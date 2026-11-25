@@ -5,6 +5,7 @@ export const okCatalog = {
   version: '1.0.0',
   owner: '포항테크노파크',
   examples: ['보도자료 써줘'],
+  outputs: ['hwpx'],
   compat: {
     claude: { level: 'full', note: '전체 지원' },
     codex: { level: 'full', note: '전체 지원' },

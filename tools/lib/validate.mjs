@@ -1,6 +1,8 @@
 const NAME_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const LEVELS = ['full', 'partial', 'none'];
 const TOOLS = ['claude', 'codex', 'chatgpt', 'gemini'];
+// 결과물 형식. 사이트 표시 이름은 site/src/lib/site.js의 OUTPUTS에 있다.
+export const OUTPUTS = ['hwpx', 'docx', 'xlsx', 'pptx', 'pdf', 'text'];
 const isStr = v => typeof v === 'string' && v.trim() !== '';
 
 export function validateSkill(skill, categories) {
@@ -34,6 +36,15 @@ export function validateSkill(skill, categories) {
   }
   if (!Array.isArray(c.examples) || c.examples.length < 1 || !c.examples.every(isStr)) {
     add('catalog.yaml', 'examples는 문자열 1개 이상의 목록이어야 합니다');
+  }
+  if (!Array.isArray(c.outputs) || c.outputs.length < 1) {
+    add('catalog.yaml', `outputs는 결과물 형식 1개 이상의 목록이어야 합니다 (가능: ${OUTPUTS.join(', ')})`);
+  } else {
+    const bad = c.outputs.filter(o => !OUTPUTS.includes(o));
+    if (bad.length) add('catalog.yaml', `outputs 값 ${bad.join(', ')}은(는) 쓸 수 없습니다 (가능: ${OUTPUTS.join(', ')})`);
+  }
+  if (c.tags !== undefined && (!Array.isArray(c.tags) || !c.tags.every(isStr))) {
+    add('catalog.yaml', 'tags는 문자열 목록이어야 합니다 (예: [보도, 언론])');
   }
   if (!c.compat || typeof c.compat !== 'object') {
     add('catalog.yaml', '필수 항목 compat이(가) 없습니다');

@@ -41,7 +41,8 @@ summary: 계획안·행사자료를 주면 포항TP 양식 보도자료(HWPX)로
 category: 보도·홍보
 version: 1.0.0
 owner: 포항테크노파크
-updated: 2026-11-25
+outputs: [hwpx]
+tags: [보도, 언론, 홍보, 한글 양식]
 examples:
   - "첨부한 행사 계획안으로 보도자료 써줘"
   - "이번 달 기업 모집 공고를 보도자료로 만들어줘"
@@ -61,9 +62,20 @@ compat:
 | `category` | 분류. `categories.yaml`에 있는 이름만 쓸 수 있습니다. |
 | `version` | 버전. 처음에는 `1.0.0`. 고칠 때마다 올립니다. |
 | `owner` | 담당 기관 또는 부서. |
-| `updated` | 마지막으로 고친 날짜(연-월-일). |
+| `outputs` | 결과물 형식. 1개 이상 필수입니다. 아래 목록에서 고릅니다. |
+| `tags` | 검색에 걸릴 키워드. 선택입니다. 업무 이름, 문서 이름처럼 직원이 검색할 만한 말을 적습니다. |
+| `updated` | 마지막으로 고친 날짜(연-월-일). 선택입니다. 없으면 GitHub 수정 기록의 날짜를 씁니다. |
 | `examples` | AI에게 실제로 하는 말 예시. 1개 이상 필수입니다. |
 | `compat` | AI 도우미별 지원 정도. 네 곳(claude, codex, chatgpt, gemini)을 모두 적습니다. |
+
+`outputs`에 쓸 수 있는 값입니다. 여러 개면 `[hwpx, xlsx]`처럼 적습니다.
+
+- `hwpx`: 한글 파일
+- `docx`: 워드 파일
+- `xlsx`: 엑셀 파일
+- `pptx`: PPT 파일
+- `pdf`: PDF 파일
+- `text`: 파일 없이 채팅 답변으로 받는 글
 
 `compat`의 `level`은 세 가지 중 하나입니다.
 
@@ -95,6 +107,7 @@ PR을 만들면 `check`라는 점검이 자동으로 돕니다. PR 화면 아래
 
 - 필수 칸이 빠졌습니다: `catalog.yaml`에 위 표의 칸을 모두 적었는지 봅니다.
 - 분류가 없습니다: `category`가 `categories.yaml`에 있는 이름인지 봅니다.
+- outputs 값을 쓸 수 없습니다: `outputs`에 위 목록의 값(hwpx, docx, xlsx, pptx, pdf, text)만 적었는지 봅니다.
 - 개인정보가 의심됩니다: 알려 준 파일에서 해당 글자를 지웁니다.
 - 넣을 수 없는 파일이 있습니다: 아래 "SKILL.md와 파일 규칙"을 봅니다.
 
