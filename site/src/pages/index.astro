@@ -20,45 +20,56 @@ const pagefindBase = url();
 <Base description="포항테크노파크 직원이 Claude·ChatGPT·Gemini·Codex에 넣어 쓰는 업무 스킬 모음입니다. 스킬을 찾고, 안내에 따라 내 AI에 넣으세요." current="home">
   <link slot="head" rel="stylesheet" href={url('pagefind/pagefind-ui.css')} />
 
-  <section class="intro">
+  <section class="hero-wrap">
     <div class="wrap">
-      <h1>포항테크노파크 직원용 AI 업무 스킬</h1>
-      <p class="lead">스킬은 AI에게 우리 기관의 업무 방식과 양식을 알려 주는 지침 묶음입니다. 필요한 스킬을 골라 안내대로 내 AI에 넣으면 됩니다. 쓰기만 할 때는 GitHub 계정이 필요 없습니다.</p>
-      <p class="facts">
-        <span>스킬 {skills.length}개</span>
-        <span>Claude · ChatGPT · Gemini · Codex</span>
-        {newest && <span>최근 업데이트 <time datetime={newest}>{formatDate(newest)}</time></span>}
-      </p>
+      <div class="hero">
+        <p class="kicker"><span class="dot" aria-hidden="true"></span>포항테크노파크 · AI 업무 스킬</p>
+        <h1>AI에게 우리 기관의 일하는 방식을 알려 주세요.</h1>
+        <p class="lead">스킬은 AI에게 포항TP의 업무 방식과 양식을 알려 주는 지침 묶음입니다. 필요한 스킬을 골라 안내대로 내 AI에 넣으면 됩니다. 쓰기만 할 때는 GitHub 계정이 필요 없습니다.</p>
 
-      <div class="search">
-        <label class="search__label">어떤 업무를 하시나요?</label>
-        <div id="search" class="search__ui"></div>
-        <noscript>
-          <p class="hint">검색은 JavaScript가 켜져 있어야 동작합니다. 아래 분류에서 찾아 주세요.</p>
-        </noscript>
+        <div class="search">
+          <label class="search__label">어떤 업무를 하시나요?</label>
+          <div id="search" class="search__ui"></div>
+          <noscript>
+            <p class="hint">검색은 JavaScript가 켜져 있어야 동작합니다. 아래 분류에서 찾아 주세요.</p>
+          </noscript>
+        </div>
+
+        <nav class="chips" aria-label="업무 분류">
+          {groups.map(g => <a class="chip" href={`#${g.id}`}>{g.category} <span class="chip__count" data-chip-count={g.id}>{g.items.length}</span></a>)}
+        </nav>
+
+        <dl class="stats">
+          <div><dt>등록된 스킬</dt><dd>{skills.length}<small>개</small></dd></div>
+          <div><dt>업무 분류</dt><dd>{groups.length}<small>개</small></dd></div>
+          <div><dt>지원하는 AI</dt><dd>4<small>종</small></dd></div>
+          {newest && <div><dt>최근 업데이트</dt><dd><time datetime={newest}>{formatDate(newest)}</time></dd></div>}
+        </dl>
       </div>
-
-      <nav class="chips" aria-label="업무 분류">
-        {groups.map(g => <a class="chip" href={`#${g.id}`}>{g.category} <span class="chip__count" data-chip-count={g.id}>{g.items.length}</span></a>)}
-      </nav>
     </div>
   </section>
 
   <section class="howto" aria-labelledby="howto-h">
     <div class="wrap">
-      <h2 id="howto-h" class="sr-only">이렇게 씁니다</h2>
+      <div class="section-head">
+        <h2 id="howto-h" class="section-title">이렇게 씁니다</h2>
+        <p class="section-head__aside">처음 한 번만 넣어 두면, 그다음부터는 평소처럼 AI에게 말하면 됩니다.</p>
+      </div>
       <ol class="howto__list">
-        <li>
-          <svg class="howto__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-          <div><b>1. 스킬 고르기</b><span>업무 이름으로 찾거나 분류에서 고릅니다.</span></div>
+        <li class="step-card">
+          <span class="pill">STEP 01</span>
+          <b>스킬 고르기</b>
+          <span>업무 이름으로 찾거나 분류에서 고릅니다.</span>
         </li>
-        <li>
-          <svg class="howto__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11" /><path d="m7 10 5 5 5-5" /><path d="M5 20h14" /></svg>
-          <div><b>2. 내 AI에 넣기</b><span>쓰는 AI를 고르고 안내 순서대로 따라 합니다.</span></div>
+        <li class="step-card step-card--accent">
+          <span class="pill">STEP 02</span>
+          <b>내 AI에 넣기</b>
+          <span>쓰는 AI를 고르고 안내 순서대로 따라 합니다.</span>
         </li>
-        <li>
-          <svg class="howto__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z" /><path d="M8 10h8" /></svg>
-          <div><b>3. 평소처럼 요청하기</b><span>요청 예시처럼 말하면 AI가 스킬을 꺼내 씁니다.</span></div>
+        <li class="step-card">
+          <span class="pill">STEP 03</span>
+          <b>평소처럼 요청하기</b>
+          <span>요청 예시처럼 말하면 AI가 스킬을 꺼내 씁니다.</span>
         </li>
       </ol>
     </div>
@@ -83,6 +94,18 @@ const pagefindBase = url();
       </ol>
     </aside>
   </div>
+
+  <section class="band" aria-labelledby="band-h">
+    <div class="wrap band__inner">
+      <div>
+        <h2 id="band-h">필요한 스킬이 없나요?</h2>
+        <p>스킬은 직원들이 함께 만들고 고칩니다. 요청만 남겨도 되고, 직접 만들어 올릴 수도 있습니다.</p>
+      </div>
+      <a class="btn btn--accent" href={url('contribute/')}>참여하는 방법 보기
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+      </a>
+    </div>
+  </section>
 
   <script is:inline src={url('pagefind/pagefind-ui.js')}></script>
   <script is:inline define:vars={{ pagefindBase }}>
