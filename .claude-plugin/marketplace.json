@@ -11,6 +11,11 @@
       "source": "./plugins/ptp-pr"
     },
     {
+      "name": "ptp-admin",
+      "description": "포항TP 회의·행정 업무 스킬 모음",
+      "source": "./plugins/ptp-admin"
+    },
+    {
       "name": "ptp-all",
       "description": "포항TP 업무 스킬 전체",
       "source": "./plugins/ptp-all"

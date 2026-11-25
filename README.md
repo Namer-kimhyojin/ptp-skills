@@ -19,13 +19,14 @@ Claude 데스크톱 앱(Cowork·Code 탭)에서는 왼쪽 **Customize** › **Pl
 /plugin install ptp-pr@pohang-tp
 ```
 
-`ptp-pr`은 보도·홍보 묶음입니다. 전체 묶음을 받으려면 `ptp-pr@pohang-tp` 대신 `ptp-all@pohang-tp`를 설치하세요. 둘 중 하나만 설치하세요. 스킬을 직접 올리거나 고치려면 [CONTRIBUTING.md](CONTRIBUTING.md)를 읽어 주세요.
+`ptp-pr`은 보도·홍보 묶음, `ptp-admin`은 회의·행정 묶음입니다. 업무별 묶음은 필요한 것만 골라 설치하고, 모두 받으려면 `ptp-all@pohang-tp` 하나만 설치하세요. 전체 묶음과 업무별 묶음을 함께 설치하면 같은 스킬이 겹칩니다. 스킬을 직접 올리거나 고치려면 [CONTRIBUTING.md](CONTRIBUTING.md)를 읽어 주세요.
 
 ## 들어 있는 스킬
 
 | 분류 | 스킬 | 설명 |
 |---|---|---|
 | 보도·홍보 | 보도자료 작성 | 계획안·행사자료로 포항TP 양식 보도자료(HWPX)를 작성·검수 |
+| 회의·행정 | 회의 결과문서 작성 | 기안문·영수증으로 회의록·방명록(서명란 빈칸)·지출증빙서(HWPX)를 작성 |
 
 ## 이용 안내
 
