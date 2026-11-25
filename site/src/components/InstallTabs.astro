@@ -1,13 +1,14 @@
 ---
 // "내 AI에 넣기" 탭. JS가 없으면 탭 버튼 없이 다섯 안내가 차례로 모두 보인다.
-// 메뉴 이름 출처(2026-11-25 확인):
+// 메뉴 이름 출처(2026-11-26 다시 확인):
 //  Claude 웹  https://support.claude.com/en/articles/12512180-use-skills-in-claude
+//             https://support.claude.com/en/articles/12512198-how-to-create-custom-skills (description 200자)
 //  Claude Code https://code.claude.com/docs/en/plugins/install
 //  Cowork     https://support.claude.com/en/articles/13837440-use-plugins-in-claude
 //  ChatGPT    https://help.openai.com/en/articles/10169521-projects-in-chatgpt
 //             https://help.openai.com/en/articles/8554397-creating-a-gpt (개인 계정 새 GPT 불가)
 //  Gemini     https://support.google.com/gemini/answer/17094296 (스킬 업로드)
-//             https://support.google.com/gemini/answer/18560919 (Gem → 스킬 전환)
+//             https://support.google.com/gemini/answer/18560919 (Gem → 스킬 전환, 글·PDF·그림만 업로드)
 //  Codex      https://learn.chatgpt.com/docs/build-skills ($HOME/.agents/skills)
 import fs from 'node:fs';
 import path from 'node:path';
@@ -165,12 +166,13 @@ const level = (k: string) => tab[k].compat?.level ?? 'none';
               <p>GPT·Gemini용 파일을 받습니다. <strong>압축을 풀지 말고</strong> 그대로 둡니다.</p>
               <p><a class="btn btn--primary" href={gptZip.href} download>{gptZip.file} 받기</a> <span class="meta">{gptZip.size}</span></p>
             </li>
-            <li><p>gemini.google.com 왼쪽 사이드바에서 <b>맞춤설정(Customize)</b>을 누르고 위쪽의 <b>스킬(Skills)</b>을 엽니다. Customize가 보이지 않으면 <b>더보기(More)</b>를 먼저 누릅니다.</p></li>
+            <li><p>PC 브라우저로 gemini.google.com에 들어갑니다. 휴대폰 앱에서는 파일을 올릴 수 없고, 스킬은 만 18세 이상 계정에서 쓸 수 있습니다.</p></li>
+            <li><p>왼쪽 사이드바에서 <b>맞춤설정(Customize)</b>을 누르고 위쪽의 <b>스킬(Skills)</b>을 엽니다. Customize가 보이지 않으면 <b>더보기(More)</b>를 먼저 누릅니다.</p></li>
             <li><p><b>만들기(Create)</b> &gt; <b>업로드(Upload)</b>를 누르고 1번에서 받은 zip 파일을 고른 뒤 <b>열기(Open)</b>를 누릅니다.</p></li>
             <li><p>내용을 확인하고 <b>만들기(Create)</b>를 누릅니다.</p></li>
             <li><p>새 대화를 열고 요청 예시처럼 요청합니다.</p></li>
           </ol>
-          <p class="hint">파일 형식 때문에 업로드가 안 되면 압축을 풀고 <code>SKILL.md</code> 파일 하나만 올려도 지침은 들어갑니다. 회사·학교 Google 계정은 2027년 3월(교육용은 6월)까지 Gem을 계속 쓸 수 있으니, Gem을 만들어 ChatGPT 탭의 3·4번처럼 지침과 파일을 넣어도 됩니다. 메뉴 이름은 바뀔 수 있습니다.</p>
+          <p class="hint">이 zip에는 Gemini가 받는 글·PDF·그림 파일만 넣었습니다(HWPX 양식은 빠집니다). 그래도 업로드가 안 되면 압축을 풀고 <code>SKILL.md</code> 파일 하나만 올려도 지침은 들어갑니다. 회사·학교 Google 계정은 2027년 3월(교육용은 6월)까지 Gem을 계속 쓸 수 있으니, Gem을 만들어 ChatGPT 탭의 3·4번처럼 지침과 파일을 넣어도 됩니다. 메뉴 이름은 바뀔 수 있습니다.</p>
         </Fragment>
       ) : (
         <Fragment>
@@ -188,7 +190,7 @@ const level = (k: string) => tab[k].compat?.level ?? 'none';
             {hasInstaller && (
               <li><p>{needsWhat} Python 3.10 이상이 필요합니다. python.org에서 Python을 설치하고(설치 화면에 <b>Add python.exe to PATH</b>가 보이면 체크), 옮긴 폴더의 <code>install_windows.bat</code>을 더블클릭합니다. <b>[성공]</b> 문장이 나오면 끝입니다.</p></li>
             )}
-            <li><p>Codex에서 요청 예시처럼 요청합니다. 스킬이 보이지 않으면 Codex를 다시 시작합니다.</p></li>
+            <li><p>Codex에서 요청 예시처럼 요청합니다. Codex가 새 스킬을 알아서 찾습니다. 보이지 않을 때만 Codex를 다시 시작합니다.</p></li>
           </ol>
         </Fragment>
       )}

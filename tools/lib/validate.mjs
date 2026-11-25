@@ -3,6 +3,8 @@ const LEVELS = ['full', 'partial', 'none'];
 const TOOLS = ['claude', 'codex', 'chatgpt', 'gemini'];
 // 결과물 형식. 사이트 표시 이름은 site/src/lib/site.js의 OUTPUTS에 있다.
 export const OUTPUTS = ['hwpx', 'docx', 'xlsx', 'pptx', 'pdf', 'text'];
+// claude.ai 스킬 업로드의 description 한도
+export const DESC_MAX = 200;
 const isStr = v => typeof v === 'string' && v.trim() !== '';
 
 export function validateSkill(skill, categories) {
@@ -12,6 +14,9 @@ export function validateSkill(skill, categories) {
   if (!NAME_RE.test(skill.name) || skill.name.length > 64) {
     add('', '폴더 이름은 영문 소문자·숫자·하이픈(-)만 쓰고 64자 이내여야 합니다');
   }
+  if (/claude|anthropic/.test(skill.name)) {
+    add('', '폴더 이름에 claude, anthropic은 쓸 수 없습니다 (Claude 업로드 규칙)');
+  }
 
   if (skill.skillMdError) add('SKILL.md', skill.skillMdError);
   else if (!skill.files.includes('SKILL.md')) add('SKILL.md', '파일이 없습니다');
@@ -20,6 +25,11 @@ export function validateSkill(skill, categories) {
     if (!isStr(fm.name)) add('SKILL.md', '프런트매터 name이 없습니다');
     else if (fm.name !== skill.name) add('SKILL.md', `프런트매터 name(${fm.name})이 폴더 이름(${skill.name})과 다릅니다`);
     if (!isStr(fm.description)) add('SKILL.md', '프런트매터 description이 없습니다');
+    else {
+      const n = [...fm.description.trim()].length;
+      if (n > DESC_MAX) add('SKILL.md', `프런트매터 description이 ${n}자입니다. claude.ai에 올리려면 ${DESC_MAX}자 이내여야 합니다`);
+      if (/[<>]/.test(fm.description)) add('SKILL.md', '프런트매터 description에 < 또는 > 기호를 쓸 수 없습니다');
+    }
   }
 
   const c = skill.catalog;
