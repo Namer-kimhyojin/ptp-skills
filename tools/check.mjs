@@ -1,7 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadSkills, loadCategories, findForbiddenFiles } from './lib/skills.mjs';
+import { loadSkills, loadCategories, loadBundles, findForbiddenFiles } from './lib/skills.mjs';
+import { buildMarketplace, serializeMarketplace } from './lib/marketplace.mjs';
 import { validateSkill } from './lib/validate.mjs';
 import { scanFileForPII, maskMatch } from './lib/pii.mjs';
 
@@ -36,6 +37,11 @@ for (const s of skills) {
   if (total > 50 * MB) errors.push(`skills/${s.name}/: 전체 크기가 ${mb}MB로 50MB를 넘습니다`);
   else if (total > 10 * MB) warnings.push(`skills/${s.name}/: 전체 크기가 ${mb}MB로 10MB를 넘습니다`);
 }
+
+const mpPath = path.join(root, '.claude-plugin', 'marketplace.json');
+const expected = serializeMarketplace(buildMarketplace(loadBundles(root), skills));
+const actual = fs.existsSync(mpPath) ? fs.readFileSync(mpPath, 'utf8').replace(/\r\n/g, '\n') : null;
+if (actual !== expected) errors.push('marketplace.json이 최신이 아닙니다. npm run build 후 커밋하세요');
 
 for (const w of warnings) console.warn(`경고: ${w}`);
 if (errors.length) {
