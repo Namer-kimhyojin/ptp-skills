@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import SkillCard from '../components/SkillCard.astro';
+import { url, skills, categories, categoryId, skillUrl, formatDate, plainSubject, lastUpdated } from '../lib/site.js';
+
+const groups = categories
+  .map(c => ({ category: c, id: categoryId(c), items: skills.filter(s => s.catalog.category === c) }))
+  .filter(g => g.items.length > 0);
+
+const recent = skills
+  .flatMap(s => s.history.map(h => ({ ...h, skill: s })))
+  .sort((a, b) => b.date.localeCompare(a.date))
+  .slice(0, 6);
+const newest = skills.map(lastUpdated).sort().at(-1);
+const pagefindBase = url();
+---
+<Base description="포항테크노파크 직원이 Claude·ChatGPT·Gemini·Codex에 넣어 쓰는 업무 스킬 모음입니다. 스킬을 찾고, 안내에 따라 내 AI에 넣으세요." current="home">
+  <link slot="head" rel="stylesheet" href={url('pagefind/pagefind-ui.css')} />
+
+  <section class="intro">
+    <div class="wrap">
+      <h1>포항테크노파크 직원용 AI 업무 스킬</h1>
+      <p class="lead">스킬은 AI에게 우리 기관의 업무 방식과 양식을 알려 주는 지침 묶음입니다. 필요한 스킬을 골라 안내대로 내 AI에 넣으면 됩니다. 쓰기만 할 때는 GitHub 계정이 필요 없습니다.</p>
+      <p class="facts">
+        <span>스킬 {skills.length}개</span>
+        <span>Claude · ChatGPT · Gemini · Codex</span>
+        {newest && <span>최근 업데이트 <time datetime={newest}>{formatDate(newest)}</time></span>}
+      </p>
+
+      <div class="search">
+        <label class="search__label">어떤 업무를 하시나요?</label>
+        <div id="search" class="search__ui"></div>
+        <noscript>
+          <p class="hint">검색은 JavaScript가 켜져 있어야 동작합니다. 아래 분류에서 찾아 주세요.</p>
+        </noscript>
+      </div>
+
+      <nav class="chips" aria-label="업무 분류">
+        {groups.map(g => <a class="chip" href={`#${g.id}`}>{g.category} <span class="chip__count">{g.items.length}</span></a>)}
+      </nav>
+    </div>
+  </section>
+
+  <div class="wrap home-grid">
+    <div class="home-grid__main">
+      {groups.map(g => (
+        <section class="group" id={g.id} aria-labelledby={`${g.id}-h`}>
+          <h2 id={`${g.id}-h`}>{g.category}</h2>
+          <div class="cards">
+            {g.items.map(s => <SkillCard skill={s} />)}
+          </div>
+        </section>
+      ))}
+      <p class="legend" aria-hidden="true">● 지원 &nbsp; ◐ 일부 지원 &nbsp; ○ 안 됨</p>
+    </div>
+
+    <aside class="home-grid__side" aria-labelledby="recent-h">
+      <h2 id="recent-h">최근 업데이트</h2>
+      <ol class="recent">
+        {recent.map(r => (
+          <li>
+            <time datetime={r.date}>{formatDate(r.date)}</time>
+            <a href={skillUrl(r.skill)}>{r.skill.catalog.title}</a>
+            <span>{plainSubject(r.subject)}</span>
+          </li>
+        ))}
+      </ol>
+    </aside>
+  </div>
+
+  <script is:inline src={url('pagefind/pagefind-ui.js')}></script>
+  <script is:inline define:vars={{ pagefindBase }}>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (typeof PagefindUI === 'undefined') return;
+      new PagefindUI({
+        element: '#search',
+        baseUrl: pagefindBase,
+        showImages: false,
+        showSubResults: false,
+        translations: { placeholder: '업무 이름으로 찾기', zero_results: '"[SEARCH_TERM]"에 맞는 스킬이 없습니다' },
+      });
+      const input = document.querySelector('#search input');
+      const label = document.querySelector('.search__label');
+      if (input && label) {
+        input.id = 'search-input';
+        label.htmlFor = 'search-input';
+      }
+    });
+  </script>
+</Base>

@@ -1,0 +1,17 @@
+---
+import { AIS, LEVELS } from '../lib/site.js';
+interface Props { compat: Record<string, { level: 'full' | 'partial' | 'none'; note: string }> }
+const { compat } = Astro.props;
+---
+<ul class="compat" aria-label="AI별 지원">
+  {AIS.map(ai => {
+    const level = compat[ai.key]?.level ?? 'none';
+    return (
+      <li class={`compat__item level-${level}`}>
+        <span class="compat__mark" aria-hidden="true">{LEVELS[level].mark}</span>
+        <span class="compat__ai">{ai.label}</span>
+        <span class="compat__text">{LEVELS[level].text}</span>
+      </li>
+    );
+  })}
+</ul>

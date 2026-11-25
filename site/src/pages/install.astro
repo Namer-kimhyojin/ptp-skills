@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import CopyBlock from '../components/CopyBlock.astro';
+import { skills, bundles, bundleSkills, skillUrl, installCommand, MARKETPLACE, MARKETPLACE_ADD, REPO } from '../lib/site.js';
+---
+<Base title="설치 안내" description="포항TP 업무 스킬을 Claude Code·Cowork에 묶음으로 설치하는 방법과, 다른 AI에 스킬을 하나씩 넣는 방법입니다." current="install">
+  <div class="wrap page">
+    <h1>설치 안내</h1>
+    <p class="lead measure">어떤 AI를 쓰는지에 따라 방법이 다릅니다. Claude Code와 Cowork는 묶음으로 한 번에 설치하고, 나머지 AI는 스킬 상세 화면에서 하나씩 받습니다.</p>
+
+    <section class="block" aria-labelledby="which-h">
+      <h2 id="which-h">AI별 설치 방법</h2>
+      <div class="table-wrap">
+        <table class="compat-table">
+          <thead><tr><th scope="col">사용하는 AI</th><th scope="col">받는 것</th><th scope="col">어디서 안내하나</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Claude Code · Cowork</th><td>스킬 묶음 (자동 업데이트 가능)</td><td>이 화면 아래</td></tr>
+            <tr><th scope="row">Claude 웹 · 데스크톱 채팅</th><td>스킬 zip 파일</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
+            <tr><th scope="row">ChatGPT</th><td>지침 문구와 문서 파일</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
+            <tr><th scope="row">Gemini</th><td>GPT·Gemini용 zip 파일</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
+            <tr><th scope="row">Codex</th><td>스킬 zip 파일</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="bundles-h">
+      <h2 id="bundles-h">스킬 묶음</h2>
+      <p class="block__lead">묶음은 업무별로 스킬을 모은 것입니다. 필요한 묶음만 설치하면 관계없는 스킬이 끼어들지 않습니다.</p>
+      <div class="bundles">
+        {bundles.map(b => {
+          const items = bundleSkills(b);
+          return (
+            <article class="card bundle">
+              <h3 class="card__title">{b.title} <code class="bundle__id">{b.id}</code></h3>
+              <p class="card__summary">{b.description}</p>
+              <CopyBlock id={`bundle-${b.id}`} text={installCommand(b)} />
+              <p class="bundle__label">들어 있는 스킬 {items.length}개</p>
+              <ul class="bundle__skills">
+                {items.map(s => <li><a href={skillUrl(s)}>{s.catalog.title}</a></li>)}
+              </ul>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="cc-h">
+      <h2 id="cc-h">Claude Code에 설치하기</h2>
+      <ol class="steps measure">
+        <li>
+          <p>Claude Code 입력창에 아래 명령을 붙여넣고 Enter를 누릅니다. 포항TP 스킬 목록(<b>{MARKETPLACE}</b>)을 등록하며, 처음 한 번만 하면 됩니다.</p>
+          <CopyBlock id="mk-add" text={MARKETPLACE_ADD} />
+        </li>
+        <li><p>위 <b>스킬 묶음</b>에서 필요한 묶음의 설치 명령을 복사해 붙여넣습니다. 설치 범위를 물으면 <b>Install for you (user scope)</b>를 고릅니다.</p></li>
+        <li><p><code>/reload-plugins</code>를 실행하라는 문장이 나오면 그대로 입력합니다.</p></li>
+        <li><p>자동 업데이트를 켭니다. 직접 등록한 스킬 목록은 자동 업데이트가 꺼진 채로 시작합니다. <code>/plugin</code>을 입력하고 <b>Marketplaces</b> 탭에서 <b>{MARKETPLACE}</b>를 고른 뒤 자동 업데이트(auto-update)를 켭니다.</p></li>
+      </ol>
+      <p class="hint measure">바로 업데이트하려면 같은 화면에서 <b>Update marketplace</b>를 고릅니다. 일부 스킬은 PC에 Python이 있어야 파일을 만들 수 있습니다. 필요한 경우 스킬 상세 화면에 적어 두었습니다.</p>
+    </section>
+
+    <section class="block" aria-labelledby="cw-h">
+      <h2 id="cw-h">Cowork에 설치하기</h2>
+      <ol class="steps measure">
+        <li><p>Claude 데스크톱 앱에서 <b>Cowork</b> 탭을 열고 왼쪽의 <b>Customize</b>를 누릅니다.</p></li>
+        <li>
+          <p><b>Plugins</b> 탭에서 <b>Add</b> &gt; <b>Add marketplace</b> &gt; <b>Add from a repository</b>를 고르고 아래 주소를 넣습니다.</p>
+          <CopyBlock id="repo" text={REPO} />
+        </li>
+        <li><p><b>Discover</b> 탭에서 필요한 묶음을 고르고 <b>Add</b>를 누릅니다.</p></li>
+      </ol>
+      <p class="hint measure">Cowork 플러그인은 유료 요금제에서 쓸 수 있습니다. 메뉴 이름은 바뀔 수 있습니다.</p>
+    </section>
+
+    <section class="block" aria-labelledby="one-h">
+      <h2 id="one-h">다른 AI에 스킬 하나씩 넣기</h2>
+      <p class="block__lead">Claude 웹, ChatGPT, Gemini, Codex는 스킬마다 받는 파일과 순서가 다릅니다. 스킬을 고른 뒤 상세 화면의 ‘내 AI에 넣기’를 따라 하세요.</p>
+      <ul class="link-list">
+        {skills.map(s => <li><a href={`${skillUrl(s)}#install`}>{s.catalog.title}</a> <span class="meta">{s.catalog.category}</span></li>)}
+      </ul>
+    </section>
+  </div>
+</Base>

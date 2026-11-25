@@ -1,0 +1,14 @@
+---
+// 복사할 글자 상자 + 복사 버튼. JS가 없으면 버튼이 숨고 글자를 직접 선택해 복사한다.
+interface Props {
+  id: string;
+  text: string;
+  label?: string;
+  variant?: 'command' | 'text';
+}
+const { id, text, label = '복사', variant = 'command' } = Astro.props;
+---
+<div class:list={['copyblock', `copyblock--${variant}`]}>
+  <pre id={id} class="copyblock__text">{text}</pre>
+  <button type="button" class="btn-copy" data-copy-target={id} aria-label={`${label}: ${text.length > 40 ? text.slice(0, 40) + '…' : text}`}>{label}</button>
+</div>
