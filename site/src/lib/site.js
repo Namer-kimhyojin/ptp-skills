@@ -45,9 +45,9 @@ export const AIS = [
 ];
 
 export const LEVELS = {
-  full: { mark: '●', text: '지원' },
-  partial: { mark: '◐', text: '일부' },
-  none: { mark: '○', text: '안 됨' },
+  full: { text: '지원' },
+  partial: { text: '일부' },
+  none: { text: '안 됨' },
 };
 
 export function bundleSkills(bundle) {

@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import CopyBlock from '../../components/CopyBlock.astro';
 import InstallTabs from '../../components/InstallTabs.astro';
+import LevelMark from '../../components/LevelMark.astro';
 import { url, skills, AIS, LEVELS, REPO_URL, categoryId, formatDate, plainSubject, lastUpdated } from '../../lib/site.js';
 
 export function getStaticPaths() {
@@ -76,7 +77,7 @@ const githubUrl = `${REPO_URL}/tree/main/skills/${skill.name}`;
                   {aiRows.map(r => (
                     <tr class={`level-${r.level}`}>
                       <th scope="row">{aiLabel[r.key].name}{aiLabel[r.key].sub && <span class="compat-table__sub">{aiLabel[r.key].sub}</span>}</th>
-                      <td class="nowrap"><span class="compat__mark" aria-hidden="true">{LEVELS[r.level].mark}</span> {LEVELS[r.level].text}</td>
+                      <td class="nowrap"><LevelMark level={r.level} /> {LEVELS[r.level].text}</td>
                       <td>{r.note}</td>
                     </tr>
                   ))}
@@ -121,7 +122,7 @@ const githubUrl = `${REPO_URL}/tree/main/skills/${skill.name}`;
               <li>
                 <a href={`#install-${q.key}`} class={`level-${q.level}`}>
                   <span>{q.label}</span>
-                  <span class="quick__level"><span class="compat__mark" aria-hidden="true">{LEVELS[q.level].mark}</span> {LEVELS[q.level].text}</span>
+                  <span class="quick__level"><LevelMark level={q.level} /> {LEVELS[q.level].text}</span>
                 </a>
               </li>
             ))}
