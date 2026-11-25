@@ -16,6 +16,10 @@ const recent = skills
   .slice(0, 6);
 const newest = skills.map(lastUpdated).sort().at(-1);
 const pagefindBase = url();
+// 첫 화면 오른쪽 미리보기: 실제 스킬의 요청 예시와 결과물로 보여 준다.
+// 스킬이 없어지면 미리보기는 빠진다.
+const demo = skills.find(s => s.name === 'write-pohang-tp-press-release');
+const demoAsk = demo?.catalog.examples[0] ?? '';
 ---
 <Base description="포항테크노파크 직원이 Claude·ChatGPT·Gemini·Codex에 넣어 쓰는 업무 스킬 모음입니다. 스킬을 찾고, 안내에 따라 내 AI에 넣으세요." current="home">
   <link slot="head" rel="stylesheet" href={url('pagefind/pagefind-ui.css')} />
@@ -23,6 +27,8 @@ const pagefindBase = url();
   <section class="hero-wrap">
     <div class="wrap">
       <div class="hero">
+        <div class="hero__grid">
+        <div class="hero__main">
         <p class="kicker"><span class="dot" aria-hidden="true"></span>포항테크노파크 · AI 업무 스킬</p>
         <h1>AI에게 우리 기관의 일하는 방식을 알려 주세요.</h1>
         <p class="lead">스킬은 AI에게 포항TP의 업무 방식과 양식을 알려 주는 지침 묶음입니다. 필요한 스킬을 골라 안내대로 내 AI에 넣으면 됩니다. 쓰기만 할 때는 GitHub 계정이 필요 없습니다.</p>
@@ -38,6 +44,25 @@ const pagefindBase = url();
         <nav class="chips" aria-label="업무 분류">
           {groups.map(g => <a class="chip" href={`#${g.id}`}>{g.category} <span class="chip__count" data-chip-count={g.id}>{g.items.length}</span></a>)}
         </nav>
+        </div>
+
+        {demo && (
+          <div class="preview" aria-hidden="true">
+            <div class="preview__bar"><span></span><span></span><span></span><b>내 AI</b></div>
+            <div class="preview__body">
+              <p class="bubble bubble--me">{demoAsk}</p>
+              <p class="preview__skill"><span class="dot"></span>{demo.catalog.title} 스킬을 꺼내 씁니다</p>
+              <div class="bubble bubble--ai">
+                <p>포항TP 보도자료 양식에 맞춰 초안을 만들고, 제목 길이와 표기를 검수했습니다.</p>
+                <div class="file">
+                  <span class="file__icon">HWPX</span>
+                  <span><b>보도자료_초안.hwpx</b><small>한글 파일</small></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        </div>
 
         <dl class="stats">
           <div><dt>등록된 스킬</dt><dd>{skills.length}<small>개</small></dd></div>
