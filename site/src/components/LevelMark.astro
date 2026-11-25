@@ -1,0 +1,9 @@
+---
+// 지원 수준 표시: 꽉 찬 원(지원), 반원(일부), 빈 원(안 됨). 뜻은 옆의 글자가 전하고 이 아이콘은 보조다.
+interface Props { level: 'full' | 'partial' | 'none' }
+const { level } = Astro.props;
+---
+<svg class={`level-mark level-mark--${level}`} viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+  <circle cx="6" cy="6" r="4.5" />
+  {level === 'partial' && <path d="M6 1.5a4.5 4.5 0 0 1 0 9z" />}
+</svg>

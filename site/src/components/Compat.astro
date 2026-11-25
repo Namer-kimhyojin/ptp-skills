@@ -1,4 +1,5 @@
 ---
+import LevelMark from './LevelMark.astro';
 import { AIS, LEVELS } from '../lib/site.js';
 interface Props { compat: Record<string, { level: 'full' | 'partial' | 'none'; note: string }> }
 const { compat } = Astro.props;
@@ -8,7 +9,7 @@ const { compat } = Astro.props;
     const level = compat[ai.key]?.level ?? 'none';
     return (
       <li class={`compat__item level-${level}`}>
-        <span class="compat__mark" aria-hidden="true">{LEVELS[level].mark}</span>
+        <LevelMark level={level} />
         <span class="compat__ai">{ai.label}</span>
         <span class="compat__text">{LEVELS[level].text}</span>
       </li>

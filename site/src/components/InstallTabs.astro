@@ -12,6 +12,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import CopyBlock from './CopyBlock.astro';
+import LevelMark from './LevelMark.astro';
 import { url, LEVELS, REPO, MARKETPLACE_ADD, bundlesFor, installCommand } from '../lib/site.js';
 
 interface Props { skill: any }
@@ -58,7 +59,7 @@ const level = (k: string) => tab[k].compat?.level ?? 'none';
     <section class="tabpanel" id={`install-${t.key}`} data-panel={t.key}>
       <h3 class="tabpanel__title">{t.label}</h3>
       <p class={`support level-${level(t.key)}`}>
-        <span class="support__mark" aria-hidden="true">{LEVELS[level(t.key)].mark}</span>
+        <LevelMark level={level(t.key)} />
         <strong>{LEVELS[level(t.key)].text}</strong>
         {t.compat?.note && <span> · {t.compat.note}</span>}
       </p>
