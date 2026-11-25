@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadSkills, loadCategories, loadBundles, findForbiddenFiles } from './lib/skills.mjs';
-import { buildMarketplace, serializeMarketplace } from './lib/marketplace.mjs';
+import { buildMarketplace, serializeMarketplace, marketplaceStaleResult } from './lib/marketplace.mjs';
 import { validateSkill } from './lib/validate.mjs';
 import { scanFileForPII, maskMatch } from './lib/pii.mjs';
 
@@ -41,7 +41,12 @@ for (const s of skills) {
 const mpPath = path.join(root, '.claude-plugin', 'marketplace.json');
 const expected = serializeMarketplace(buildMarketplace(loadBundles(root), skills));
 const actual = fs.existsSync(mpPath) ? fs.readFileSync(mpPath, 'utf8').replace(/\r\n/g, '\n') : null;
-if (actual !== expected) errors.push('marketplace.json이 최신이 아닙니다. npm run build 후 커밋하세요');
+const mp = marketplaceStaleResult(actual !== expected, process.argv.includes('--marketplace-warn-only'));
+if (mp.error) errors.push(mp.error);
+if (mp.warning) {
+  warnings.push(mp.warning);
+  if (process.env.GITHUB_ACTIONS) console.log('::warning::marketplace.json이 최신이 아닙니다. 병합 후 관리자가 갱신합니다');
+}
 
 for (const w of warnings) console.warn(`경고: ${w}`);
 if (errors.length) {

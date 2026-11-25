@@ -28,6 +28,11 @@ jobs:
         run: npm test
 
       - name: 스킬·개인정보·마켓플레이스 점검
+        if: github.event_name == 'pull_request'
+        run: npm run check -- --marketplace-warn-only
+
+      - name: 스킬·개인정보·마켓플레이스 점검 (main)
+        if: github.event_name != 'pull_request'
         run: npm run check
 
       - name: 실행 코드 변경 확인

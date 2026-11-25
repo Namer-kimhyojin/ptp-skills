@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildMarketplace, serializeMarketplace } from '../tools/lib/marketplace.mjs';
+import { buildMarketplace, serializeMarketplace, marketplaceStaleResult } from '../tools/lib/marketplace.mjs';
 import { makeSkill } from './helpers.mjs';
 
 const skills = [makeSkill({ name: 'write-pohang-tp-press-release' })];
@@ -34,4 +34,12 @@ test('이름과 소유자, 경로 정렬', () => {
 test('직렬화는 2칸 들여쓰기와 끝 줄바꿈', () => {
   const s = serializeMarketplace({ a: 1 });
   assert.equal(s, '{\n  "a": 1\n}\n');
+});
+
+test('marketplace 최신 여부: 기본은 오류, warn-only는 경고', () => {
+  assert.deepEqual(marketplaceStaleResult(false, false), { error: null, warning: null });
+  assert.ok(marketplaceStaleResult(true, false).error);
+  const r = marketplaceStaleResult(true, true);
+  assert.equal(r.error, null);
+  assert.ok(r.warning);
 });
