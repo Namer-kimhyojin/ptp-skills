@@ -1,10 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
-import SkillCard from '../components/SkillCard.astro';
-import { url, skills, categories, categoryId, skillUrl, formatDate, plainSubject, lastUpdated } from '../lib/site.js';
+import SkillGroup from '../components/SkillGroup.astro';
+import AiFilter from '../components/AiFilter.astro';
+import { url, skills, categories, categoryId, skillUrl, skillsIn, formatDate, plainSubject, lastUpdated, HOME_LIMIT } from '../lib/site.js';
 
 const groups = categories
-  .map(c => ({ category: c, id: categoryId(c), items: skills.filter(s => s.catalog.category === c) }))
+  .map(c => ({ category: c, id: categoryId(c), items: skillsIn(c) }))
   .filter(g => g.items.length > 0);
 
 // 최근 업데이트: 스킬마다 가장 최근 변경 한 건만 보여 준다(같은 스킬이 줄줄이 반복되지 않게).
@@ -38,7 +39,7 @@ const pagefindBase = url();
       </div>
 
       <nav class="chips" aria-label="업무 분류">
-        {groups.map(g => <a class="chip" href={`#${g.id}`}>{g.category} <span class="chip__count">{g.items.length}</span></a>)}
+        {groups.map(g => <a class="chip" href={`#${g.id}`}>{g.category} <span class="chip__count" data-chip-count={g.id}>{g.items.length}</span></a>)}
       </nav>
     </div>
   </section>
@@ -65,14 +66,8 @@ const pagefindBase = url();
 
   <div class="wrap home-grid">
     <div class="home-grid__main">
-      {groups.map(g => (
-        <section class="group" id={g.id} aria-labelledby={`${g.id}-h`}>
-          <h2 id={`${g.id}-h`}>{g.category}</h2>
-          <div class="cards">
-            {g.items.map(s => <SkillCard skill={s} />)}
-          </div>
-        </section>
-      ))}
+      <AiFilter />
+      {groups.map(g => <SkillGroup category={g.category} items={g.items} limit={HOME_LIMIT} />)}
     </div>
 
     <aside class="home-grid__side" aria-labelledby="recent-h">

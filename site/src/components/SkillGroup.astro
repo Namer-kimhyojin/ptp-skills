@@ -1,0 +1,22 @@
+---
+// 한 분류의 스킬 카드 묶음. 홈에서는 limit개만 보여 주고 나머지는 분류 페이지로 안내한다.
+// AiFilter가 data-ai-group 안의 카드를 다시 계산한다(JS가 없으면 서버가 그린 그대로).
+import SkillCard from './SkillCard.astro';
+import { categoryId, categoryUrl } from '../lib/site.js';
+interface Props { category: string; items: any[]; limit?: number; heading?: boolean }
+const { category, items, limit = Infinity, heading = true } = Astro.props;
+const id = categoryId(category);
+const more = items.length > limit;
+---
+<section class="group" id={heading ? id : undefined} aria-labelledby={heading ? `${id}-h` : undefined} aria-label={heading ? undefined : `${category} 스킬`} data-ai-group data-limit={Number.isFinite(limit) ? limit : undefined} data-category={category}>
+  {heading && <h2 id={`${id}-h`}><a class="group__title" href={categoryUrl(category)}>{category}</a></h2>}
+  <div class="cards">
+    {items.map((s, i) => <SkillCard skill={s} hidden={i >= limit} />)}
+  </div>
+  <p class="group__empty" data-group-empty hidden></p>
+  {Number.isFinite(limit) && (
+    <p class="group__more" data-group-more hidden={!more}>
+      <a href={categoryUrl(category)}><span data-group-more-text>{category} 스킬 {items.length}개 모두 보기</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg></a>
+    </p>
+  )}
+</section>

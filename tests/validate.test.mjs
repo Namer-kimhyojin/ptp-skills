@@ -57,6 +57,20 @@ test('compat 도구 누락', () => {
   const e = validateSkill(makeSkill({ catalog: { ...okCatalog, compat } }), C);
   assert.ok(e.some(m => m.includes('compat.gemini')));
 });
+test('outputs 없음', () => {
+  const { outputs, ...rest } = okCatalog;
+  const e = validateSkill(makeSkill({ catalog: rest }), C);
+  assert.ok(e.some(m => m.includes('outputs')));
+});
+test('outputs 값 오류', () => {
+  const e = validateSkill(makeSkill({ catalog: { ...okCatalog, outputs: ['hwp'] } }), C);
+  assert.ok(e.some(m => m.includes('outputs') && m.includes('hwp')));
+});
+test('tags는 선택이지만 쓰면 문자열 목록', () => {
+  assert.deepEqual(validateSkill(makeSkill({ catalog: { ...okCatalog, tags: ['보도', '언론'] } }), C), []);
+  const e = validateSkill(makeSkill({ catalog: { ...okCatalog, tags: '보도' } }), C);
+  assert.ok(e.some(m => m.includes('tags')));
+});
 test('금지 파일', () => {
   assert.deepEqual(
     findForbiddenFiles(['SKILL.md', 'scripts/__pycache__/a.pyc', 'runtime-python.txt']).sort(),

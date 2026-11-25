@@ -2,6 +2,8 @@
 import Base from '../layouts/Base.astro';
 import CopyBlock from '../components/CopyBlock.astro';
 import { skills, bundles, bundleSkills, skillUrl, installCommand, MARKETPLACE, MARKETPLACE_ADD, REPO } from '../lib/site.js';
+// 업무별 묶음을 먼저, 전체 묶음은 맨 뒤에 둔다.
+const orderedBundles = [...bundles.filter(b => b.categories !== 'all'), ...bundles.filter(b => b.categories === 'all')];
 ---
 <Base title="설치 안내" description="포항TP 업무 스킬을 Claude Code·Cowork에 묶음으로 설치하는 방법과, 다른 AI에 스킬을 하나씩 넣는 방법입니다." current="install">
   <div class="wrap page">
@@ -26,14 +28,16 @@ import { skills, bundles, bundleSkills, skillUrl, installCommand, MARKETPLACE, M
 
     <section class="block" aria-labelledby="bundles-h">
       <h2 id="bundles-h">스킬 묶음</h2>
-      <p class="block__lead">묶음은 업무별로 스킬을 모은 것입니다. 필요한 묶음만 설치하면 관계없는 스킬이 끼어들지 않습니다.</p>
+      <p class="block__lead">묶음은 업무별로 스킬을 모은 것입니다. 내 업무에 맞는 묶음만 설치하면 관계없는 스킬이 끼어들지 않습니다.</p>
       <div class="bundles">
-        {bundles.map(b => {
+        {orderedBundles.map(b => {
           const items = bundleSkills(b);
+          const all = b.categories === 'all';
           return (
             <article class="card bundle">
               <h3 class="card__title">{b.title} <code class="bundle__id">{b.id}</code></h3>
               <p class="card__summary">{b.description}</p>
+              {all && <p class="bundle__warn">스킬을 한꺼번에 많이 넣으면 AI가 상관없는 스킬을 꺼내 쓰기도 합니다. 되도록 업무별 묶음을 설치하세요.</p>}
               <CopyBlock id={`bundle-${b.id}`} text={installCommand(b)} />
               <p class="bundle__label">들어 있는 스킬 {items.length}개</p>
               <ul class="bundle__skills">

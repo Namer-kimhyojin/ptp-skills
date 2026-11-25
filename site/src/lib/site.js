@@ -71,3 +71,36 @@ export const MARKETPLACE_ADD = `/plugin marketplace add ${REPO}`;
 export function categoryId(category) {
   return `cat-${categories.indexOf(category) + 1}`;
 }
+
+export function categoryUrl(category) {
+  return url(`categories/${categoryId(category)}/`);
+}
+
+/** 홈에서 분류마다 보여 주는 카드 수. 넘으면 분류 페이지로 안내한다. */
+export const HOME_LIMIT = 6;
+
+/** 결과물 형식 표시 이름. 허용 값은 tools/lib/validate.mjs의 OUTPUTS와 같다. */
+export const OUTPUTS = {
+  hwpx: '한글 파일',
+  docx: '워드 파일',
+  xlsx: '엑셀 파일',
+  pptx: 'PPT 파일',
+  pdf: 'PDF 파일',
+  text: '글(채팅 답변)',
+};
+
+export function outputLabels(skill) {
+  return (skill.catalog.outputs ?? []).map(o => OUTPUTS[o] ?? o);
+}
+
+/** 분류 안의 스킬: 최근 업데이트 순, 같으면 이름 순. */
+export function skillsIn(category) {
+  return skills
+    .filter(s => s.catalog.category === category)
+    .sort((a, b) => lastUpdated(b).localeCompare(lastUpdated(a)) || a.catalog.title.localeCompare(b.catalog.title, 'ko'));
+}
+
+/** 이 분류만 담은 묶음(전체 묶음 제외). 없으면 undefined. */
+export function categoryBundle(category) {
+  return bundles.find(b => b.categories !== 'all' && [].concat(b.categories).includes(category));
+}

@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import CopyBlock from '../../components/CopyBlock.astro';
 import InstallTabs from '../../components/InstallTabs.astro';
 import LevelMark from '../../components/LevelMark.astro';
-import { url, skills, AIS, LEVELS, REPO_URL, categoryId, formatDate, plainSubject, lastUpdated } from '../../lib/site.js';
+import { url, skills, AIS, LEVELS, REPO_URL, categoryUrl, formatDate, plainSubject, lastUpdated, outputLabels } from '../../lib/site.js';
 
 export function getStaticPaths() {
   return skills.map(skill => ({ params: { name: skill.name }, props: { skill } }));
@@ -12,6 +12,8 @@ export function getStaticPaths() {
 const { skill } = Astro.props;
 const c = skill.catalog;
 const updated = lastUpdated(skill);
+const outputs = outputLabels(skill);
+const tags: string[] = c.tags ?? [];
 const aiRows = AIS.map(ai => ({ ...ai, ...(c.compat[ai.key] ?? { level: 'none', note: '' }) }));
 const aiLabel: Record<string, { name: string; sub?: string }> = {
   claude: { name: 'Claude', sub: '웹·Claude Code·Cowork' },
@@ -36,7 +38,7 @@ const githubUrl = `${REPO_URL}/tree/main/skills/${skill.name}`;
     <nav class="crumbs" aria-label="현재 위치">
       <a href={url()}>스킬 목록</a>
       <span aria-hidden="true">/</span>
-      <a href={`${url()}#${categoryId(c.category)}`}>{c.category}</a>
+      <a href={categoryUrl(c.category)}>{c.category}</a>
     </nav>
 
     <div class="detail__grid">
@@ -46,11 +48,13 @@ const githubUrl = `${REPO_URL}/tree/main/skills/${skill.name}`;
             <h1>{c.title}</h1>
             <p class="lead">{c.summary}</p>
             <dl class="meta-list">
-              <div><dt>분류</dt><dd data-pagefind-filter="분류">{c.category}</dd></div>
+              <div><dt>분류</dt><dd data-pagefind-filter="분류"><a href={categoryUrl(c.category)}>{c.category}</a></dd></div>
+              {outputs.length > 0 && <div><dt>결과물</dt><dd>{outputs.join(', ')}</dd></div>}
               <div><dt>버전</dt><dd>{c.version}</dd></div>
               <div><dt>관리</dt><dd>{c.owner}</dd></div>
               {updated && <div><dt>업데이트</dt><dd><time datetime={updated}>{formatDate(updated)}</time></dd></div>}
             </dl>
+            {tags.length > 0 && <p class="tags"><span class="sr-only">키워드: </span>{tags.map((t: string) => <span class="tag">{t}</span>)}</p>}
             <p class="jump" data-pagefind-ignore><a class="btn btn--primary" href="#install">내 AI에 넣기</a></p>
           </header>
 

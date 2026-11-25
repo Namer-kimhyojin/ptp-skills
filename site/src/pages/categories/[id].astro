@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import CopyBlock from '../../components/CopyBlock.astro';
+import SkillGroup from '../../components/SkillGroup.astro';
+import AiFilter from '../../components/AiFilter.astro';
+import { url, categories, categoryId, skillsIn, categoryBundle, installCommand, MARKETPLACE_ADD } from '../../lib/site.js';
+
+export function getStaticPaths() {
+  return categories.map(category => ({ params: { id: categoryId(category) }, props: { category } }));
+}
+
+const { category } = Astro.props;
+const items = skillsIn(category);
+const bundle = categoryBundle(category);
+---
+<Base title={`${category} 스킬`} description={`포항테크노파크 ${category} 업무 스킬 ${items.length}개. 고른 스킬을 안내대로 내 AI에 넣어 쓰세요.`}>
+  <div class="wrap page">
+    <nav class="crumbs" aria-label="현재 위치">
+      <a href={url()}>스킬 목록</a>
+      <span aria-hidden="true">/</span>
+      <span>{category}</span>
+    </nav>
+    <h1 class="category__title">{category}</h1>
+    <p class="lead">{category} 업무에 쓰는 스킬 {items.length}개입니다. 최근에 고친 스킬이 앞에 옵니다.</p>
+
+    <div class="home-grid category__grid">
+      <div class="home-grid__main">
+        {items.length > 0 ? (
+          <>
+            <AiFilter />
+            <SkillGroup category={category} items={items} heading={false} />
+          </>
+        ) : (
+          <p class="note">이 분류에는 아직 스킬이 없습니다. 필요한 스킬이 있으면 <a href={url('contribute/')}>참여하기</a>에서 요청하거나 직접 올릴 수 있습니다.</p>
+        )}
+      </div>
+
+      {bundle && items.length > 0 && (
+        <aside class="home-grid__side" aria-labelledby="bundle-h">
+          <h2 id="bundle-h">한 번에 설치하기</h2>
+          <p class="side__lead">Claude Code·Cowork를 쓰면 이 분류의 스킬을 묶음으로 한 번에 넣을 수 있습니다. 처음이라면 스킬 목록 등록부터 합니다.</p>
+          <p class="side__step">1. 스킬 목록 등록 (처음 한 번)</p>
+          <CopyBlock id="cat-mk-add" text={MARKETPLACE_ADD} />
+          <p class="side__step">2. {bundle.title} 설치</p>
+          <CopyBlock id={`cat-bundle-${bundle.id}`} text={installCommand(bundle)} />
+          <p class="side__link"><a class="link" href={url('install/')}>자세한 설치 안내 보기</a></p>
+        </aside>
+      )}
+    </div>
+  </div>
+</Base>

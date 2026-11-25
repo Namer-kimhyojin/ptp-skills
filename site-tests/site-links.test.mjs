@@ -28,6 +28,7 @@ test('필요한 페이지와 검색 색인이 있다', () => {
     `skills/${skill}/index.html`,
     'install/index.html',
     'contribute/index.html',
+    'categories/cat-1/index.html',
     'pagefind/pagefind.js',
     `downloads/${skill}.zip`,
     `downloads/${skill}-gpt-gemini.zip`,
@@ -56,4 +57,18 @@ test('상세 페이지에 Claude용 zip과 GPT·Gemini용 zip 링크가 있다',
   assert.ok(html.includes(`href="${BASE}downloads/${skill}.zip"`), 'Claude zip 링크 없음');
   assert.ok(html.includes(`href="${BASE}downloads/${skill}-gpt-gemini.zip"`), 'GPT·Gemini zip 링크 없음');
   assert.ok(html.includes('data-pagefind-body'), '검색 색인 표시 없음');
+});
+
+test('홈과 분류 페이지에 AI 필터와 카드 지원 수준 속성이 있다', () => {
+  for (const f of ['index.html', 'categories/cat-1/index.html']) {
+    const html = fs.readFileSync(path.join(dist, f), 'utf8');
+    assert.ok(html.includes('data-ai-filter'), `${f}: AI 필터 없음`);
+    assert.match(html, /data-card[^>]*data-gemini="(full|partial|none)"/, `${f}: 카드 지원 수준 속성 없음`);
+  }
+});
+
+test('상세 페이지가 분류 페이지로 연결되고 결과물을 보여 준다', () => {
+  const html = fs.readFileSync(path.join(dist, 'skills', skill, 'index.html'), 'utf8');
+  assert.ok(html.includes(`href="${BASE}categories/cat-1/"`), '분류 페이지 링크 없음');
+  assert.ok(html.includes('결과물'), '결과물 표시 없음');
 });

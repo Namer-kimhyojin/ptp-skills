@@ -3,6 +3,8 @@ summary: 계획안·행사자료를 주면 포항TP 양식 보도자료(HWPX)로
 category: 보도·홍보
 version: 1.0.0
 owner: 포항테크노파크
+outputs: [hwpx]
+tags: [보도, 언론, 홍보, 한글 양식]
 examples:
   - "첨부한 행사 계획안으로 보도자료 써줘"
   - "이번 달 기업 모집 공고를 보도자료로 만들어줘"
