@@ -1,1 +1,0 @@
-문의 gmail 계정 kim@gmail.com

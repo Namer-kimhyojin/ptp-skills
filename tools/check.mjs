@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadSkills, loadCategories, findForbiddenFiles } from './lib/skills.mjs';
 import { validateSkill } from './lib/validate.mjs';
-import { scanFileForPII } from './lib/pii.mjs';
+import { scanFileForPII, maskMatch } from './lib/pii.mjs';
 
 const MB = 1024 * 1024;
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -21,8 +21,15 @@ for (const s of skills) {
   for (const f of s.files) {
     const abs = path.join(s.dir, f);
     total += fs.statSync(abs).size;
-    for (const hit of scanFileForPII(abs)) {
-      errors.push(`skills/${s.name}/${f}: 개인정보로 보이는 ${hit.type}이(가) 있습니다 (${hit.match})`);
+    let hits = [];
+    try {
+      hits = scanFileForPII(abs);
+    } catch (e) {
+      if (e.code !== 'ZIP_UNREADABLE') throw e;
+      errors.push(`skills/${s.name}/${f}: ${e.message}`);
+    }
+    for (const hit of hits) {
+      errors.push(`skills/${s.name}/${f}: 개인정보로 보이는 ${hit.type}이(가) 있습니다 (${maskMatch(hit)})`);
     }
   }
   const mb = (total / MB).toFixed(1);

@@ -28,15 +28,31 @@ export function scanFileForPII(absPath) {
   const ext = path.extname(absPath).toLowerCase();
   if (ZIP_EXT.has(ext)) {
     let entries;
-    try { entries = unzipSync(new Uint8Array(fs.readFileSync(absPath))); }
-    catch { return []; }
+    try {
+      entries = unzipSync(new Uint8Array(fs.readFileSync(absPath)), { filter: f => /\.(xml|txt)$/i.test(f.name) });
+    } catch (cause) {
+      const err = new Error('압축 파일을 읽을 수 없어 개인정보 검사를 하지 못했습니다', { cause });
+      err.code = 'ZIP_UNREADABLE';
+      throw err;
+    }
     const out = [];
-    for (const [name, data] of Object.entries(entries)) {
-      if (!name.toLowerCase().endsWith('.xml')) continue;
+    for (const data of Object.values(entries)) {
       out.push(...scanTextForPII(Buffer.from(data).toString('utf8')));
     }
     return out;
   }
   if (TEXT_EXT.has(ext)) return scanTextForPII(fs.readFileSync(absPath, 'utf8'));
   return [];
+}
+
+export function maskMatch(hit) {
+  const m = hit.match;
+  if (hit.type === '개인 이메일') {
+    const at = m.lastIndexOf('@');
+    return `${m.slice(0, 1)}***${m.slice(at)}`;
+  }
+  if (hit.type === '주민등록번호') return m.replace(/-?\d{7}$/, s => (s.startsWith('-') ? '-' : '') + '*******');
+  const digits = m.replace(/\D/g, '');
+  const sep = m.match(/[-. ]/)?.[0] ?? '';
+  return `${digits.slice(0, 3)}${sep}${'*'.repeat(digits.length - 7)}${sep}${digits.slice(-4)}`;
 }
