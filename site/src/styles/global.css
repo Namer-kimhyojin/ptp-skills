@@ -376,6 +376,7 @@ main:focus { outline: none; }
 .side__lead { margin-top: 12px; color: var(--ink-2); font-size: 15px; }
 .side__step { margin-top: 20px; font-size: 15px; font-weight: 600; }
 .side__step + .copyblock { margin-top: 8px; }
+.home-grid__side .copyblock__text { word-break: normal; overflow-wrap: anywhere; font-size: 14px; }
 .side__link { margin-top: 16px; font-size: 15px; }
 .bundle__warn { margin-top: 12px; padding: 10px 14px; border-radius: var(--r-sm); background: var(--warn-bg); color: var(--ink-2); font-size: 15px; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
