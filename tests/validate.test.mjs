@@ -71,6 +71,20 @@ test('tags는 선택이지만 쓰면 문자열 목록', () => {
   const e = validateSkill(makeSkill({ catalog: { ...okCatalog, tags: '보도' } }), C);
   assert.ok(e.some(m => m.includes('tags')));
 });
+test('description은 claude.ai 업로드 한도 200자 이내', () => {
+  const ok = validateSkill(makeSkill({ frontmatter: { name: 'sample-skill', description: '가'.repeat(200) } }), C);
+  assert.deepEqual(ok, []);
+  const e = validateSkill(makeSkill({ frontmatter: { name: 'sample-skill', description: '가'.repeat(201) } }), C);
+  assert.ok(e.some(m => m.includes('description') && m.includes('200')));
+});
+test('description에 < > 금지', () => {
+  const e = validateSkill(makeSkill({ frontmatter: { name: 'sample-skill', description: '<b>보도</b>' } }), C);
+  assert.ok(e.some(m => m.includes('description') && m.includes('<')));
+});
+test('이름에 claude·anthropic 금지', () => {
+  const e = validateSkill(makeSkill({ name: 'claude-helper', frontmatter: { name: 'claude-helper', description: 'x' } }), C);
+  assert.ok(e.some(m => m.includes('claude')));
+});
 test('금지 파일', () => {
   assert.deepEqual(
     findForbiddenFiles(['SKILL.md', 'scripts/__pycache__/a.pyc', 'runtime-python.txt']).sort(),

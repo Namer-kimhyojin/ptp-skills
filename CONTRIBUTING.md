@@ -119,6 +119,7 @@ PR을 만들면 `check`라는 점검이 자동으로 돕니다. PR 화면 아래
 ## SKILL.md와 파일 규칙
 
 - `SKILL.md` 맨 위에 프런트매터가 필요합니다. `name`(폴더 이름과 같게, 영문 소문자·숫자·하이픈)과 `description`(언제 쓰는 스킬인지 설명)을 적습니다.
+- `description`은 200자 이내로, `<` `>` 기호 없이 씁니다. 폴더 이름에는 `claude`, `anthropic`을 넣을 수 없습니다. claude.ai에 스킬을 올릴 때의 규칙입니다.
 - 스킬 폴더 전체 크기는 50MB를 넘을 수 없습니다.
 - 아래 파일·폴더는 넣을 수 없습니다: `__pycache__/`, `*.pyc`, `.env`, 이름에 `.backup-`이 들어간 폴더, `runtime-python.txt`, `.venv/`, `venv/`
 

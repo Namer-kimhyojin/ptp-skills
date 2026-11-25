@@ -18,6 +18,8 @@ const files = {
   'install_windows.bat': '@echo off\r\necho hi\r\n',
   'references/a.md': '문서',
   'assets/b.txt': 'asset',
+  'assets/form.hwpx': 'PK',
+  'assets/pic.PNG': 'img',
   'scripts/run.py': 'print(1)',
   'scripts/__pycache__/run.pyc': 'x',
   'runtime-python.txt': 'x',
@@ -38,11 +40,11 @@ test('Claude zip: 최상위 폴더, catalog.yaml·금지 파일 제외, CRLF 유
   assert.equal(Buffer.from(z[`${name}/install_windows.bat`]).toString(), files['install_windows.bat']);
 });
 
-test('GPT·Gemini zip: scripts 제외, 사용법.txt 포함', () => {
+test('GPT·Gemini zip: scripts·HWPX 같은 비지원 형식 제외, 사용법.txt 포함', () => {
   const z = unzipSync(buildGptGeminiZip(skill));
   const entries = Object.keys(z).sort();
   assert.deepEqual(entries, [
-    `${name}/SKILL.md`, `${name}/assets/b.txt`, `${name}/references/a.md`, `${name}/사용법.txt`,
+    `${name}/SKILL.md`, `${name}/assets/b.txt`, `${name}/assets/pic.PNG`, `${name}/references/a.md`, `${name}/사용법.txt`,
   ].sort());
   assert.equal(Buffer.from(z[`${name}/사용법.txt`]).toString(), buildStarterPrompt(skill));
 });
