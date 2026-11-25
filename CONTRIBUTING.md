@@ -114,7 +114,7 @@ PR을 만들면 `check`라는 점검이 자동으로 돕니다. PR 화면 아래
 노란색 경고는 실패가 아닙니다.
 
 - "실행 코드 검토 필요": 스킬의 `scripts/` 폴더가 바뀌었다는 알림입니다. 관리자가 코드를 더 꼼꼼히 봅니다.
-- "marketplace.json이 최신이 아닙니다": 스킬을 추가하면 PR에서는 늘 나오는 정상 경고입니다. 관리자가 병합 후 처리하니 신경 쓰지 않아도 됩니다.
+- "묶음 정보(marketplace.json·plugins 폴더)가 최신이 아닙니다": 스킬을 추가하거나 고치면 PR에서는 늘 나오는 정상 경고입니다. 관리자가 병합 후 처리하니 신경 쓰지 않아도 됩니다. `plugins/` 폴더는 직접 고치지 마세요.
 
 ## SKILL.md와 파일 규칙
 
@@ -124,13 +124,13 @@ PR을 만들면 `check`라는 점검이 자동으로 돕니다. PR 화면 아래
 
 ## 관리자용
 
-스킬 추가 PR을 병합한 뒤에는 `.claude-plugin/marketplace.json`을 새로 만들어야 합니다.
+스킬을 추가하거나 고친 PR을 병합한 뒤에는 묶음 정보를 새로 만들어야 합니다. 묶음 정보는 `.claude-plugin/marketplace.json`과, 묶음마다 스킬을 복사해 둔 `plugins/<묶음 id>/` 폴더입니다.
 
 1. 최신 main을 받습니다.
 2. `npm run build`를 실행합니다.
-3. 바뀐 `.claude-plugin/marketplace.json`을 PR로 올려 병합합니다.
+3. 바뀐 `.claude-plugin/marketplace.json`과 `plugins/` 폴더를 PR로 올려 병합합니다.
 
-이 작업 전까지는 main의 `check`가 빨갛게 나오고, Claude Code 사용자에게 새 스킬이 보이지 않습니다.
+이 작업 전까지는 main의 `check`가 빨갛게 나오고, 묶음으로 설치한 사용자(데스크톱 앱·Claude Code)는 바뀐 스킬을 받지 못합니다.
 
 ## 막힐 때
 

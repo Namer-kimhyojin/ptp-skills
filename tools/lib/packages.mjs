@@ -6,7 +6,7 @@ import { findForbiddenFiles } from './skills.mjs';
 export const GPT_INSTRUCTION_LIMIT = 8000;
 const MTIME = new Date('2026-01-01T00:00:00Z');
 
-function distributable(skill) {
+export function distributable(skill) {
   const forbidden = new Set(findForbiddenFiles(skill.files));
   return skill.files.filter(f => !forbidden.has(f) && f !== 'catalog.yaml');
 }

@@ -40,7 +40,7 @@ const id = (s: string) => `${skill.name}-${s}`;
 
 const tabs = [
   { key: 'claude-web', label: 'Claude 웹', compat: compat.claude },
-  { key: 'claude-code', label: 'Claude Code·Cowork', compat: compat.claude },
+  { key: 'claude-code', label: 'Claude 데스크톱·Code', compat: compat.claude },
   { key: 'chatgpt', label: 'ChatGPT', compat: compat.chatgpt },
   { key: 'gemini', label: 'Gemini', compat: compat.gemini },
   { key: 'codex', label: 'Codex', compat: compat.codex },
@@ -83,8 +83,19 @@ const level = (k: string) => tab[k].compat?.level ?? 'none';
         </Fragment>
       ) : t.key === 'claude-code' ? (
         <Fragment>
-          <p class="panel-lead">Claude Code와 Cowork에서는 스킬을 묶음으로 설치합니다. 한 번 설치하면 같은 묶음에 새 스킬이 추가될 때 함께 받을 수 있습니다.</p>
-          <h4>Claude Code</h4>
+          <p class="panel-lead">Claude 데스크톱 앱과 Claude Code에서는 스킬을 묶음으로 설치합니다. 한 번 설치하면 같은 묶음에 새 스킬이 추가될 때 함께 받을 수 있습니다.</p>
+          <h4>Claude 데스크톱 앱 (Cowork·Code 탭)</h4>
+          <ol class="steps">
+            <li><p>Claude 데스크톱 앱 왼쪽의 <b>Customize</b>를 누릅니다. 여기서 설치하면 Cowork와 Code 탭에서 함께 쓸 수 있습니다.</p></li>
+            <li>
+              <p><b>Plugins</b> 탭에서 <b>Add</b> &gt; <b>Add marketplace</b> &gt; <b>Add from a repository</b>를 고르고 아래 주소를 넣습니다.</p>
+              <CopyBlock id={id('repo')} text={REPO} />
+            </li>
+            {mainBundle && <li><p><b>Discover</b> 탭에서 <b>{mainBundle.id}</b> 묶음을 고르고 <b>Add</b>를 누릅니다.</p></li>}
+          </ol>
+          <p class="hint">플러그인은 유료 요금제(Pro·Max·Team·Enterprise 등)에서 쓸 수 있습니다. 메뉴 이름은 바뀔 수 있습니다.</p>
+          <h4>Claude Code (터미널)</h4>
+          <p>PowerShell 같은 터미널에서 <code>claude</code>를 실행해 쓰는 경우입니다. 데스크톱 앱 Code 탭에서는 이 명령 대신 위 방법을 씁니다.</p>
           <ol class="steps">
             <li>
               <p>Claude Code 입력창에 아래 명령을 붙여넣고 Enter를 누릅니다. 포항TP 스킬 목록을 등록하는 단계이며, 처음 한 번만 하면 됩니다.</p>
@@ -105,21 +116,11 @@ const level = (k: string) => tab[k].compat?.level ?? 'none';
               <p><strong>{needsWhat} PC에 Python이 필요합니다.</strong> 처음 한 번만 하면 됩니다.</p>
               <ol>
                 <li>python.org에서 Python 3.10 이상을 설치합니다. 설치 화면에 <b>Add python.exe to PATH</b>가 보이면 꼭 체크합니다.</li>
-                <li>Claude Code에 <q>install_windows.bat 실행해줘</q>라고 요청합니다. Claude가 스킬 폴더에 있는 이 파일을 찾아 실행합니다. <b>[성공]</b> 문장이 나오면 끝입니다.</li>
+                <li>Claude(데스크톱 앱 Code 탭이나 Claude Code)에 <q>install_windows.bat 실행해줘</q>라고 요청합니다. Claude가 스킬 폴더에 있는 이 파일을 찾아 실행합니다. <b>[성공]</b> 문장이 나오면 끝입니다.</li>
               </ol>
               <p>플러그인이 업데이트된 뒤 설치 안내가 다시 나오면 install_windows.bat을 한 번 더 실행하세요.</p>
             </div>
           )}
-          <h4>Cowork (Claude 데스크톱 앱)</h4>
-          <ol class="steps">
-            <li><p>Claude 데스크톱 앱에서 <b>Cowork</b> 탭을 열고 왼쪽의 <b>Customize</b>를 누릅니다.</p></li>
-            <li>
-              <p><b>Plugins</b> 탭에서 <b>Add</b> &gt; <b>Add marketplace</b> &gt; <b>Add from a repository</b>를 고르고 아래 주소를 넣습니다.</p>
-              <CopyBlock id={id('repo')} text={REPO} />
-            </li>
-            {mainBundle && <li><p><b>Discover</b> 탭에서 <b>{mainBundle.id}</b> 묶음을 고르고 <b>Add</b>를 누릅니다.</p></li>}
-          </ol>
-          <p class="hint">Cowork 플러그인은 유료 요금제(Pro·Max·Team·Enterprise 등)에서 쓸 수 있습니다. 메뉴 이름은 바뀔 수 있습니다.</p>
         </Fragment>
       ) : t.key === 'chatgpt' ? (
         <Fragment>
