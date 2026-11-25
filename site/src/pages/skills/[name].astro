@@ -16,7 +16,7 @@ const outputs = outputLabels(skill);
 const tags: string[] = c.tags ?? [];
 const aiRows = AIS.map(ai => ({ ...ai, ...(c.compat[ai.key] ?? { level: 'none', note: '' }) }));
 const aiLabel: Record<string, { name: string; sub?: string }> = {
-  claude: { name: 'Claude', sub: '웹·Claude Code·Cowork' },
+  claude: { name: 'Claude', sub: '웹·데스크톱 앱·Claude Code' },
   codex: { name: 'Codex' },
   chatgpt: { name: 'ChatGPT' },
   gemini: { name: 'Gemini' },
@@ -24,7 +24,7 @@ const aiLabel: Record<string, { name: string; sub?: string }> = {
 // 옆 패널의 "바로 넣기" 링크. 각 링크는 해당 AI 탭(#install-<key>)을 연다.
 const quickLinks = [
   { key: 'claude-web', label: 'Claude 웹', ai: 'claude' },
-  { key: 'claude-code', label: 'Claude Code·Cowork', ai: 'claude' },
+  { key: 'claude-code', label: 'Claude 데스크톱·Code', ai: 'claude' },
   { key: 'chatgpt', label: 'ChatGPT', ai: 'chatgpt' },
   { key: 'gemini', label: 'Gemini', ai: 'gemini' },
   { key: 'codex', label: 'Codex', ai: 'codex' },

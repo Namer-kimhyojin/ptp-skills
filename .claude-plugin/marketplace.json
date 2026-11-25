@@ -8,20 +8,12 @@
     {
       "name": "ptp-pr",
       "description": "포항TP 보도·홍보 업무 스킬 모음",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/write-pohang-tp-press-release"
-      ]
+      "source": "./plugins/ptp-pr"
     },
     {
       "name": "ptp-all",
       "description": "포항TP 업무 스킬 전체",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/write-pohang-tp-press-release"
-      ]
+      "source": "./plugins/ptp-all"
     }
   ]
 }

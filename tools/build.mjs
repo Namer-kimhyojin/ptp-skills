@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadSkills, loadCategories, loadBundles } from './lib/skills.mjs';
-import { buildMarketplace, serializeMarketplace } from './lib/marketplace.mjs';
+import { buildMarketplace, serializeMarketplace, buildPluginFiles, writePluginFiles } from './lib/marketplace.mjs';
 import { buildSkillZip, buildGptGeminiZip, buildInstructions, buildStarterPrompt } from './lib/packages.mjs';
 import { skillHistory } from './lib/history.mjs';
 
@@ -42,5 +42,6 @@ fs.writeFileSync(dataPath, JSON.stringify({ skills: data, categories, bundles },
 const mpPath = path.join(root, '.claude-plugin', 'marketplace.json');
 fs.mkdirSync(path.dirname(mpPath), { recursive: true });
 fs.writeFileSync(mpPath, serializeMarketplace(buildMarketplace(bundles, skills)));
+writePluginFiles(root, buildPluginFiles(bundles, skills));
 
 console.log(`빌드 완료: 스킬 ${skills.length}개`);
