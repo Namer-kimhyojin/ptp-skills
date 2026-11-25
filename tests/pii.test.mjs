@@ -38,6 +38,6 @@ test('손상된 zip은 검사 불가 오류(fail closed)', () => {
 test('maskMatch는 값을 가린다', () => {
   assert.equal(maskMatch({ type: '휴대전화번호', match: '010-1234-5678' }), '010-****-5678');
   assert.equal(maskMatch({ type: '휴대전화번호', match: '01012345678' }), '010****5678');
-  assert.equal(maskMatch({ type: '주민등록번호', match: '900101-1234567' }), '900101-*******');
+  assert.equal(maskMatch({ type: '주민등록번호', match: '900101-1234567' }), '******-*******');
   assert.equal(maskMatch({ type: '개인 이메일', match: 'hong@naver.com' }), 'h***@naver.com');
 });

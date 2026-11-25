@@ -51,7 +51,7 @@ export function maskMatch(hit) {
     const at = m.lastIndexOf('@');
     return `${m.slice(0, 1)}***${m.slice(at)}`;
   }
-  if (hit.type === '주민등록번호') return m.replace(/-?\d{7}$/, s => (s.startsWith('-') ? '-' : '') + '*******');
+  if (hit.type === '주민등록번호') return m.replace(/\d/g, '*');
   const digits = m.replace(/\D/g, '');
   const sep = m.match(/[-. ]/)?.[0] ?? '';
   return `${digits.slice(0, 3)}${sep}${'*'.repeat(digits.length - 7)}${sep}${digits.slice(-4)}`;

@@ -15,10 +15,9 @@ Claude Code를 쓴다면 아래 명령으로 바로 설치할 수 있습니다.
 ```
 /plugin marketplace add Namer-kimhyojin/ptp-skills
 /plugin install ptp-pr@pohang-tp
-/plugin install ptp-all@pohang-tp
 ```
 
-`ptp-pr`은 보도·홍보 묶음, `ptp-all`은 전체 묶음입니다. 필요한 쪽 하나만 설치해도 됩니다. 스킬을 직접 올리거나 고치려면 [CONTRIBUTING.md](CONTRIBUTING.md)를 읽어 주세요.
+`ptp-pr`은 보도·홍보 묶음입니다. 전체 묶음을 받으려면 `ptp-pr@pohang-tp` 대신 `ptp-all@pohang-tp`를 설치하세요. 둘 중 하나만 설치하세요. 스킬을 직접 올리거나 고치려면 [CONTRIBUTING.md](CONTRIBUTING.md)를 읽어 주세요.
 
 ## 들어 있는 스킬
 
