@@ -236,5 +236,12 @@ const level = (k: string) => tab[k].compat?.level ?? 'none';
       try { start = tabs.findIndex(t => t.dataset.key === localStorage.getItem('ptp-ai')); } catch {}
     }
     select(Math.max(0, start));
+    // 옆 패널의 "바로 넣기" 링크(#install-<key>)를 누르면 그 탭을 열고 탭 줄로 이동한다.
+    window.addEventListener('hashchange', () => {
+      const i = panels.findIndex(p => p!.id === location.hash.slice(1));
+      if (i < 0) return;
+      select(i);
+      list.scrollIntoView({ block: 'start' });
+    });
   }
 </script>
