@@ -1,0 +1,68 @@
+---
+// "쓰는 AI" 필터. 고른 AI에서 '안 됨'인 스킬 카드를 숨긴다('일부'는 남긴다).
+// 고른 값은 브라우저에 기억한다. JavaScript가 없으면 이 줄 자체가 보이지 않는다.
+import { AIS } from '../lib/site.js';
+const order = ['claude', 'chatgpt', 'gemini', 'codex'];
+const opts = [{ key: '', label: '전체' }, ...order.map(k => AIS.find(a => a.key === k)!)];
+---
+<div class="ai-filter" data-ai-filter hidden>
+  <span class="ai-filter__label" id="ai-filter-label">쓰는 AI</span>
+  <div class="ai-filter__opts" role="group" aria-labelledby="ai-filter-label">
+    {opts.map(o => (
+      <button type="button" class="ai-filter__opt" data-ai={o.key} data-label={o.label} aria-pressed={o.key === '' ? 'true' : 'false'}>{o.label}</button>
+    ))}
+  </div>
+  <p class="ai-filter__status" data-ai-status aria-live="polite"></p>
+</div>
+
+<script>
+  const KEY = 'ptp-ai';
+  const root = document.querySelector<HTMLElement>('[data-ai-filter]');
+  if (root) {
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-ai]')];
+    const status = root.querySelector<HTMLElement>('[data-ai-status]')!;
+    const labelOf = (ai: string) => buttons.find(b => b.dataset.ai === ai)?.dataset.label ?? '';
+
+    const apply = (ai: string) => {
+      buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.ai === ai)));
+      let total = 0;
+      document.querySelectorAll<HTMLElement>('[data-ai-group]').forEach(group => {
+        const limit = Number(group.dataset.limit) || Infinity;
+        let matched = 0;
+        group.querySelectorAll<HTMLElement>('[data-card]').forEach(card => {
+          const level = ai ? card.dataset[ai] : 'full';
+          const ok = !!level && level !== 'none';
+          card.hidden = !ok || matched >= limit;
+          if (ok) matched++;
+        });
+        total += matched;
+        const empty = group.querySelector<HTMLElement>('[data-group-empty]');
+        if (empty) {
+          empty.hidden = matched > 0;
+          empty.textContent = ai ? `이 분류에는 아직 ${labelOf(ai)}에서 쓸 수 있는 스킬이 없습니다.` : '이 분류에는 아직 스킬이 없습니다.';
+        }
+        const more = group.querySelector<HTMLElement>('[data-group-more]');
+        const moreText = group.querySelector<HTMLElement>('[data-group-more-text]');
+        if (more && moreText) {
+          more.hidden = matched <= limit;
+          moreText.textContent = `${group.dataset.category} 스킬 ${matched}개 모두 보기`;
+        }
+        const chip = document.querySelector<HTMLElement>(`[data-chip-count="${group.id}"]`);
+        if (chip) chip.textContent = String(matched);
+      });
+      status.textContent = ai ? `${labelOf(ai)}에서 쓸 수 있는 스킬 ${total}개` : `스킬 ${total}개`;
+    };
+
+    let saved = '';
+    try { saved = localStorage.getItem(KEY) ?? ''; } catch {}
+    if (!buttons.some(b => b.dataset.ai === saved)) saved = '';
+    root.hidden = false;
+    apply(saved);
+
+    buttons.forEach(b => b.addEventListener('click', () => {
+      const ai = b.dataset.ai ?? '';
+      try { ai ? localStorage.setItem(KEY, ai) : localStorage.removeItem(KEY); } catch {}
+      apply(ai);
+    }));
+  }
+</script>
