@@ -59,6 +59,8 @@ q { quotes: "“" "”"; }
 b, strong { font-weight: 700; }
 :focus-visible { outline: 2px solid var(--action); outline-offset: 2px; border-radius: 2px; }
 main:focus { outline: none; }
+[hidden] { display: none !important; }
+.no-js .tabs__list { display: none !important; }
 
 .wrap { max-width: calc(var(--max) + var(--gut) * 2); margin: 0 auto; padding: 0 var(--gut); }
 .measure { max-width: 46em; }
