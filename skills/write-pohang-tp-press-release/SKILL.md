@@ -200,6 +200,7 @@ description: 계획안·행사 개요·사업자료를 파일이나 이미지로
 
 ## 실행 환경
 
+- 실행 환경이 준비되지 않았으면(runtime-python.txt가 없고 lxml이 없는 경우) 사용자에게 스킬 폴더의 install_windows.bat을 한 번 실행하도록 안내한다.
 - 배포본의 `install_windows.bat`로 설치한 경우 스킬 폴더의 `runtime-python.txt`에 기록된 Python을 우선 사용한다.
 - `runtime-python.txt`가 없으면 Python 3.10 이상과 `lxml`이 설치된 실행 파일을 사용한다.
 - 한컴오피스는 HWPX 생성의 필수 조건이 아니다. 설치되어 있으면 실제 열기·쪽수·출력 화면 검증에 추가로 사용한다.
