@@ -1,0 +1,9 @@
+bundles:
+  - id: ptp-pr
+    title: 보도·홍보 묶음
+    description: 포항TP 보도·홍보 업무 스킬 모음
+    categories: [보도·홍보]
+  - id: ptp-all
+    title: 전체 묶음
+    description: 포항TP 업무 스킬 전체
+    categories: all

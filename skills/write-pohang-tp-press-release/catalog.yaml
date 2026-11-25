@@ -1,0 +1,15 @@
+title: 보도자료 작성
+summary: 계획안·행사자료를 주면 포항TP 양식 보도자료(HWPX)로 작성·검수
+category: 보도·홍보
+version: 1.0.0
+owner: 포항테크노파크
+updated: 2026-11-25
+examples:
+  - "첨부한 행사 계획안으로 보도자료 써줘"
+  - "이번 달 기업 모집 공고를 보도자료로 만들어줘"
+  - "이 보도자료 초안에서 제목을 더 짧게 고쳐줘"
+compat:
+  claude:  { level: full,    note: 초안·검수·HWPX 파일 생성까지 (Python 설치 필요) }
+  codex:   { level: full,    note: 초안·검수·HWPX 파일 생성까지 (Python 설치 필요) }
+  chatgpt: { level: partial, note: 초안 작성까지. HWPX는 양식에 직접 붙여넣기 }
+  gemini:  { level: partial, note: 초안 작성까지. HWPX는 양식에 직접 붙여넣기 }
