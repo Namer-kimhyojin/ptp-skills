@@ -1,0 +1,44 @@
+name: 오류 신고
+description: 스킬이 잘못 동작하거나 사이트에 문제가 있을 때 알려 주세요.
+title: "[오류] "
+body:
+  - type: input
+    id: skill
+    attributes:
+      label: 어떤 스킬 또는 화면인가요?
+      description: 예) 보도자료 작성, 사이트 다운로드 버튼
+    validations:
+      required: true
+  - type: dropdown
+    id: tool
+    attributes:
+      label: 사용한 AI 도우미
+      options:
+        - Claude
+        - ChatGPT
+        - Gemini
+        - Codex
+        - 사이트 (AI 도우미와 무관)
+        - 기타
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: 무슨 일이 있었나요?
+      description: AI에게 한 요청과 실제 결과를 적어 주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 어떻게 되어야 하나요?
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 확인
+      options:
+        - label: 개인정보와 내부 비공개 자료는 적지 않았습니다.
+          required: true

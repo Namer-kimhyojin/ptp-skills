@@ -1,0 +1,41 @@
+name: 스킬 요청
+description: 새로 만들고 싶은 스킬이나 개선 아이디어를 알려 주세요.
+title: "[스킬 요청] "
+body:
+  - type: input
+    id: topic
+    attributes:
+      label: 어떤 업무인가요?
+      description: 예) 회의록 작성, 공고문 검토
+    validations:
+      required: true
+  - type: textarea
+    id: situation
+    attributes:
+      label: 지금은 어떻게 하고 있나요?
+      description: 현재 작업 방식과 불편한 점을 적어 주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: wish
+    attributes:
+      label: AI가 대신 해 주면 좋은 일
+      description: 입력으로 줄 자료와 받고 싶은 결과물을 적어 주세요.
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: 분류
+      options:
+        - 보도·홍보
+        - 기타
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 확인
+      options:
+        - label: 개인정보(이름, 연락처, 주민번호 등)와 내부 비공개 자료는 적지 않았습니다.
+          required: true
