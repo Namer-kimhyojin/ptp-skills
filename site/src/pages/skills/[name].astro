@@ -12,12 +12,21 @@ const { skill } = Astro.props;
 const c = skill.catalog;
 const updated = lastUpdated(skill);
 const aiRows = AIS.map(ai => ({ ...ai, ...(c.compat[ai.key] ?? { level: 'none', note: '' }) }));
-const aiLabel: Record<string, string> = {
-  claude: 'Claude (웹·Claude Code·Cowork)',
-  codex: 'Codex',
-  chatgpt: 'ChatGPT',
-  gemini: 'Gemini',
+const aiLabel: Record<string, { name: string; sub?: string }> = {
+  claude: { name: 'Claude', sub: '웹·Claude Code·Cowork' },
+  codex: { name: 'Codex' },
+  chatgpt: { name: 'ChatGPT' },
+  gemini: { name: 'Gemini' },
 };
+// 옆 패널의 "바로 넣기" 링크. 각 링크는 해당 AI 탭(#install-<key>)을 연다.
+const quickLinks = [
+  { key: 'claude-web', label: 'Claude 웹', ai: 'claude' },
+  { key: 'claude-code', label: 'Claude Code·Cowork', ai: 'claude' },
+  { key: 'chatgpt', label: 'ChatGPT', ai: 'chatgpt' },
+  { key: 'gemini', label: 'Gemini', ai: 'gemini' },
+  { key: 'codex', label: 'Codex', ai: 'codex' },
+].map(q => ({ ...q, level: (c.compat[q.ai]?.level ?? 'none') as 'full' | 'partial' | 'none' }));
+const claudeZip = url(skill.downloads.claude);
 const githubUrl = `${REPO_URL}/tree/main/skills/${skill.name}`;
 ---
 <Base title={c.title} description={`${c.summary}. Claude·ChatGPT·Gemini·Codex에 넣는 방법을 단계별로 안내합니다.`}>
@@ -28,76 +37,118 @@ const githubUrl = `${REPO_URL}/tree/main/skills/${skill.name}`;
       <a href={`${url()}#${categoryId(c.category)}`}>{c.category}</a>
     </nav>
 
-    <div data-pagefind-body>
-      <header class="detail__head">
-        <h1>{c.title}</h1>
-        <p class="lead">{c.summary}</p>
-        <dl class="meta-list">
-          <div><dt>분류</dt><dd data-pagefind-filter="분류">{c.category}</dd></div>
-          <div><dt>버전</dt><dd>{c.version}</dd></div>
-          <div><dt>관리</dt><dd>{c.owner}</dd></div>
-          {updated && <div><dt>업데이트</dt><dd><time datetime={updated}>{formatDate(updated)}</time></dd></div>}
-        </dl>
-        <p class="jump" data-pagefind-ignore><a class="btn btn--primary" href="#install">내 AI에 넣기</a></p>
-      </header>
+    <div class="detail__grid">
+      <div class="detail__main">
+        <div data-pagefind-body>
+          <header class="detail__head">
+            <h1>{c.title}</h1>
+            <p class="lead">{c.summary}</p>
+            <dl class="meta-list">
+              <div><dt>분류</dt><dd data-pagefind-filter="분류">{c.category}</dd></div>
+              <div><dt>버전</dt><dd>{c.version}</dd></div>
+              <div><dt>관리</dt><dd>{c.owner}</dd></div>
+              {updated && <div><dt>업데이트</dt><dd><time datetime={updated}>{formatDate(updated)}</time></dd></div>}
+            </dl>
+            <p class="jump" data-pagefind-ignore><a class="btn btn--primary" href="#install">내 AI에 넣기</a></p>
+          </header>
 
-      <section class="block" aria-labelledby="what-h">
-        <h2 id="what-h">이 스킬로 할 수 있는 일</h2>
-        <p class="measure">{skill.description}</p>
-      </section>
+          <section class="block" aria-labelledby="what-h">
+            <h2 id="what-h">이 스킬로 할 수 있는 일</h2>
+            <p class="measure">{skill.description}</p>
+          </section>
 
-      <section class="block" aria-labelledby="ex-h">
-        <h2 id="ex-h">요청 예시</h2>
-        <p class="block__lead">스킬을 넣은 뒤 AI에게 이렇게 말하면 됩니다. 파일이 필요한 요청은 파일을 함께 첨부합니다.</p>
-        <ul class="examples">
-          {c.examples.map((ex: string, i: number) => (
-            <li><CopyBlock id={`ex-${i + 1}`} text={ex} variant="text" /></li>
-          ))}
-        </ul>
-      </section>
-
-      <section class="block" aria-labelledby="compat-h">
-        <h2 id="compat-h">AI별 지원 범위</h2>
-        <div class="table-wrap">
-          <table class="compat-table">
-            <thead><tr><th scope="col">AI</th><th scope="col">지원</th><th scope="col">할 수 있는 범위</th></tr></thead>
-            <tbody>
-              {aiRows.map(r => (
-                <tr class={`level-${r.level}`}>
-                  <th scope="row">{aiLabel[r.key]}</th>
-                  <td class="nowrap"><span class="compat__mark" aria-hidden="true">{LEVELS[r.level].mark}</span> {LEVELS[r.level].text}</td>
-                  <td>{r.note}</td>
-                </tr>
+          <section class="block" aria-labelledby="ex-h">
+            <h2 id="ex-h">요청 예시</h2>
+            <p class="block__lead">스킬을 넣은 뒤 AI에게 이렇게 말하면 됩니다. 파일이 필요한 요청은 파일을 함께 첨부합니다.</p>
+            <ul class="examples">
+              {c.examples.map((ex: string, i: number) => (
+                <li><CopyBlock id={`ex-${i + 1}`} text={ex} variant="text" /></li>
               ))}
-            </tbody>
-          </table>
+            </ul>
+          </section>
+
+          <section class="block" aria-labelledby="compat-h">
+            <h2 id="compat-h">AI별 지원 범위</h2>
+            <div class="table-wrap">
+              <table class="compat-table">
+                <thead><tr><th scope="col">AI</th><th scope="col">지원</th><th scope="col">할 수 있는 범위</th></tr></thead>
+                <tbody>
+                  {aiRows.map(r => (
+                    <tr class={`level-${r.level}`}>
+                      <th scope="row">{aiLabel[r.key].name}{aiLabel[r.key].sub && <span class="compat-table__sub">{aiLabel[r.key].sub}</span>}</th>
+                      <td class="nowrap"><span class="compat__mark" aria-hidden="true">{LEVELS[r.level].mark}</span> {LEVELS[r.level].text}</td>
+                      <td>{r.note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
         </div>
-      </section>
+
+        <section class="block" id="install" aria-labelledby="install-h" data-pagefind-ignore>
+          <h2 id="install-h">내 AI에 넣기</h2>
+          <p class="block__lead">평소 쓰는 AI를 고르고 순서대로 따라 하세요.</p>
+          <InstallTabs skill={skill} />
+        </section>
+
+        <section class="block" aria-labelledby="history-h" data-pagefind-ignore>
+          <h2 id="history-h">변경 이력</h2>
+          <p class="block__lead">현재 버전 {c.version}</p>
+          <ol class="history">
+            {skill.history.map((h: any) => (
+              <li><time datetime={h.date}>{formatDate(h.date)}</time><span>{plainSubject(h.subject)}</span></li>
+            ))}
+          </ol>
+        </section>
+
+        <section class="block" aria-labelledby="gh-h" data-pagefind-ignore>
+          <h2 id="gh-h">GitHub에서 보기·고치기</h2>
+          <p class="measure">스킬 파일 전체와 수정 기록을 GitHub에서 볼 수 있습니다. 보기만 할 때는 계정이 필요 없고, 고칠 내용을 올리려면 GitHub 계정이 필요합니다.</p>
+          <p class="btn-row">
+            <a class="btn btn--secondary" href={githubUrl}>GitHub에서 파일 보기</a>
+            <a class="link" href={url('contribute/')}>고치는 방법 보기</a>
+          </p>
+        </section>
+      </div>
+
+      <aside class="quick" aria-labelledby="quick-h" data-pagefind-ignore>
+        <div class="quick__box">
+          <h2 id="quick-h" class="quick__title">바로 넣기</h2>
+          <p class="quick__lead">쓰는 AI를 누르면 해당 안내로 이동합니다.</p>
+          <ul class="quick__list">
+            {quickLinks.map(q => (
+              <li>
+                <a href={`#install-${q.key}`} class={`level-${q.level}`}>
+                  <span>{q.label}</span>
+                  <span class="quick__level"><span class="compat__mark" aria-hidden="true">{LEVELS[q.level].mark}</span> {LEVELS[q.level].text}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a class="btn btn--primary quick__download" href={claudeZip} download>Claude용 파일 받기</a>
+          <p class="quick__note">Claude 웹·Codex에 올리는 zip 파일입니다.</p>
+        </div>
+        <nav class="toc" aria-label="이 페이지 목차">
+          <a href="#what-h">할 수 있는 일</a>
+          <a href="#ex-h">요청 예시</a>
+          <a href="#compat-h">AI별 지원 범위</a>
+          <a href="#install-h">내 AI에 넣기</a>
+          <a href="#history-h">변경 이력</a>
+        </nav>
+      </aside>
     </div>
-
-    <section class="block" id="install" aria-labelledby="install-h" data-pagefind-ignore>
-      <h2 id="install-h">내 AI에 넣기</h2>
-      <p class="block__lead">평소 쓰는 AI를 고르고 순서대로 따라 하세요.</p>
-      <InstallTabs skill={skill} />
-    </section>
-
-    <section class="block" aria-labelledby="history-h" data-pagefind-ignore>
-      <h2 id="history-h">변경 이력</h2>
-      <p class="block__lead">현재 버전 {c.version}</p>
-      <ol class="history">
-        {skill.history.map((h: any) => (
-          <li><time datetime={h.date}>{formatDate(h.date)}</time><span>{plainSubject(h.subject)}</span></li>
-        ))}
-      </ol>
-    </section>
-
-    <section class="block" aria-labelledby="gh-h" data-pagefind-ignore>
-      <h2 id="gh-h">GitHub에서 보기·고치기</h2>
-      <p class="measure">스킬 파일 전체와 수정 기록을 GitHub에서 볼 수 있습니다. 보기만 할 때는 계정이 필요 없고, 고칠 내용을 올리려면 GitHub 계정이 필요합니다.</p>
-      <p class="btn-row">
-        <a class="btn btn--secondary" href={githubUrl}>GitHub에서 파일 보기</a>
-        <a class="link" href={url('contribute/')}>고치는 방법 보기</a>
-      </p>
-    </section>
   </div>
+
+  <a class="sticky-cta" href="#install" data-sticky-cta data-pagefind-ignore>내 AI에 넣기</a>
+  <script>
+    // 휴대폰 하단 고정 버튼: "내 AI에 넣기" 구역이 화면에 보이면 숨긴다.
+    const cta = document.querySelector<HTMLElement>('[data-sticky-cta]');
+    const target = document.getElementById('install');
+    if (cta && target && 'IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => {
+        cta.classList.toggle('is-hidden', entry.isIntersecting || entry.boundingClientRect.top < 0);
+      }).observe(target);
+    }
+  </script>
 </Base>

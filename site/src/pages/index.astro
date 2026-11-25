@@ -41,6 +41,26 @@ const pagefindBase = url();
     </div>
   </section>
 
+  <section class="howto" aria-labelledby="howto-h">
+    <div class="wrap">
+      <h2 id="howto-h" class="sr-only">이렇게 씁니다</h2>
+      <ol class="howto__list">
+        <li>
+          <svg class="howto__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+          <div><b>1. 스킬 고르기</b><span>업무 이름으로 찾거나 분류에서 고릅니다.</span></div>
+        </li>
+        <li>
+          <svg class="howto__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11" /><path d="m7 10 5 5 5-5" /><path d="M5 20h14" /></svg>
+          <div><b>2. 내 AI에 넣기</b><span>쓰는 AI를 고르고 안내 순서대로 따라 합니다.</span></div>
+        </li>
+        <li>
+          <svg class="howto__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z" /><path d="M8 10h8" /></svg>
+          <div><b>3. 평소처럼 요청하기</b><span>요청 예시처럼 말하면 AI가 스킬을 꺼내 씁니다.</span></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
   <div class="wrap home-grid">
     <div class="home-grid__main">
       {groups.map(g => (
