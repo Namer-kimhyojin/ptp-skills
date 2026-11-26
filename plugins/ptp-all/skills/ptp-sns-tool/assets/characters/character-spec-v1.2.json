@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.2",
+  "status": "locked",
+  "authority": {
+    "identity": ["AST-GUIDE-TEO-V10", "AST-GUIDE-PIO-V10"],
+    "production_anchor": ["AST-ANCHOR-TEO-V12", "AST-ANCHOR-PIO-V12"],
+    "rule": "승인 가이드 v1.0은 실루엣·기본복의 최상위 기준이고, 사용자 승인 v1.2 마스터 시트는 시점·표정·가슴 문자 위치·두 캐릭터 체형 통일의 제작 앵커다."
+  },
+  "shared_geometry": {
+    "target_heads_tall": 2.7,
+    "allowed_heads_tall_range": [2.55, 2.85],
+    "turnaround_scale_variance_max_percent": 3,
+    "floor_baseline_variance_max_percent_of_sheet_height": 1.5,
+    "outline_style": "clean rounded vector contour",
+    "shading": "soft two-step shading",
+    "symbol_policy": "화면 기준 오른쪽 가슴 상단의 작은 T 또는 P 하나만 허용; 중앙 대형 문자와 머리·얼굴·팔다리·소품 표식 금지",
+    "team_body_match": "테오와 피오는 어깨 폭, 몸통 볼륨, 팔다리 굵기, 손과 신발 크기를 같은 마스코트 패밀리 범위로 맞춘다"
+  },
+  "sheet_layout": {
+    "canvas_px": [1024, 1536],
+    "view_order": ["front", "three_quarter", "side", "back"],
+    "expression_order": ["friendly_neutral", "cheerful", "explain_confident", "concerned_kind"],
+    "view_region_normalized_hint": [0.0, 0.12, 1.0, 0.55],
+    "expression_region_normalized_hint": [0.0, 0.56, 1.0, 0.84],
+    "usage": "정밀 크롭 좌표가 아니라 이미지 생성 참조 슬롯의 위치 힌트"
+  },
+  "characters": {
+    "CHR-BLUE": {
+      "name_ko": "테오",
+      "name_en": "TEO",
+      "meaning": "Technology + Opportunity",
+      "role": "기술과 기업의 기회를 연결하는 안내자",
+      "asset": "characters/teo/teo-master-sheet-v1.2.png",
+      "silhouette_lock": "왼쪽으로 길게 흐르는 단정한 비대칭 보브형 청색 머리와 오른쪽 상단의 작은 오목 곡선",
+      "face_lock": "흰 얼굴 면, 짙은 타원 눈, 짧은 친화형 입",
+      "outfit_lock": "흰색 일체형 기본복, 청색 옆선·어깨 배색·손목 테두리, 흰색 하의, 청색 밑창",
+      "hands": "기본 가이드와 같은 단순한 흰색 손; 별도 장갑 장비로 과장하지 않음",
+      "chest_mark": "화면 기준 오른쪽 가슴 상단의 작은 청색 대문자 T 하나; 유니폼 자수 크기",
+      "forbidden": ["가슴 중앙 대형 문자", "머리 표식", "안테나", "리본", "치마", "네이비 바지", "재킷", "과장된 장갑", "추가 로고"]
+    },
+    "CHR-ORANGE": {
+      "name_ko": "피오",
+      "name_en": "PIO",
+      "meaning": "Pohang + Innovation + Opportunity",
+      "role": "포항의 혁신과 기회를 기업 성장으로 피워 올리는 동반자",
+      "asset": "characters/pio/pio-master-sheet-v1.2.png",
+      "silhouette_lock": "위로 흐르는 큰 주황 불꽃·물방울형 머리와 오른쪽 상단의 단일 오목 곡선",
+      "face_lock": "흰 얼굴 면, 짙은 타원 눈, 짧은 친화형 입",
+      "outfit_lock": "기존 승인 가이드와 같은 흰색 일체형 기본복, 어깨에서 몸통·다리 바깥쪽으로 이어지는 주황 측면 패널, 흰색 하의, 주황 밑창",
+      "hands": "기본 가이드와 같은 단순한 흰색 손; 별도 장갑·두꺼운 장갑 커프 금지",
+      "body_match": "테오와 같은 2.7등신, 어깨 폭, 둥근 몸통 볼륨, 팔다리 굵기, 손과 신발 크기",
+      "chest_mark": "화면 기준 오른쪽 가슴 상단의 작은 주황 대문자 P 하나; 유니폼 자수 크기",
+      "forbidden": ["테오보다 가늘거나 긴 체형", "가슴 중앙 대형 문자", "머리 표식", "불꽃 왕관", "네이비 바지", "주황 스웨트셔츠", "재킷", "별도 장갑", "벨트", "추가 로고"]
+    }
+  },
+  "typography": {
+    "family": "Paperlogy",
+    "display_weights": [700, 800, 900],
+    "body_weights": [400, 500],
+    "label_weight": 600,
+    "chest_mark_exception": "T/P는 글꼴 조판 대상이 아니라 승인 캐릭터 원화의 일부"
+  }
+}

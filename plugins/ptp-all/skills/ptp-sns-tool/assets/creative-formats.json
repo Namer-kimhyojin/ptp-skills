@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "policy": "These are starting grammars, not fixed templates. Adapt the structure to each notice and compare with recent actual work.",
+  "formats": [
+    {"id":"mission-webtoon","name_ko":"테오·피오 미션 웹툰","layout_family":"sequential-scenes","signal_tags":["process","steps","story"],"hook":"마감 전에 해결할 현장 미션","character_action":"테오가 단서를 해석하고 피오가 단계별로 실행","structure":"장면의 인과와 반응을 따라 컷 크기·카메라·말풍선 위치를 바꾼다"},
+    {"id":"quiz-reveal","name_ko":"신청 자격 퀴즈·반전 공개","layout_family":"question-reveal","signal_tags":["eligibility","deadline","announcement"],"hook":"우리 기업도 가능할까?","character_action":"피오가 선택하고 테오가 근거를 설명","structure":"질문 화면과 정답·조건 화면을 다른 구성으로 연결; 핵심 조건을 숨긴 채 끝내지 않는다"},
+    {"id":"interview-magazine","name_ko":"테오·피오 인터뷰 매거진","layout_family":"editorial-spread","signal_tags":["business","people","story"],"hook":"기업이 묻는 한 가지 질문","character_action":"피오는 인터뷰어, 테오는 공개된 공고 사실만 답하는 해설자","structure":"큰 인용문·인물·여백과 설명 지면을 교차; 실제 인터뷰인 것처럼 꾸미지 않는다"},
+    {"id":"newsroom-briefing","name_ko":"오늘의 지원사업 뉴스룸","layout_family":"newsroom-board","signal_tags":["announcement","deadline","numbers"],"hook":"지원사업의 핵심을 짚는 뉴스 헤드라인","character_action":"앵커와 현장 리포터 역할로 조건과 신청을 나눠 설명","structure":"전체 장면·확대 보드·큰 수치·현장 화면을 교차; 양쪽 말풍선 고정 반복 금지"},
+    {"id":"before-after","name_ko":"문제에서 변화로 전후 비교","layout_family":"split-comparison","signal_tags":["benefit","technology","achievement"],"hook":"현장의 이 문제, 이렇게 달라질 수 있다면?","character_action":"피오가 상황을 제시하고 테오가 지원 내용과 연결","structure":"전후·가능과 조건을 대비; 미확정 성과는 가정으로 표시"},
+    {"id":"field-notebook","name_ko":"현장 탐방·관찰 노트","layout_family":"field-notes","signal_tags":["place","industry","ecosystem"],"hook":"우리 지역 현장에는 무엇이 필요할까?","character_action":"관찰·측정·메모·설명으로 현장 문제를 구체화","structure":"현장 큰 이미지와 메모·확대 관찰·경로를 편집; 임의 통계나 실사 증거를 만들지 않는다"},
+    {"id":"decision-map","name_ko":"우리 기업 신청 길찾기","layout_family":"branching-route","signal_tags":["eligibility","process","navigation"],"hook":"몇 가지 조건을 따라 신청 준비 점검","character_action":"캐릭터가 실제 조건의 분기와 준비 항목을 확인","structure":"읽을 수 있는 간단한 분기·경로, 큰 장면과 요약 교차; 모델이 적격 판정을 확정하지 않는다"},
+    {"id":"assembly-workshop","name_ko":"지원사업 조립소","layout_family":"title-two-bubbles-wide-scene-bottom-info","signal_tags":["ecosystem","process","technology"],"hook":"기술과 현장을 함께 연결","character_action":"기술·팀·현장 오브젝트를 조립","structure":"조립의 원인과 결과를 보여주는 장면; 최근 같은 형태를 썼다면 다른 형식을 먼저 검토"}
+  ]
+}

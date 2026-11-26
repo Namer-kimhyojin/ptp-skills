@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "status": "approved",
+  "purpose": "AI 이미지 생성에서 테오·피오의 반복 가능한 3D 표현을 유지하기 위한 시각·재질·조명 계약",
+  "authority_order": [
+    "기존 승인 v1.0 가이드: 실루엣과 기본복",
+    "기존 승인 v1.2 마스터 시트: 시점, 표정, 가슴 문자 위치와 패밀리 체형",
+    "3D 스타일 시트 v1.0: 입체 볼륨, 표면 재질, 광원과 렌더링 언어"
+  ],
+  "assets": {
+    "teo": "teo-3d-style-sheet-v1.0.png",
+    "pio": "pio-3d-style-sheet-v1.0.png",
+    "family": "teo-pio-3d-family-sheet-v1.0.png"
+  },
+  "reference_order": {
+    "single_character": ["approved_2d_anchor", "matching_3d_style_sheet"],
+    "both_characters": ["approved_2d_anchor_teo", "approved_2d_anchor_pio", "3d_family_sheet"]
+  },
+  "render_style": {
+    "family": "premium-rounded-soft-vinyl-animated-mascot",
+    "geometry": "둥글고 연속적인 볼륨, 날카로운 모서리와 얇은 팔다리 금지",
+    "face_material": "따뜻한 백색 무광 폴리머",
+    "suit_material": "반무광 백색 소재, 매우 미세한 직물 결만 허용",
+    "head_and_trim_material": "파랑 또는 주황의 절제된 새틴 광택",
+    "sole_material": "색상 고무 질감",
+    "metallic": 0.0,
+    "gloss_policy": "강한 플라스틱 반사와 유리 같은 광택 금지"
+  },
+  "lighting": {
+    "setup": "부드러운 중성 주광색 3점 조명",
+    "key_fill_ratio": "약한 명암 대비",
+    "ambient_occlusion": "subtle",
+    "contact_shadow": "required",
+    "forbidden": ["네온", "강한 색조명", "극적 역광", "렌즈 플레어", "과도한 림라이트"]
+  },
+  "camera": {
+    "reference_sheet": "정투영에 가까운 50~70mm 시야, 원근 과장 금지",
+    "scene_default": "캐릭터 체형을 왜곡하지 않는 자연스러운 시야",
+    "forbidden": ["극단적 광각", "어안", "과도한 로우앵글", "머리 또는 신발 크기 왜곡"]
+  },
+  "identity_invariants": {
+    "heads_tall": 2.7,
+    "allowed_heads_tall_range": [2.55, 2.85],
+    "team_body_match": "테오와 피오는 어깨 폭, 둥근 몸통 부피, 팔다리 굵기, 손과 신발 크기를 동일 패밀리 범위로 유지",
+    "symbol_policy": "화면 기준 오른쪽 가슴 상단의 작은 T 또는 P 하나만 허용",
+    "head_mark_policy": "머리·얼굴·팔다리·소품 표식 금지",
+    "outfit_policy": "승인된 흰색 일체형 기본복과 캐릭터별 측면 패널 유지"
+  },
+  "generation_contract": {
+    "use_case": "stylized-concept",
+    "required_prompt_terms": [
+      "same approved character",
+      "premium rounded soft-vinyl animated mascot",
+      "same 2.7-head proportions",
+      "neutral three-point daylight",
+      "small chest T or P only",
+      "no head mark",
+      "no costume redesign"
+    ],
+    "negative_terms": [
+      "slim body",
+      "long limbs",
+      "central large letter",
+      "head emblem",
+      "jacket",
+      "navy pants",
+      "separate gloves",
+      "metallic surface",
+      "neon lighting",
+      "watermark"
+    ],
+    "text_policy": "캐릭터 가슴의 작은 T/P 외의 문자는 원화 생성 단계에 포함하지 않음",
+    "approval_policy": "2026-09-03 사용자 승인 기준으로 잠긴 3D 스타일을 적용하며 변경 시 새 버전과 재승인이 필요"
+  }
+}

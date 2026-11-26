@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "source_key": "ptp:15:8190",
+  "source_url": "https://www.ptp.or.kr/main/board/view.do?menu_idx=116&manage_idx=15&board_idx=8190",
+  "checked_at": "2026-10-22T13:45:18+09:00",
+  "source_status": "open",
+  "source_status_evidence": {
+    "path": "source/detail.html",
+    "location": "상세 공고의 접수 상태",
+    "raw_text": "접수중"
+  },
+  "application_period": {
+    "purpose": "application",
+    "verified": true,
+    "kind": "bounded",
+    "start": "2026-10-21",
+    "end": "2026-10-30T15:00:00+09:00",
+    "evidence": {
+      "path": "source/notice.pdf",
+      "location": "접수기간 항목 (실제 원문 쪽수로 교체)",
+      "raw_text": "예시: 접수기간 2026. 10. 21. ~ 2026. 10. 30. 15:00까지"
+    }
+  },
+  "_instructions": "구조 예시이며 현재 확인 또는 게시 허가가 아닙니다. 실제 공고와 첨부에서 접수 상태·신청 시작/마감·정정/취소 여부를 확인하고 근거와 checked_at을 교체하세요. 사업 수행기간을 신청기간으로 쓰지 마세요. 일자만 기재된 마감은 한국시간 당일 끝까지, 시간이 명시된 마감은 정확한 시간까지입니다. 종료일이 없는 공식 접수는 kind=open-ended, start, condition(근거 raw_text에 포함된 공식 종료조건)을 쓰고 end를 생략합니다. 최종 게시와 예약 공개 직전 다시 확인합니다."
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "enabled": true,
+  "content_mode": "four-panel",
+  "reading_direction": "left-to-right",
+  "panel_count": 4,
+  "frame_diversity": "controlled",
+  "art_and_lettering_separate": true,
+  "character_continuity_required": true,
+  "delivery": {
+    "master_width_px": 1080,
+    "height_policy": "platform-target-or-scroll-length",
+    "channel_adaptation": "reflow-not-resize"
+  },
+  "story_beats": ["hook", "context", "explanation", "call-to-action"],
+  "panel_contract": [
+    {
+      "panel": 1,
+      "function": "hook",
+      "visual_action": "테오와 피오가 핵심 질문을 발견",
+      "core_information": "가장 먼저 알아야 할 한 문장",
+      "source_refs": ["확인 필요"],
+      "characters": ["CHR-BLUE", "CHR-ORANGE"],
+      "lettering_safe_area": "top-left",
+      "state_before": "시작",
+      "state_after": "질문 인식"
+    },
+    {
+      "panel": 2,
+      "function": "context",
+      "visual_action": "테오가 대상과 조건을 설명",
+      "core_information": "대상 또는 문제 맥락",
+      "source_refs": ["확인 필요"],
+      "characters": ["CHR-BLUE"],
+      "lettering_safe_area": "top-right",
+      "state_before": "질문 인식",
+      "state_after": "조건 이해"
+    },
+    {
+      "panel": 3,
+      "function": "explanation",
+      "visual_action": "피오가 신청 절차를 실행",
+      "core_information": "핵심 절차 또는 혜택",
+      "source_refs": ["확인 필요"],
+      "characters": ["CHR-ORANGE"],
+      "lettering_safe_area": "top-left",
+      "state_before": "조건 이해",
+      "state_after": "실행 방법 이해"
+    },
+    {
+      "panel": 4,
+      "function": "call-to-action",
+      "visual_action": "테오와 피오가 다음 행동을 안내",
+      "core_information": "마감 또는 최종 행동",
+      "source_refs": ["확인 필요"],
+      "characters": ["CHR-BLUE", "CHR-ORANGE"],
+      "lettering_safe_area": "top-center",
+      "state_before": "실행 방법 이해",
+      "state_after": "행동 준비"
+    }
+  ]
+}
+

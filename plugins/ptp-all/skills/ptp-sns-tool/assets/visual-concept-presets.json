@@ -1,0 +1,323 @@
+{
+  "schema_version": "1.0",
+  "policy": "입력 데이터 적합성과 상업적 완성도를 함께 평가하며, 색상만 다른 콘셉트는 별도 안으로 세지 않는다.",
+  "concepts": [
+    {
+      "id": "photoreal-business-scene",
+      "name_ko": "실사 비즈니스 현장",
+      "medium_family": "photoreal",
+      "best_for": [
+        "지원사업",
+        "기업",
+        "성과",
+        "채용",
+        "상담"
+      ],
+      "signal_tags": [
+        "benefit",
+        "business",
+        "achievement",
+        "people"
+      ],
+      "tone_tags": [
+        "professional",
+        "premium",
+        "trust"
+      ],
+      "photo_dependency": "preferred",
+      "commercial_rank": 5,
+      "scene_recipe": "실제 업무·상담·산업 현장에 테오·피오를 자연스럽게 합성하고 정보 패널을 공간 안에 배치",
+      "character_treatment": "접지 그림자·색 번짐·가림 관계를 적용한 환경 참여자",
+      "avoid": [
+        "사진 위 스티커처럼 붙인 캐릭터",
+        "과도한 렌즈 플레어",
+        "익명 사무실 스톡 이미지"
+      ]
+    },
+    {
+      "id": "cinematic-industry-keyvisual",
+      "name_ko": "시네마틱 산업 키비주얼",
+      "medium_family": "cinematic",
+      "best_for": [
+        "기술",
+        "산업",
+        "에너지",
+        "수소",
+        "배터리",
+        "미래전략"
+      ],
+      "signal_tags": [
+        "technology",
+        "industry",
+        "future",
+        "scale"
+      ],
+      "tone_tags": [
+        "dynamic",
+        "premium",
+        "visionary"
+      ],
+      "photo_dependency": "preferred",
+      "commercial_rank": 5,
+      "scene_recipe": "산업 시설·연구 장비·도시 야경을 깊이감 있는 광원과 원근으로 구성한 캠페인 키비주얼",
+      "character_treatment": "현장을 안내하는 주인공으로 배치하고 실제 광원과 그림자를 공유",
+      "avoid": [
+        "근거 없는 공상과학 장비",
+        "네온 과잉",
+        "배경과 무관한 캐릭터 포즈"
+      ]
+    },
+    {
+      "id": "editorial-photo-collage",
+      "name_ko": "에디토리얼 포토 콜라주",
+      "medium_family": "editorial-collage",
+      "best_for": [
+        "정책",
+        "모집",
+        "인터뷰",
+        "사례",
+        "지역 이야기"
+      ],
+      "signal_tags": [
+        "announcement",
+        "people",
+        "place",
+        "story"
+      ],
+      "tone_tags": [
+        "editorial",
+        "friendly",
+        "contemporary"
+      ],
+      "photo_dependency": "optional",
+      "commercial_rank": 5,
+      "scene_recipe": "실사 사진 조각·타이포그래피·텍스처·캐릭터를 편집 매거진처럼 겹쳐 구성",
+      "character_treatment": "사진 프레임을 넘나들며 정보를 연결하는 내레이터",
+      "avoid": [
+        "무작위 스티커 모음",
+        "찢김 효과 과잉",
+        "작은 사진 타일 반복"
+      ]
+    },
+    {
+      "id": "data-led-photo-editorial",
+      "name_ko": "데이터 중심 포토 에디토리얼",
+      "medium_family": "data-editorial",
+      "best_for": [
+        "지원금",
+        "마감",
+        "성과",
+        "통계",
+        "대상 조건"
+      ],
+      "signal_tags": [
+        "benefit",
+        "deadline",
+        "numbers",
+        "achievement"
+      ],
+      "tone_tags": [
+        "professional",
+        "clear",
+        "trust"
+      ],
+      "photo_dependency": "optional",
+      "commercial_rank": 5,
+      "scene_recipe": "관련 현장 이미지 위에 하나의 강한 수치와 절제된 반투명 정보 레이어를 결합",
+      "character_treatment": "핵심 수치와 CTA의 시선 흐름을 만드는 안내자",
+      "avoid": [
+        "대시보드처럼 보이는 박스 나열",
+        "모든 숫자의 동급 강조",
+        "배경과 분리된 하단 캐릭터"
+      ]
+    },
+    {
+      "id": "3d-miniature-diorama",
+      "name_ko": "3D 미니어처 디오라마",
+      "medium_family": "3d-diorama",
+      "best_for": [
+        "시설",
+        "입주",
+        "공간",
+        "행사",
+        "산업 생태계"
+      ],
+      "signal_tags": [
+        "place",
+        "event",
+        "ecosystem",
+        "process"
+      ],
+      "tone_tags": [
+        "friendly",
+        "premium",
+        "playful"
+      ],
+      "photo_dependency": "none",
+      "commercial_rank": 5,
+      "scene_recipe": "포항·산업·연구 공간을 고급 미니어처 세트처럼 구축하고 안내 요소를 공간 오브젝트로 통합",
+      "character_treatment": "디오라마 스케일에 맞춘 현장 호스트",
+      "avoid": [
+        "저가 장난감 질감",
+        "지나친 등각 투영",
+        "정보보다 복잡한 배경"
+      ]
+    },
+    {
+      "id": "isometric-process-world",
+      "name_ko": "아이소메트릭 절차 월드",
+      "medium_family": "isometric",
+      "best_for": [
+        "신청 절차",
+        "로드맵",
+        "지원 단계",
+        "시설 안내"
+      ],
+      "signal_tags": [
+        "process",
+        "steps",
+        "place",
+        "navigation"
+      ],
+      "tone_tags": [
+        "clear",
+        "friendly",
+        "systematic"
+      ],
+      "photo_dependency": "none",
+      "commercial_rank": 4,
+      "scene_recipe": "절차 단계를 하나의 입체 공간과 동선으로 연결하고 캐릭터가 이동하며 안내",
+      "character_treatment": "단계별 위치를 이동하는 가이드",
+      "avoid": [
+        "평면 아이콘 나열",
+        "작은 라벨 과다",
+        "지도와 절차의 혼합"
+      ]
+    },
+    {
+      "id": "tactile-paper-collage",
+      "name_ko": "촉감형 페이퍼 콜라주",
+      "medium_family": "tactile-collage",
+      "best_for": [
+        "교육",
+        "청년",
+        "지역 행사",
+        "참여 캠페인",
+        "친근한 안내"
+      ],
+      "signal_tags": [
+        "education",
+        "youth",
+        "event",
+        "community"
+      ],
+      "tone_tags": [
+        "friendly",
+        "warm",
+        "playful"
+      ],
+      "photo_dependency": "none",
+      "commercial_rank": 4,
+      "scene_recipe": "고급 종이 질감·컷아웃·인쇄 잉크 느낌으로 깊이를 만들고 정보와 캐릭터를 겹쳐 구성",
+      "character_treatment": "입체 종이 오브젝트 사이에서 행동하는 안내자",
+      "avoid": [
+        "유아용 공작 느낌",
+        "평면 도형만 사용",
+        "과도한 그림자 테두리"
+      ]
+    },
+    {
+      "id": "local-seasonal-story",
+      "name_ko": "포항 로컬·시즌 스토리",
+      "medium_family": "place-story",
+      "best_for": [
+        "지역 홍보",
+        "축제",
+        "방문",
+        "계절 캠페인",
+        "시민 안내"
+      ],
+      "signal_tags": [
+        "place",
+        "season",
+        "event",
+        "community"
+      ],
+      "tone_tags": [
+        "warm",
+        "emotional",
+        "friendly"
+      ],
+      "photo_dependency": "preferred",
+      "commercial_rank": 5,
+      "scene_recipe": "포항의 실제 장소·계절·시간대 분위기를 중심으로 캐릭터와 정보가 하나의 장면을 형성",
+      "character_treatment": "장소를 소개하고 참여를 유도하는 로컬 호스트",
+      "avoid": [
+        "관광 엽서식 장식",
+        "사실과 다른 랜드마크",
+        "계절 오브젝트 과잉"
+      ]
+    },
+    {
+      "id": "premium-product-stage",
+      "name_ko": "프리미엄 제품·성과 스테이지",
+      "medium_family": "product-stage",
+      "best_for": [
+        "기업 제품",
+        "성과물",
+        "기술 공개",
+        "수상",
+        "브랜드 캠페인"
+      ],
+      "signal_tags": [
+        "product",
+        "achievement",
+        "technology",
+        "launch"
+      ],
+      "tone_tags": [
+        "premium",
+        "minimal",
+        "confident"
+      ],
+      "photo_dependency": "optional",
+      "commercial_rank": 5,
+      "scene_recipe": "제품·성과물을 중심 무대에 두고 재질감 있는 조명, 반사, 받침 구조와 캐릭터를 결합",
+      "character_treatment": "제품의 크기·기능을 설명하는 프레젠터",
+      "avoid": [
+        "실물과 다른 제품 형상",
+        "과도한 유광 효과",
+        "제품보다 큰 캐릭터"
+      ]
+    },
+    {
+      "id": "editorial-illustrated-comic",
+      "name_ko": "에디토리얼 설명 웹툰",
+      "medium_family": "illustration",
+      "best_for": [
+        "기관소개",
+        "정책설명",
+        "교육",
+        "설립목적"
+      ],
+      "signal_tags": [
+        "institution",
+        "explainer",
+        "collaboration"
+      ],
+      "tone_tags": [
+        "friendly",
+        "professional"
+      ],
+      "photo_dependency": "none",
+      "commercial_rank": 5,
+      "scene_recipe": "캐릭터 행동으로 질문·원인·과정·결과를 전달하는 장면형 만화. 매편 카메라·공간·비유를 조정한다.",
+      "character_treatment": "승인 앵커의 비율과 정체성을 유지하는 장면 참여자",
+      "avoid": [
+        "같은 안내판 반복",
+        "사실과 다른 과장",
+        "작은 글씨로 채운 말풍선"
+      ]
+    }
+  ]
+}

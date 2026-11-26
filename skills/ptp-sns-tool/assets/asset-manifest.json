@@ -1,0 +1,501 @@
+{
+  "schema_version": "1.2",
+  "status": "identity_locked",
+  "project_id": "PTP-MASCOT-CONSISTENCY-001",
+  "identity_spec": "characters/character-spec-v1.2.json",
+  "assets": [
+    {
+      "id": "AST-CI-USER",
+      "kind": "brand-reference",
+      "path": "review/ptp-ci-user-provided.jpg",
+      "sha256": "2900bb5f579958db84fd62cccd2355369e62b5db852039811592ab115782a625",
+      "width_px": 1496,
+      "height_px": 1536,
+      "color_mode": "RGB",
+      "approval": "review_only"
+    },
+    {
+      "id": "AST-GUIDE-TEO-V10",
+      "kind": "character-guide",
+      "character_id": "CHR-BLUE",
+      "character_name": "테오",
+      "name_status": "approved",
+      "path": "guides/teo-character-guide-v1.0.png",
+      "sha256": "6256bc5459632f9b7c7bcaa7154c5c3ed6b0f506466bb8add0fcc0b24de9f22d",
+      "width_px": 1024,
+      "height_px": 1536,
+      "color_mode": "RGB",
+      "approval": "approved",
+      "use_scope": "silhouette_outfit_only",
+      "superseded_rule": "중앙 가슴 T 위치는 v1.2 규격으로 대체"
+    },
+    {
+      "id": "AST-GUIDE-PIO-V10",
+      "kind": "character-guide",
+      "character_id": "CHR-ORANGE",
+      "character_name": "피오",
+      "name_status": "approved",
+      "path": "guides/pio-character-guide-v1.0.png",
+      "sha256": "3eaf926ab281db48b17cf4c4033dcbd768df88dca384c889eee59e018045571f",
+      "width_px": 1024,
+      "height_px": 1536,
+      "color_mode": "RGB",
+      "approval": "approved",
+      "use_scope": "silhouette_outfit_only",
+      "superseded_rule": "중앙 가슴 P 위치는 v1.2 규격으로 대체"
+    },
+    {
+      "id": "AST-ANCHOR-TEO-V12",
+      "kind": "character-anchor",
+      "character_id": "CHR-BLUE",
+      "character_name": "테오",
+      "path": "characters/teo/teo-master-sheet-v1.2.png",
+      "sha256": "d0052382133261a0a18084eacb14709f4fda6a08a642c090a6a781bbaae424b4",
+      "width_px": 1024,
+      "height_px": 1536,
+      "color_mode": "RGB",
+      "approval": "approved",
+      "coverage": [
+        "front",
+        "three_quarter",
+        "side",
+        "back",
+        "expression_4"
+      ]
+    },
+    {
+      "id": "AST-ANCHOR-PIO-V12",
+      "kind": "character-anchor",
+      "character_id": "CHR-ORANGE",
+      "character_name": "피오",
+      "path": "characters/pio/pio-master-sheet-v1.2.png",
+      "sha256": "b6801449d6b56ac9f414dc40b5308e79e635105f67e816fb619049fade235e37",
+      "width_px": 1024,
+      "height_px": 1536,
+      "color_mode": "RGB",
+      "approval": "approved",
+      "coverage": [
+        "front",
+        "three_quarter",
+        "side",
+        "back",
+        "expression_4"
+      ]
+    },
+    {
+      "id": "AST-3D-TEO-V10",
+      "kind": "3d-style-reference",
+      "character_id": "CHR-BLUE",
+      "character_name": "테오",
+      "path": "characters/3d/teo-3d-style-sheet-v1.0.png",
+      "sha256": "8b0a4a59d631d156cc0782ed443eb967a3787fac2a8ce5aac10a89524b73ade9",
+      "width_px": 1024,
+      "height_px": 1536,
+      "color_mode": "RGB",
+      "approval": "approved",
+      "use_scope": "approved_3d_volume_material_lighting_reference",
+      "coverage": [
+        "front",
+        "three_quarter",
+        "side",
+        "back",
+        "expression_4"
+      ]
+    },
+    {
+      "id": "AST-3D-PIO-V10",
+      "kind": "3d-style-reference",
+      "character_id": "CHR-ORANGE",
+      "character_name": "피오",
+      "path": "characters/3d/pio-3d-style-sheet-v1.0.png",
+      "sha256": "4469da0486b91b104dbab273bca130fc1816b9cd168f38b156a0d2648e9ffa78",
+      "width_px": 1024,
+      "height_px": 1536,
+      "color_mode": "RGB",
+      "approval": "approved",
+      "use_scope": "approved_3d_volume_material_lighting_reference",
+      "coverage": [
+        "front",
+        "three_quarter",
+        "side",
+        "back",
+        "expression_4"
+      ]
+    },
+    {
+      "id": "AST-3D-FAMILY-V10",
+      "kind": "3d-style-reference",
+      "path": "characters/3d/teo-pio-3d-family-sheet-v1.0.png",
+      "sha256": "58399cf6ac3354ab80d8bc0bbae0ac0e0541bbf62de5f6a2aa4c1664b9620d64",
+      "width_px": 1024,
+      "height_px": 1536,
+      "color_mode": "RGB",
+      "approval": "approved",
+      "use_scope": "approved_paired_3d_body_material_consistency_reference",
+      "coverage": [
+        "paired_front",
+        "paired_three_quarter",
+        "paired_functional_pose"
+      ]
+    },
+    {
+      "id": "AST-3D-SPEC-V10",
+      "kind": "other",
+      "path": "characters/3d/3d-style-spec-v1.0.json",
+      "media_type": "application/json",
+      "sha256": "f59db746e907dec3e1b52057e400f690becf6b642268e0c1ec4d07d2a3588344",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-SPEC-CHARACTER-V12",
+      "kind": "other",
+      "path": "characters/character-spec-v1.2.json",
+      "media_type": "application/json",
+      "sha256": "c9657dc373a44d461a7939c34c4386100ef29f87404bb6453015ddc8b927d3ca",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-FONT-CSS-PAPERLOGY",
+      "kind": "other",
+      "path": "fonts/paperlogy/paperlogy.css",
+      "media_type": "text/css",
+      "sha256": "d893b1cdfe924105bf81af10e6de11531f1e750c7d8cf698c1bfd6798da81694",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-PLATFORM-PRESETS-V10",
+      "kind": "other",
+      "path": "platform-presets.json",
+      "media_type": "application/json",
+      "sha256": "b77c3ad2832c57e7e87b402baadacdd2a7e3ab168515d911b34895a9f349c8c3",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-OUTPUT-SIZE-PROFILES-V10",
+      "kind": "other",
+      "path": "output-size-profiles.json",
+      "media_type": "application/json",
+      "sha256": "869aa94e71523db384d547b0bbbe46b4c34fd265151fd6e2259de9ccbf68d7f7",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-VISUAL-CONCEPTS-V10",
+      "kind": "other",
+      "path": "visual-concept-presets.json",
+      "media_type": "application/json",
+      "sha256": "881f23981e90cae6be4d235e109dd87de34e1e477eebd21394fba1644a32a688",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-WEBTOON-MODE-V10",
+      "kind": "other",
+      "path": "webtoon-mode-template.json",
+      "media_type": "application/json",
+      "sha256": "75dc1f5a426b2e18ce251d8f64e822d8c6e85bb6c91654e610bef4d0846caf3d",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-QUICK-JOB-V13",
+      "kind": "other",
+      "path": "quick-job-template.json",
+      "media_type": "application/json",
+      "sha256": "ec3e8b29ed491d806c905377e35776f1090130cc7c8aa9dcc51ea33e103cb074",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-ACTIVE-ASSETS-V10",
+      "kind": "other",
+      "path": "active-assets.json",
+      "media_type": "application/json",
+      "sha256": "8636d1d8304785a3126645292a314870add3683aafabd9f4707e4ca787d9a00a",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-CONTEXT-ROUTING-V10",
+      "kind": "other",
+      "path": "context-routing.json",
+      "media_type": "application/json",
+      "sha256": "96311de1a1def447372a0de419c1d25568748a73f3d26df192ac4684e85a81ed",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-POSE-LIBRARY-V10",
+      "kind": "other",
+      "path": "characters/3d/poses/pose-library.json",
+      "media_type": "application/json",
+      "sha256": "d94d4bdcf54ec140a5e6ff1f5ae16b4fcf57a936392c94893baa5c1f7b6c65ee",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-POSE-TEO-ATLAS-V10",
+      "kind": "3d-style-reference",
+      "character_id": "CHR-BLUE",
+      "character_name": "테오",
+      "path": "characters/3d/poses/teo/teo-pose-atlas-v1.0.png",
+      "sha256": "124c1c5691f0ab426464a597217f773a30b9ed21cad3314d49f7f07e43b40852",
+      "width_px": 1536,
+      "height_px": 1024,
+      "color_mode": "RGB",
+      "approval": "approved",
+      "use_scope": "AI image-generation pose reference; baked checkerboard"
+    },
+    {
+      "id": "AST-POSE-PIO-ATLAS-V10",
+      "kind": "3d-style-reference",
+      "character_id": "CHR-ORANGE",
+      "character_name": "피오",
+      "path": "characters/3d/poses/pio/pio-pose-atlas-v1.0.png",
+      "sha256": "4378e7af77095026bc1257b832bf87106b6cd292c363f084da567d805cb03c58",
+      "width_px": 1774,
+      "height_px": 887,
+      "color_mode": "RGB",
+      "approval": "approved",
+      "use_scope": "AI image-generation pose reference; baked checkerboard"
+    },
+    {
+      "id": "AST-TEMPLATE-SOCIAL-HTML-V10",
+      "kind": "other",
+      "path": "templates/social-card-base.html",
+      "media_type": "text/html",
+      "sha256": "6f57fced3fb87b4671de64ca59ac2fc04758b5f5c1c348e33371fa2c2af80436",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-FONT-PAPERLOGY-100",
+      "kind": "font",
+      "path": "fonts/paperlogy/Paperlogy-1Thin.ttf",
+      "sha256": "9d8f4627b1a299dfedc7382c14f56521913ba6fa667753ccd6fbcc4e38824a8a",
+      "font_family": "Paperlogy",
+      "font_weight": 100,
+      "font_version": "1.001",
+      "license": "OFL-1.1",
+      "license_path": "fonts/paperlogy/OFL.txt",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-FONT-PAPERLOGY-200",
+      "kind": "font",
+      "path": "fonts/paperlogy/Paperlogy-2ExtraLight.ttf",
+      "sha256": "e7ee3fde6d3ac91cca98f2eeb3d39ee87984aa06a0c442c6b2f900255c453593",
+      "font_family": "Paperlogy",
+      "font_weight": 200,
+      "font_version": "1.001",
+      "license": "OFL-1.1",
+      "license_path": "fonts/paperlogy/OFL.txt",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-FONT-PAPERLOGY-300",
+      "kind": "font",
+      "path": "fonts/paperlogy/Paperlogy-3Light.ttf",
+      "sha256": "7e92cd3075e088e4fd139da64e7a46f3102b8b8797eee5c1ccfc37b13a5a7794",
+      "font_family": "Paperlogy",
+      "font_weight": 300,
+      "font_version": "1.001",
+      "license": "OFL-1.1",
+      "license_path": "fonts/paperlogy/OFL.txt",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-FONT-PAPERLOGY-400",
+      "kind": "font",
+      "path": "fonts/paperlogy/Paperlogy-4Regular.ttf",
+      "sha256": "05e1021e3de620dddc97875342e2be1a94c5f8e9b9f792bd16c4c1d0085343b3",
+      "font_family": "Paperlogy",
+      "font_weight": 400,
+      "font_version": "1.001",
+      "license": "OFL-1.1",
+      "license_path": "fonts/paperlogy/OFL.txt",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-FONT-PAPERLOGY-500",
+      "kind": "font",
+      "path": "fonts/paperlogy/Paperlogy-5Medium.ttf",
+      "sha256": "f3c97ace885bb7d2a53a73dc71d832fa79988d5f546c2562abbb87aa07492f4b",
+      "font_family": "Paperlogy",
+      "font_weight": 500,
+      "font_version": "1.001",
+      "license": "OFL-1.1",
+      "license_path": "fonts/paperlogy/OFL.txt",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-FONT-PAPERLOGY-600",
+      "kind": "font",
+      "path": "fonts/paperlogy/Paperlogy-6SemiBold.ttf",
+      "sha256": "ca92034a1c4602a57c55434dfdbf8428a0bb88ac84a99a5effec1a41f0118127",
+      "font_family": "Paperlogy",
+      "font_weight": 600,
+      "font_version": "1.001",
+      "license": "OFL-1.1",
+      "license_path": "fonts/paperlogy/OFL.txt",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-FONT-PAPERLOGY-700",
+      "kind": "font",
+      "path": "fonts/paperlogy/Paperlogy-7Bold.ttf",
+      "sha256": "7effb892621474e9c2a9112f482eb87dd25b65a470e5ae5971be5a68d89ad89b",
+      "font_family": "Paperlogy",
+      "font_weight": 700,
+      "font_version": "1.001",
+      "license": "OFL-1.1",
+      "license_path": "fonts/paperlogy/OFL.txt",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-FONT-PAPERLOGY-800",
+      "kind": "font",
+      "path": "fonts/paperlogy/Paperlogy-8ExtraBold.ttf",
+      "sha256": "fb0324f8ac057e50f4f4632331617e347bfe5a04184f7b0db514be682fb6b25c",
+      "font_family": "Paperlogy",
+      "font_weight": 800,
+      "font_version": "1.001",
+      "license": "OFL-1.1",
+      "license_path": "fonts/paperlogy/OFL.txt",
+      "approval": "approved"
+    },
+    {
+      "id": "AST-FONT-PAPERLOGY-900",
+      "kind": "font",
+      "path": "fonts/paperlogy/Paperlogy-9Black.ttf",
+      "sha256": "9a2149095d72ae268abb3acf6a3a6ab4adcae8c0ebb98999bd2d607f22149bc0",
+      "font_family": "Paperlogy",
+      "font_weight": 900,
+      "font_version": "1.001",
+      "license": "OFL-1.1",
+      "license_path": "fonts/paperlogy/OFL.txt",
+      "approval": "approved"
+    }
+  ],
+  "production_requirements": {
+    "identity_rule_set": {
+      "status": "locked",
+      "approved_at": "2026-09-02",
+      "spec_asset": "AST-SPEC-CHARACTER-V12"
+    },
+    "character_guide_set": {
+      "status": "locked",
+      "approved_at": "2026-09-02",
+      "approved_assets": [
+        "AST-GUIDE-TEO-V10",
+        "AST-GUIDE-PIO-V10"
+      ],
+      "use_scope": "silhouette_outfit_only"
+    },
+    "character_anchor_set": {
+      "status": "locked",
+      "approved_at": "2026-09-02",
+      "required_characters": [
+        "CHR-BLUE",
+        "CHR-ORANGE"
+      ],
+      "required_views_per_character": [
+        "front",
+        "three_quarter",
+        "side",
+        "back"
+      ],
+      "minimum_expressions_per_character": 4,
+      "approved_assets": [
+        "AST-ANCHOR-TEO-V12",
+        "AST-ANCHOR-PIO-V12"
+      ],
+      "required_outfit_slots": [
+        "default"
+      ],
+      "optional_outfit_slots": [
+        "field",
+        "research"
+      ]
+    },
+    "three_d_style_set": {
+      "status": "locked",
+      "approved_at": "2026-09-03",
+      "spec_asset": "AST-3D-SPEC-V10",
+      "candidate_assets": [
+        "AST-3D-TEO-V10",
+        "AST-3D-PIO-V10",
+        "AST-3D-FAMILY-V10"
+      ],
+      "identity_authority": "character_anchor_set",
+      "use_scope": "approved AI image-generation 3D volume, material and lighting reference"
+    },
+    "pose_library_set": {
+      "status": "locked",
+      "approved_at": "2026-09-03",
+      "library_asset": "AST-POSE-LIBRARY-V10",
+      "atlas_assets": [
+        "AST-POSE-TEO-ATLAS-V10",
+        "AST-POSE-PIO-ATLAS-V10"
+      ],
+      "pose_count_per_character": 8,
+      "use_scope": "AI image-generation reference only; not transparent composition assets"
+    },
+    "context_routing_set": {
+      "status": "locked",
+      "active_asset": "AST-ACTIVE-ASSETS-V10",
+      "routing_asset": "AST-CONTEXT-ROUTING-V10",
+      "generation_manifest_policy": "do_not_load_full_manifest"
+    },
+    "typography_set": {
+      "status": "locked",
+      "font_family": "Paperlogy",
+      "font_version": "1.001",
+      "weights": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900
+      ],
+      "license": "OFL-1.1"
+    },
+    "channel_preset_set": {
+      "status": "locked",
+      "asset": "AST-PLATFORM-PRESETS-V10",
+      "checked_at": "2026-09-02",
+      "refresh_after_days": 90
+    },
+    "output_size_profile_set": {
+      "status": "locked",
+      "asset": "AST-OUTPUT-SIZE-PROFILES-V10",
+      "default_final_profile": "channel-native-1x",
+      "quick_preview_profile": "draft-preview-0.5x",
+      "upscale_existing_raster": false
+    },
+    "output_format_set": {
+      "status": "locked",
+      "formats": [
+        "png",
+        "pdf",
+        "html"
+      ],
+      "template_asset": "AST-TEMPLATE-SOCIAL-HTML-V10"
+    },
+    "visual_concept_set": {
+      "status": "locked",
+      "asset": "AST-VISUAL-CONCEPTS-V10",
+      "proposal_count": 3,
+      "composition_mode": "multi-layer",
+      "allow_flat_geometric_only": false
+    },
+    "webtoon_mode_set": {
+      "status": "locked",
+      "asset": "AST-WEBTOON-MODE-V10",
+      "character_anchor_set": "character_anchor_set",
+      "art_and_lettering_separate": true
+    },
+    "brand_guide": {
+      "status": "pending"
+    },
+    "rights_and_ai_policy": {
+      "status": "pending"
+    }
+  }
+}

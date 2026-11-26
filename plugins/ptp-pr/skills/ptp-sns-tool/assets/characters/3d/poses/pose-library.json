@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "library_id": "PTP-3D-POSE-LIBRARY-V1.0",
+  "status": "approved",
+  "approved_at": "2026-09-03",
+  "purpose": "테오·피오 3D 이미지 생성 시 새로 그리기 전에 우선 참조하는 포즈 라이브러리",
+  "usage_scope": "AI image-generation reference; the checkerboard is baked into the PNG and is not an alpha transparency layer",
+  "generation": {
+    "engine": "OpenAI built-in image generation",
+    "method": "approved 2D anchor plus approved 3D style sheet",
+    "atlas_layout": "4 columns x 2 rows",
+    "continuity_review": "passed"
+  },
+  "pose_order": [
+    "neutral",
+    "open-hand-guide",
+    "index-explain",
+    "thumbs-up",
+    "action-step",
+    "concerned-kind",
+    "tablet",
+    "wave"
+  ],
+  "characters": {
+    "teo": {
+      "atlas": {
+        "path": "teo/teo-pose-atlas-v1.0.png",
+        "width": 1536,
+        "height": 1024,
+        "sha256": "124c1c5691f0ab426464a597217f773a30b9ed21cad3314d49f7f07e43b40852"
+      },
+      "poses": [
+        {"id": "neutral", "path": "teo/01-neutral.png", "width": 384, "height": 512, "sha256": "e85fa117ec72035fdacdafec730fc48147bf57b4a150e7757b91b7b3ff47d07a"},
+        {"id": "open-hand-guide", "path": "teo/02-open-hand-guide.png", "width": 384, "height": 512, "sha256": "13975c40ea20ad497e3bae4f945b7397f148cbf64f8e4ec53f9bf01f72ca3524"},
+        {"id": "index-explain", "path": "teo/03-index-explain.png", "width": 384, "height": 512, "sha256": "7147ac55657318fb8839ae6cf25905a17fe89593029c943ee9f6fa99eb227cfa"},
+        {"id": "thumbs-up", "path": "teo/04-thumbs-up.png", "width": 384, "height": 512, "sha256": "f6dfdbc8b9a3af8a26cb1c1cb77c5fb262217f66ca64908005d6aa667f91c702"},
+        {"id": "action-step", "path": "teo/05-action-step.png", "width": 384, "height": 512, "sha256": "70bb2868a48dce05fc80d552a615d47d7be6ac22eb7a56c0e72c6177a9833ce0"},
+        {"id": "concerned-kind", "path": "teo/06-concerned-kind.png", "width": 384, "height": 512, "sha256": "153d07b7d60818cdb6d44df2871e511ab5dfd446088fd90d52e103d9c00315ff"},
+        {"id": "tablet", "path": "teo/07-tablet.png", "width": 384, "height": 512, "sha256": "658970af5bb36b29ea943dbd98b03aff83e0c0a198a522121c4e0163f7f60d3f"},
+        {"id": "wave", "path": "teo/08-wave.png", "width": 384, "height": 512, "sha256": "c61a8e39abfd9794e26c20691d7e5c1f71ab54d85589759998f81e5cfbb4c4df"}
+      ]
+    },
+    "pio": {
+      "atlas": {
+        "path": "pio/pio-pose-atlas-v1.0.png",
+        "width": 1774,
+        "height": 887,
+        "sha256": "4378e7af77095026bc1257b832bf87106b6cd292c363f084da567d805cb03c58"
+      },
+      "poses": [
+        {"id": "neutral", "path": "pio/01-neutral.png", "width": 444, "height": 444, "sha256": "d0b105bfdcf61c623f148a03eccf362e10372de08426d9d0bba411868433e878"},
+        {"id": "open-hand-guide", "path": "pio/02-open-hand-guide.png", "width": 443, "height": 444, "sha256": "51ecafccebcfb3dfcc21f24f0ce343603832aa8c152bc8d0e1701143a5943dd4"},
+        {"id": "index-explain", "path": "pio/03-index-explain.png", "width": 443, "height": 444, "sha256": "1cdd75cd5fcd31c3b855df8a11a7863c46e3636239be8fc441b173cc902eb222"},
+        {"id": "thumbs-up", "path": "pio/04-thumbs-up.png", "width": 444, "height": 444, "sha256": "580bf8302695c72dcdd393b506c8e5b2553378aa38995aee763e1c0e08b15047"},
+        {"id": "action-step", "path": "pio/05-action-step.png", "width": 444, "height": 443, "sha256": "627cd8f4bd4ca8a0b75cc9a5945874e30aa96e8965c4d836957ad1e09314fdec"},
+        {"id": "concerned-kind", "path": "pio/06-concerned-kind.png", "width": 443, "height": 443, "sha256": "74636507e1ff82123b7814e99530b913ea93c05c5789302b2fa22d3a90b3ba26"},
+        {"id": "tablet", "path": "pio/07-tablet.png", "width": 443, "height": 443, "sha256": "2ae1b0d989f4a6b4a662b15d65e48ba56d6c362f06a11e8fceffe0ae0175f140"},
+        {"id": "wave", "path": "pio/08-wave.png", "width": 444, "height": 443, "sha256": "67b91622ed9078d743f67ee9841807a4abf5e935656e42df23c170e03a9d5150"}
+      ]
+    }
+  }
+}

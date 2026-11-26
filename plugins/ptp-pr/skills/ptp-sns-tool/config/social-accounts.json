@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "organization": "포항테크노파크",
+  "timezone": "Asia/Seoul",
+  "preferred_method": "meta-business-suite",
+  "authentication": {
+    "preferred_browser": "iab",
+    "strategy": "existing-session-then-saved-profile-or-browser-login",
+    "credential_storage": "browser-or-official-site-only",
+    "save_login_requested": false,
+    "save_login_request_evidence": null,
+    "facebook_login_profile_url": null,
+    "status_path": "state/authentication-status.json",
+    "handoff_on_security_challenge": true
+  },
+  "instagram": {
+    "account_id": "pohangtp_official",
+    "profile_url": "https://www.instagram.com/pohangtp_official/",
+    "display_name": "포항테크노파크",
+    "verified_at": null,
+    "verified_by": null,
+    "identity_kind": "handle"
+  },
+  "facebook": {
+    "account_id": "pohangtpoffcial",
+    "profile_url": "https://www.facebook.com/pohangtpoffcial",
+    "display_name": "포항테크노파크",
+    "verified_at": null,
+    "verified_by": null,
+    "identity_kind": "handle"
+  }
+}
