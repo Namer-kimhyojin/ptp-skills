@@ -9,7 +9,7 @@ import {
   buildSkillZip, buildGeminiZip, geminiFiles, GEMINI_MAX_FILES, buildInstructions, buildStarterPrompt,
 } from '../tools/lib/packages.mjs';
 
-const name = 'write-pohang-tp-press-release';
+const name = 'ptp-press';
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'ptp-pkg-'));
 test.after(() => fs.rmSync(tmp, { recursive: true, force: true }));
 const files = {

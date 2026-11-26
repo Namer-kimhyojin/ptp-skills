@@ -18,7 +18,7 @@ const recent = skills
 const newest = skills.map(lastUpdated).sort().at(-1);
 // 첫 화면 오른쪽 미리보기: 실제 스킬의 요청 예시와 결과물로 보여 준다.
 // 스킬이 없어지면 미리보기는 빠진다.
-const demo = skills.find(s => s.name === 'write-pohang-tp-press-release');
+const demo = skills.find(s => s.name === 'ptp-press');
 const demoAsk = demo?.catalog.examples[0] ?? '';
 ---
 <Base description="포항테크노파크 직원이 Claude·ChatGPT·Gemini 앱에 넣어 쓰는 업무 스킬 모음입니다. 스킬을 찾고, 안내에 따라 내 AI에 넣으세요." current="home">

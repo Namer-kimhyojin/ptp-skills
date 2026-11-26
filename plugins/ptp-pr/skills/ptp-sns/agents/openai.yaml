@@ -1,0 +1,8 @@
+interface:
+  display_name: "포항TP SNS 제작·게시 도구"
+  short_description: "홍보 이미지·카드뉴스·웹툰·짧은 영상을 제작하고 재단 SNS에 게시"
+  brand_color: "#064191"
+  default_prompt: "$ptp-sns로 포항TP 사업공고 홍보물을 만들어줘. 캐릭터를 선택한 후 검수를 통과하면 재단 인스타그램과 페이스북에 자동으로 게시해줘."
+
+policy:
+  allow_implicit_invocation: true

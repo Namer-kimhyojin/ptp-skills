@@ -1,4 +1,0 @@
-interface:
-  display_name: "포항TP 보도자료 작성"
-  short_description: "포항TP 보도자료 작성·검수·HWPX 파일 생성"
-  default_prompt: "Use $write-pohang-tp-press-release to read the attached plan file or image, verify the facts and contact details, generate at least seven title-subtitle candidates across at least five evidence-supported news angles, score and de-duplicate them, present three to five genuinely distinct options with one recommendation, draft the selected press release in at least six substantive paragraphs, and then ask whether to create the official HWPX distribution file unless the user already requested it."

@@ -6,7 +6,7 @@ import path from 'node:path';
 
 const dist = path.resolve('dist');
 const BASE = '/ptp-skills/';
-const skill = 'write-pohang-tp-press-release';
+const skill = 'ptp-press';
 
 function htmlFiles(dir) {
   const out = [];

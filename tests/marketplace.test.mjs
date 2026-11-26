@@ -6,7 +6,7 @@ import path from 'node:path';
 import { buildMarketplace, serializeMarketplace, marketplaceStaleResult, buildPluginFiles, writePluginFiles, pluginFilesStale } from '../tools/lib/marketplace.mjs';
 import { makeSkill } from './helpers.mjs';
 
-const skills = [makeSkill({ name: 'write-pohang-tp-press-release' })];
+const skills = [makeSkill({ name: 'ptp-press' })];
 const bundles = [
   { id: 'ptp-pr', title: '보도', description: '포항TP 보도·홍보 업무 스킬 모음', categories: ['보도·홍보'] },
   { id: 'ptp-all', title: '전체', description: '전체', categories: 'all' },
