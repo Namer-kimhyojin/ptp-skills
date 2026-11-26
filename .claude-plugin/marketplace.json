@@ -17,13 +17,8 @@
     },
     {
       "name": "ptp-report",
-      "description": "포항TP 발표·보고 업무 스킬 모음",
+      "description": "포항TP 사업기획·공고 탐색·발표·보고 업무 스킬 모음",
       "source": "./plugins/ptp-report"
-    },
-    {
-      "name": "ptp-planning",
-      "description": "포항TP 사업기획·공고 탐색 스킬 모음",
-      "source": "./plugins/ptp-planning"
     },
     {
       "name": "ptp-all",

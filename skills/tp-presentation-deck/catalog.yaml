@@ -1,6 +1,6 @@
 title: 발표자료 제작
 summary: 보고서·수치·메모를 주면 포항TP 로고가 들어간 발표자료(A4 가로 기본)를 HTML 한 파일로 제작. 발표 보기·편집 모드·인쇄/PDF 지원
-category: 발표·보고
+category: 기획·발표·보고
 version: 1.0.0
 owner: 포항테크노파크
 outputs: [html, pdf]
