@@ -1,0 +1,35 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "skills/ptp-sns-tool/assets/templates/social-card-base.html"
+        ],
+        "createdAt": "2026-11-26T06:09:20.013Z",
+        "reason": "Claude judged false positive: .metric is #ffad4d at 102px/900 on rgba(6,30,51,.6) over #18364f navy, about 8:1, above the 3:1 large-text bar; the checker cannot resolve the translucent layer. File is the user's imported skill template."
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "plugins/ptp-pr/skills/ptp-sns-tool/assets/templates/social-card-base.html"
+        ],
+        "createdAt": "2026-11-26T06:09:20.175Z",
+        "reason": "Claude judged false positive: .metric is #ffad4d at 102px/900 on rgba(6,30,51,.6) over #18364f navy, about 8:1, above the 3:1 large-text bar; the checker cannot resolve the translucent layer. File is the user's imported skill template."
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "plugins/ptp-all/skills/ptp-sns-tool/assets/templates/social-card-base.html"
+        ],
+        "createdAt": "2026-11-26T06:09:20.323Z",
+        "reason": "Claude judged false positive: .metric is #ffad4d at 102px/900 on rgba(6,30,51,.6) over #18364f navy, about 8:1, above the 3:1 large-text bar; the checker cannot resolve the translucent layer. File is the user's imported skill template."
+      }
+    ]
+  }
+}

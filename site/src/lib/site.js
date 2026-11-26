@@ -39,8 +39,8 @@ export function lastUpdated(skill) {
 
 export const AIS = [
   { key: 'claude', label: 'Claude' },
-  { key: 'codex', label: 'Codex' },
-  { key: 'chatgpt', label: 'ChatGPT' },
+  { key: 'codex', label: 'Codex (ChatGPT 앱)' },
+  { key: 'chatgpt', label: 'ChatGPT 대화' },
   { key: 'gemini', label: 'Gemini' },
 ];
 

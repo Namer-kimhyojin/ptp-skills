@@ -18,10 +18,10 @@ const orderedBundles = [...bundles.filter(b => b.categories !== 'all'), ...bundl
           <tbody>
             <tr><th scope="row">Claude 데스크톱 앱 (Cowork · Code 탭)</th><td>스킬 묶음</td><td>이 화면 아래</td></tr>
             <tr><th scope="row">Claude Code (터미널)</th><td>스킬 묶음 (자동 업데이트 가능)</td><td>이 화면 아래</td></tr>
-            <tr><th scope="row">Claude 웹 · 데스크톱 채팅</th><td>스킬 zip 파일</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
-            <tr><th scope="row">ChatGPT</th><td>지침 문구와 문서 파일</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
-            <tr><th scope="row">Gemini</th><td>GPT·Gemini용 zip 파일</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
-            <tr><th scope="row">Codex</th><td>스킬 zip 파일</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
+            <tr><th scope="row">Claude 웹 · 데스크톱 채팅</th><td>전체 파일 zip</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
+            <tr><th scope="row">Codex (ChatGPT 앱 · Codex CLI)</th><td>전체 파일 zip</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
+            <tr><th scope="row">ChatGPT 대화 (웹·앱 채팅, 프로젝트)</th><td>지침 문구와 글·그림 파일</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
+            <tr><th scope="row">Gemini</th><td>글·그림만 담은 zip</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
           </tbody>
         </table>
       </div>
@@ -80,7 +80,7 @@ const orderedBundles = [...bundles.filter(b => b.categories !== 'all'), ...bundl
 
     <section class="block" aria-labelledby="one-h">
       <h2 id="one-h">다른 AI에 스킬 하나씩 넣기</h2>
-      <p class="block__lead">Claude 웹, ChatGPT, Gemini, Codex는 스킬마다 받는 파일과 순서가 다릅니다. 스킬을 고른 뒤 상세 화면의 ‘내 AI에 넣기’를 따라 하세요.</p>
+      <p class="block__lead">Claude 웹, Codex(ChatGPT 앱), ChatGPT 대화, Gemini는 스킬마다 받는 파일과 순서가 다릅니다. 스킬을 고른 뒤 상세 화면의 ‘내 AI에 넣기’를 따라 하세요.</p>
       <ul class="link-list">
         {skills.map(s => <li><a href={`${skillUrl(s)}#install`}>{s.catalog.title}</a> <span class="meta">{s.catalog.category}</span></li>)}
       </ul>
