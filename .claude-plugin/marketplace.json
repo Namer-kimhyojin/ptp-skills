@@ -21,6 +21,11 @@
       "source": "./plugins/ptp-report"
     },
     {
+      "name": "ptp-planning",
+      "description": "포항TP 사업기획·공고 탐색 스킬 모음",
+      "source": "./plugins/ptp-planning"
+    },
+    {
       "name": "ptp-all",
       "description": "포항TP 업무 스킬 전체",
       "source": "./plugins/ptp-all"

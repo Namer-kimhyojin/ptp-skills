@@ -1,0 +1,108 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>공고레이더 브리핑 2026-11-26</title><style>
+:root{--ink:#1b1f24;--muted:#5d6672;--line:#e2e5e9;--bg:#f7f7f5;--panel:#fff;--accent:#0b57a4;
+--hot:#b42318;--hot-bg:#fdecea;--warm:#9a5b00;--warm-bg:#fff4e0;--ok:#11663a;--ok-bg:#e6f4ec;--info-bg:#eaf1fa}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Pretendard,"Pretendard Variable","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 24px 64px}
+header h1{font-size:24px;margin:0 0 4px;letter-spacing:-.01em}
+header .meta{color:var(--muted);font-size:13.5px;margin:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:20px 0}
+.stat{background:var(--panel);padding:14px 16px}
+.stat b{display:block;font-size:24px;line-height:1.2}
+.stat span{color:var(--muted);font-size:13px}
+.stat.hot b{color:var(--hot)}
+.tools{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;display:flex;gap:16px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.tools input[type=search]{flex:1;min-width:220px;padding:9px 12px;border:1px solid #cfd4da;border-radius:8px;font:inherit;background:#fff}
+.tools label{color:var(--muted);font-size:14px;display:flex;gap:6px;align-items:center;cursor:pointer}
+nav.toc{display:flex;gap:14px;flex-wrap:wrap;font-size:13.5px}
+nav.toc a{color:var(--muted);text-decoration:none}
+nav.toc a:hover{color:var(--accent)}
+section{margin-top:36px}
+section>h2{font-size:17px;margin:0 0 4px;display:flex;align-items:baseline;gap:8px}
+section>h2 .n{color:var(--muted);font-weight:500;font-size:14px}
+section>p.desc{color:var(--muted);font-size:13.5px;margin:0 0 12px}
+.tw{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:860px}
+th{font-size:12.5px;color:var(--muted);font-weight:600;text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);background:#fbfbfa;white-space:nowrap}
+td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:14px}
+tr:last-child td{border-bottom:0}
+td.t{min-width:300px;max-width:420px}
+td.nowrap{white-space:nowrap}
+td.ag{min-width:120px;word-break:keep-all}
+td.ty{min-width:96px;word-break:keep-all}
+td{word-break:keep-all}
+a{color:var(--accent);text-underline-offset:2px}
+a:visited{color:#5b3c99}
+td.t a,.card h3 a{font-weight:600;text-decoration:none}
+td.t a:hover,.card h3 a:hover{text-decoration:underline}
+.nolink{font-weight:600}
+.sub{color:var(--muted);font-size:12.5px;margin-top:3px}
+.new{display:inline-block;font-size:10.5px;font-weight:700;color:#fff;background:var(--accent);border-radius:4px;padding:1px 5px;margin-right:6px;vertical-align:2px}
+.dd{display:inline-block;font-weight:700;font-size:13px;border-radius:6px;padding:2px 8px}
+.dd-hot{color:var(--hot);background:var(--hot-bg)}
+.dd-warm{color:var(--warm);background:var(--warm-bg)}
+.dd-cool{color:var(--ok);background:var(--ok-bg)}
+.dd-na{color:var(--muted);background:#eef0f2}
+.score b{font-size:20px;line-height:1.1;display:block}
+.score small{color:var(--muted);font-size:11.5px;white-space:nowrap}
+.score[title]:not([title=""]){cursor:help}
+.sc-top b{color:var(--ok)}
+.flag{display:inline-block;font-size:12px;border-radius:999px;padding:1px 8px;margin:0 4px 4px 0;white-space:nowrap}
+.f-hot{background:var(--hot-bg);color:var(--hot);font-weight:700}
+.f-warn{background:var(--warm-bg);color:var(--warm)}
+.f-info{background:var(--info-bg);color:#1d4f86}
+.f-muted{background:#eef0f2;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--hot);border-radius:10px;padding:16px 18px}
+.card-top{display:flex;gap:10px;align-items:center}
+.card-score{margin-left:auto;font-weight:700}
+.card h3{font-size:16px;margin:10px 0 4px;line-height:1.45}
+.card p{margin:6px 0;font-size:14px}
+.rel{display:inline-block;font-weight:700;font-size:12.5px;border-radius:6px;padding:2px 8px}
+.rel-hi{background:var(--ok-bg);color:var(--ok)}
+.rel-md{background:#eef0f2;color:var(--muted)}
+.gate{font-weight:700;color:var(--hot)}
+details{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:0 16px;margin-top:12px}
+details>summary{cursor:pointer;padding:12px 0;font-weight:600}
+details .tw{border:0;border-radius:0;margin:0 -16px}
+ul.plain{margin:6px 0 10px;padding-left:18px}
+ul.plain li{margin:4px 0}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 18px}
+.box p{margin:6px 0}
+.empty{color:var(--muted);background:var(--panel);border:1px dashed var(--line);border-radius:10px;padding:14px 18px;margin:0}
+footer{margin-top:40px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px}
+footer p{margin:4px 0}
+.hide{display:none!important}
+@media (max-width:640px){.wrap{padding:20px 14px 48px}header h1{font-size:20px}}
+@media print{.tools{display:none}details{border:0}details:not([open])>*:not(summary){display:block}}
+</style></head><body><div class="wrap">
+<header><h1>공고레이더 브리핑</h1>
+<p class="meta">2026년 11월 26일(목) · 시범 스캔 · (재)포항테크노파크 기준
+ · 조회 41/50회</p></header>
+<div class="stats">
+<div class="stat"><b>21</b><span>접수 중 공고</span></div>
+<div class="stat"><b>1</b><span>즉시 검토 70+</span></div>
+<div class="stat hot"><b>1</b><span>마감 임박·고적합</span></div>
+<div class="stat"><b>4</b><span>참고 (40~69)</span></div>
+<div class="stat"><b>3</b><span>사전조사</span></div>
+<div class="stat"><b>0</b><span>이번에 처음 본 공고</span></div>
+</div>
+<div class="tools"><input id="q" type="search" placeholder="공고명·기관·유형·플래그로 찾기 (예: 수소, KEIT, 컨소)">
+<label><input id="onlynew" type="checkbox"> NEW만 보기</label>
+<nav class="toc"><a href="#urgent">마감 임박</a><a href="#top">즉시 검토</a><a href="#ref">참고</a><a href="#pre">사전조사</a><a href="#etc">기타</a><a href="#src">수집 현황</a></nav></div>
+<section id="urgent"><h2>마감 임박 — 적합도는 높은데 D-7 이내 <span class="n">1건</span></h2><p class="desc">자격·분야·유형은 최상위권인데 마감이 7일 안에 닥친 공고입니다. 마감 여유 점수가 낮아 총점이 실제 적합도보다 낮게 나옵니다. 오늘 안에 내부 보고 여부를 정하세요.</p><div class="cards"><article class="card" data-q="2027년도 소재·부품·장비 양산성능평가 지원사업 총괄주관연구개발기관 모집 (산업통상부 공고 제2026-693호) kiat (iris 접수) 기술개발(총괄주관 r&amp;d) 신청자격에 &#x27;기업지원기관(산업기술혁신사업 공통운영요령 제3조 사업을 수행하는 비영리기관)&#x27; 포함 → tp 해당. 10대 분야에 바이오·기계금속·수소 포함(분야별 선정) 긴급 추정"><div class="card-top"><span class="dd dd-hot">D-4</span><span class="sub">2026-11-30 마감</span><span class="card-score">70점</span></div><h3><a href="https://www.motir.go.kr/attach/down/c26df36c4f964b1523b31be51e734922/f54767b4cbf6075d21f52c8b4fb24a94/13055e35ba7465cb478c5b4be490c5a8" target="_blank" rel="noopener noreferrer">2027년도 소재·부품·장비 양산성능평가 지원사업 총괄주관연구개발기관 모집 (산업통상부 공고 제2026-693호)</a></h3><p class="sub">KIAT (IRIS 접수) · 기술개발(총괄주관 R&amp;D) · 약 9억 (추정: 국비 21억 ÷ 7개 분야, 3년)</p><p>신청자격에 &#x27;기업지원기관(산업기술혁신사업 공통운영요령 제3조 사업을 수행하는 비영리기관)&#x27; 포함 → TP 해당. 10대 분야에 바이오·기계금속·수소 포함(분야별 선정)</p><p class="sub">자격·분야·유형 62/70점 <span class="flag f-hot">긴급</span><span class="flag f-muted">추정</span></p></article></div></section><section id="top"><h2>즉시 검토 <span class="n">70점 이상 · 1건 (긴급 건은 위 칸에)</span></h2><p class="desc">공고명을 누르면 원문이 새 탭으로 열립니다. 점수에 마우스를 올리면 판정 근거가 보입니다.</p><div class="tw"><table><thead><tr><th>공고명</th><th>기관</th><th>유형</th><th>예산(과제당)</th><th>마감</th><th>적합도</th><th>플래그</th></tr></thead><tbody><tr data-q="2027년 한-스페인 에너지국제공동연구사업 신규지원대상 연구개발과제 ketep 기후에너지환경부 기술개발 접수 12-03부터 · 상대국 파트너 확보가 관건 주관기관 제한 없음. 기업 참여 필수 + 스페인 기관 참여 필수(양국에 각각 신청). 분야: 재생에너지·수소·전력계통 컨소 해외파트너"><td class="t"><a href="https://www.ketep.re.kr/businessAcment/view?menuId=MENU002080200000000&amp;subj_dmsy_tc=&amp;status=&amp;ancm_strt_date=&amp;ancm_end_date=&amp;ancm_nm=&amp;pageNum=1&amp;rowCnt=10&amp;uni_ancm_id=D202610544" target="_blank" rel="noopener noreferrer">2027년 한-스페인 에너지국제공동연구사업 신규지원대상 연구개발과제</a><div class="sub">접수 12-03부터 · 상대국 파트너 확보가 관건</div></td><td class="ag">KETEP<div class="sub">기후에너지환경부</div></td><td class="ty">기술개발</td><td>총 15억 내외 (36개월)</td><td class="nowrap"><span class="dd dd-cool">D-68</span><div class="sub">2027-02-02</div></td><td><div class="score sc-top" title="주관기관 제한 없음. 기업 참여 필수 + 스페인 기관 참여 필수(양국에 각각 신청). 분야: 재생에너지·수소·전력계통"><b>78</b><small>A20 · B15+4 · C20 · D9 · E15 · F-5</small></div></td><td><span class="flag f-info">컨소</span><span class="flag f-warn">해외파트너</span></td></tr></tbody></table></div></section><section id="ref"><h2>참고 <span class="n">40~69점 · 4건</span></h2><div class="tw"><table><thead><tr><th>공고명</th><th>기관</th><th>유형</th><th>예산(과제당)</th><th>마감</th><th>적합도</th><th>플래그</th></tr></thead><tbody><tr data-q="2027년 월드프렌즈코리아 nipa자문단 종합관리센터 운영기관 모집 nipa 과기정통부 운영·관리 &#x27;해외파견사업 운영이 가능한 비영리기관, 협·단체 등이 신청&#x27;. 해외봉사 운영이라 분야 무관"><td class="t"><a href="https://www.nipa.kr/home/2-2/16982" target="_blank" rel="noopener noreferrer">2027년 월드프렌즈코리아 NIPA자문단 종합관리센터 운영기관 모집</a></td><td class="ag">NIPA<div class="sub">과기정통부</div></td><td class="ty">운영·관리</td><td>10~30억</td><td class="nowrap"><span class="dd dd-hot">D-4</span><div class="sub">2026-11-30</div></td><td><div class="score sc-ref" title="&#x27;해외파견사업 운영이 가능한 비영리기관, 협·단체 등이 신청&#x27;. 해외봉사 운영이라 분야 무관"><b>43</b><small>A20 · B0+0 · C12 · D9 · E2</small></div></td><td></td></tr><tr data-q="디지털 의료기기 실증지원센터 전담기관 운영 모집 khidi 보건복지부 운영·관리 신청 자격 원문 미확인 미상"><td class="t"><a href="https://www.khidi.or.kr/board/view?no1=9999999997&amp;linkId=48952461&amp;menuId=MENU01108" target="_blank" rel="noopener noreferrer">디지털 의료기기 실증지원센터 전담기관 운영 모집</a></td><td class="ag">KHIDI<div class="sub">보건복지부</div></td><td class="ty">운영·관리</td><td>미상</td><td class="nowrap"><span class="dd dd-warm">D-8</span><div class="sub">2026-12-04</div></td><td><div class="score sc-ref" title="신청 자격 원문 미확인"><b>40</b><small>A8 · B6+4 · C12 · D5 · E5</small></div></td><td><span class="flag f-muted">미상</span></td></tr><tr data-q="산업단지 광역형 산학연협의체 지원계획 (공고 제2026-713호) kicox 산업통상부 네트워킹+사업화 비영리기관은 협의체 참여기관으로 참여 컨소 매칭"><td class="t"><a href="https://www.motir.go.kr/attach/down/c26df36c4f964b1523b31be51e734922/dcedbf490fa74eb8a9388655321518c3/778bdbf5db9ced7c8fd52756c00bf0cd" target="_blank" rel="noopener noreferrer">산업단지 광역형 산학연협의체 지원계획 (공고 제2026-713호)</a></td><td class="ag">KICOX<div class="sub">산업통상부</div></td><td class="ty">네트워킹+사업화</td><td>1~3억</td><td class="nowrap"><span class="dd dd-cool">D-25</span><div class="sub">2026-12-21</div></td><td><div class="score sc-ref" title="비영리기관은 협의체 참여기관으로 참여"><b>40</b><small>A12 · B6+0 · C7 · D3 · E12</small></div></td><td><span class="flag f-info">컨소</span><span class="flag f-info">매칭</span></td></tr><tr data-q="2027년 글로벌 액셀러레이팅(gmep) 지원사업 주관기관 모집 창업진흥원 중기부 사업화(수출) 주관기관 모집 — 비영리 액셀러레이터·기관 신청 가능 미상"><td class="t"><a href="https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&amp;pbancSn=179887" target="_blank" rel="noopener noreferrer">2027년 글로벌 액셀러레이팅(GMEP) 지원사업 주관기관 모집</a></td><td class="ag">창업진흥원<div class="sub">중기부</div></td><td class="ty">사업화(수출)</td><td>미상</td><td class="nowrap"><span class="dd dd-cool">D-32</span><div class="sub">2026-12-28</div></td><td><div class="score sc-ref" title="주관기관 모집 — 비영리 액셀러레이터·기관 신청 가능"><b>61</b><small>A20 · B6+0 · C15 · D5 · E15</small></div></td><td><span class="flag f-muted">미상</span></td></tr></tbody></table></div></section><section id="pre"><h2>사전조사 <span class="n">수요조사·RFP 공개·사전공고 · 3건</span></h2><p class="desc">공모 전 단계입니다. 여기에 과제를 제안하거나 의견을 내면 내년 RFP에 포항TP 기획이 반영될 수 있습니다. 관련도는 분야·키워드 기준입니다.</p><div class="tw"><table><thead><tr><th>관련도</th><th>제목</th><th>구분</th><th>기관</th><th>마감</th></tr></thead><tbody><tr data-q="(기정원 연계) 2027년도 제조ax분야 산업기술r&amp;d 과제기획 기술수요조사 산업통상부 기술수요조사 ntis 게시"><td><span class="rel rel-hi">상</span></td><td class="t"><span class="nolink">(기정원 연계) 2027년도 제조AX분야 산업기술R&amp;D 과제기획 기술수요조사</span><div class="sub">NTIS 게시</div></td><td>기술수요조사</td><td>산업통상부</td><td class="nowrap"><span class="dd dd-hot">D-1</span><div class="sub">2026-11-27</div></td></tr><tr data-q="2027년 ai 성능강화 데이터 구축 수요조사 nia 사업수요조사"><td><span class="rel rel-hi">상</span></td><td class="t"><span class="nolink">2027년 AI 성능강화 데이터 구축 수요조사</span></td><td>사업수요조사</td><td>NIA</td><td class="nowrap"><span class="dd dd-na">미상</span><div class="sub"></div></td></tr><tr data-q="경북tp 지역혁신선도기업육성(r&amp;d) 기술수요조사 경북tp 기술수요조사"><td><span class="rel rel-md">중</span></td><td class="t"><span class="nolink">경북TP 지역혁신선도기업육성(R&amp;D) 기술수요조사</span></td><td>기술수요조사</td><td>경북TP</td><td class="nowrap"><span class="dd dd-warm">D-11</span><div class="sub">2026-12-07</div></td></tr></tbody></table></div></section><section id="etc"><h2>기타</h2><div class="box"><p><b>원문 확인 필요</b> — 공고는 확인했지만 링크나 기간을 확보하지 못했습니다.</p><ul class='plain'><li data-q="광역형 국산의료기기 교육·훈련 지원센터 구축 및 운영 컨소시엄 모집 khidi 관련성 높음, 원문 미확보"><span class="nolink">광역형 국산의료기기 교육·훈련 지원센터 구축 및 운영 컨소시엄 모집</span> <span class="sub">— KHIDI · ~2026-11-30 · 관련성 높음, 원문 미확보</span></li><li data-q="2027년 스마트 제조혁신 지원사업 통합공고 중기부 언론 보도만 확인"><span class="nolink">2027년 스마트 제조혁신 지원사업 통합공고</span> <span class="sub">— 중기부 · 언론 보도만 확인</span></li><li data-q="한국에너지공단 신재생에너지센터 공동체 태양광 관련 공고 에너지공단"><span class="nolink">한국에너지공단 신재생에너지센터 공동체 태양광 관련 공고</span> <span class="sub">— 에너지공단 · ~2026-12-31</span></li></ul></div><details><summary>자격 미달 9건 — G1 비영리 불가 · G2 지역 · G3 타 기관·기존 수행자 지정</summary><div class="tw"><table><thead><tr><th>코드</th><th>공고명</th><th>기관</th><th>근거</th></tr></thead><tbody><tr data-q="2026년 연구개발특구 실증특례 지정과제 실증사업비 지원사업(비r&amp;d) 특구재단 g3?"><td class="nowrap"><span class="gate">G3?</span> <small>(추정)</small></td><td class="t"><a href="https://www.innopolis.or.kr/board/view?menuId=MENU00319&amp;pageNum=1&amp;rowCnt=8&amp;no1=517&amp;linkId=53047" target="_blank" rel="noopener noreferrer">2026년 연구개발특구 실증특례 지정과제 실증사업비 지원사업(비R&amp;D)</a></td><td>특구재단</td><td>실증특례 지정과제 수행자 대상으로 보임 (제목 기준)</td></tr><tr data-q="개인기초연구 신규과제 공모 (공고 제2026-1069호, 12개 트랙) nrf g1?"><td class="nowrap"><span class="gate">G1?</span> <small>(추정)</small></td><td class="t"><span class="nolink">개인기초연구 신규과제 공모 (공고 제2026-1069호, 12개 트랙)</span></td><td>NRF</td><td>개인 연구자 대상 (제목 기준)</td></tr><tr data-q="리더연구 후속과제 공모 nrf g3?"><td class="nowrap"><span class="gate">G3?</span> <small>(추정)</small></td><td class="t"><span class="nolink">리더연구 후속과제 공모</span></td><td>NRF</td><td>기존 수행자 후속과제 (제목 기준)</td></tr><tr data-q="2026년도 제5차 과학기술분야 연구기획과제 공모 (지정공모) nrf g3?"><td class="nowrap"><span class="gate">G3?</span> <small>(추정)</small></td><td class="t"><span class="nolink">2026년도 제5차 과학기술분야 연구기획과제 공모 (지정공모)</span></td><td>NRF</td><td>지정공모</td></tr><tr data-q="tipa valueup 프로그램 20기 참여기업 모집 tipa g1"><td class="nowrap"><span class="gate">G1</span></td><td class="t"><a href="https://www.smtech.go.kr/front/ifg/no/notice02_detail.do?ancmId=S02884&amp;buclCd=S9141&amp;dtlAncmSn=1&amp;schdSe=MO5005&amp;aplySn=1" target="_blank" rel="noopener noreferrer">TIPA ValueUP 프로그램 20기 참여기업 모집</a></td><td>TIPA</td><td>중소기업 대상</td></tr><tr data-q="중소기업 연구인력지원사업(파견) 11월 공고 tipa g1"><td class="nowrap"><span class="gate">G1</span></td><td class="t"><a href="https://www.smtech.go.kr/front/ifg/no/notice02_detail.do?ancmId=S02847&amp;buclCd=S6041&amp;dtlAncmSn=11&amp;schdSe=MO5005&amp;aplySn=1" target="_blank" rel="noopener noreferrer">중소기업 연구인력지원사업(파견) 11월 공고</a></td><td>TIPA</td><td>중소기업 대상</td></tr><tr data-q="medical korea 2027 연계 지역 콘퍼런스 참여 지자체 모집 khidi g3"><td class="nowrap"><span class="gate">G3</span></td><td class="t"><a href="https://www.khidi.or.kr/board/view?no1=938&amp;linkId=48952917&amp;menuId=MENU01108" target="_blank" rel="noopener noreferrer">Medical Korea 2027 연계 지역 콘퍼런스 참여 지자체 모집</a></td><td>KHIDI</td><td>지자체 대상</td></tr><tr data-q="인천서구강소연구개발특구 특화성장 지원사업 통합공고 특구재단 g2"><td class="nowrap"><span class="gate">G2</span></td><td class="t"><a href="https://www.innopolis.or.kr/board/view?menuId=MENU00319&amp;pageNum=1&amp;rowCnt=8&amp;no1=516&amp;linkId=52304" target="_blank" rel="noopener noreferrer">인천서구강소연구개발특구 특화성장 지원사업 통합공고</a></td><td>특구재단</td><td>인천 서구 강소특구 소재 기관 한정</td></tr><tr data-q="신산업 분야 및 시장전문가 예비위원단 공개모집 창업진흥원 g1"><td class="nowrap"><span class="gate">G1</span></td><td class="t"><a href="https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&amp;pbancSn=179698" target="_blank" rel="noopener noreferrer">신산업 분야 및 시장전문가 예비위원단 공개모집</a></td><td>창업진흥원</td><td>개인 전문가 모집</td></tr></tbody></table></div></details><details><summary>40점 미만 6건 (브리핑 제외 대상, 참고용)</summary><div class="tw"><table><thead><tr><th>공고명</th><th>기관</th><th>유형</th><th>예산(과제당)</th><th>마감</th><th>적합도</th><th>플래그</th></tr></thead><tbody><tr data-q="재난재해 대응기술 현장화 지원사업 (공고 제2026-1039호) nrf 과기정통부 기술개발 iris 목록 (상세 id 미확보) 미상"><td class="t"><span class="nolink">재난재해 대응기술 현장화 지원사업 (공고 제2026-1039호)</span><div class="sub">IRIS 목록 (상세 ID 미확보)</div></td><td class="ag">NRF<div class="sub">과기정통부</div></td><td class="ty">기술개발</td><td>미상</td><td class="nowrap"><span class="dd dd-na">미상</span><div class="sub"></div></td><td><div class="score sc-low" title=""><b>38</b><small>A8 · B0+0 · C20 · D5 · E5</small></div></td><td><span class="flag f-muted">미상</span></td></tr><tr data-q="인문학 분야별 학문생태계 유지조건 분석을 위한 기초연구 ntis 부처 미상 기술개발 ntis 목록 미상"><td class="t"><span class="nolink">인문학 분야별 학문생태계 유지조건 분석을 위한 기초연구</span><div class="sub">NTIS 목록</div></td><td class="ag">NTIS<div class="sub">부처 미상</div></td><td class="ty">기술개발</td><td>미상</td><td class="nowrap"><span class="dd dd-warm">D-11</span><div class="sub">2026-12-07</div></td><td><div class="score sc-low" title=""><b>38</b><small>A8 · B0+0 · C20 · D5 · E5</small></div></td><td><span class="flag f-muted">미상</span></td></tr><tr data-q="ces 2027 경상북도 글로벌 비즈니스 지원사업 모집 공고 경북경제진흥원 경상북도 사업화(수출) 기업마당 pbln_000000000128117 신청 주체 원문 미확인 미상"><td class="t"><span class="nolink">CES 2027 경상북도 글로벌 비즈니스 지원사업 모집 공고</span><div class="sub">기업마당 PBLN_000000000128117</div></td><td class="ag">경북경제진흥원<div class="sub">경상북도</div></td><td class="ty">사업화(수출)</td><td>미상</td><td class="nowrap"><span class="dd dd-hot">D-4</span><div class="sub">2026-11-30</div></td><td><div class="score sc-low" title="신청 주체 원문 미확인"><b>36</b><small>A8 · B6+0 · C15 · D5 · E2</small></div></td><td><span class="flag f-muted">미상</span></td></tr><tr data-q="국가신약개발사업 2027년 r&amp;d conference 용역 입찰 kddf 국가신약개발재단 기타(행사 용역) 행사 용역 — b-1 유형 상한 적용 대상 미상"><td class="t"><a href="https://www.kddf.org/ko/board/business_notice/view/?bc_no=3023&amp;page=1" target="_blank" rel="noopener noreferrer">국가신약개발사업 2027년 R&amp;D Conference 용역 입찰</a></td><td class="ag">KDDF<div class="sub">국가신약개발재단</div></td><td class="ty">기타(행사 용역)</td><td>미상</td><td class="nowrap"><span class="dd dd-warm">D-11</span><div class="sub">2026-12-07</div></td><td><div class="score sc-low" title="행사 용역 — B-1 유형 상한 적용 대상"><b>31</b><small>A8 · B6+4 · C3 · D5 · E5</small></div></td><td><span class="flag f-muted">미상</span></td></tr><tr data-q="2026년 제약바이오산업단 지원 사업 위탁회계정산기관 모집 khidi 보건복지부 기타(회계정산) 미상"><td class="t"><a href="https://www.khidi.or.kr/board/view?no1=9999999998&amp;linkId=48953077&amp;menuId=MENU01108" target="_blank" rel="noopener noreferrer">2026년 제약바이오산업단 지원 사업 위탁회계정산기관 모집</a></td><td class="ag">KHIDI<div class="sub">보건복지부</div></td><td class="ty">기타(회계정산)</td><td>미상</td><td class="nowrap"><span class="dd dd-hot">D-1</span><div class="sub">2026-11-27</div></td><td><div class="score sc-low" title=""><b>22</b><small>A8 · B6+0 · C3 · D5 · E0</small></div></td><td><span class="flag f-muted">미상</span></td></tr><tr data-q="범부처 통합연구지원시스템 운영지원사업 신규과제 공모 kistep 과기정통부 기타 iris 목록 미상"><td class="t"><span class="nolink">범부처 통합연구지원시스템 운영지원사업 신규과제 공모</span><div class="sub">IRIS 목록</div></td><td class="ag">KISTEP<div class="sub">과기정통부</div></td><td class="ty">기타</td><td>미상</td><td class="nowrap"><span class="dd dd-na">미상</span><div class="sub"></div></td><td><div class="score sc-low" title=""><b>21</b><small>A8 · B0+0 · C3 · D5 · E5</small></div></td><td><span class="flag f-muted">미상</span></td></tr></tbody></table></div></details></section><section id="src"><h2>수집 현황</h2><div class="box"><p><b>성공</b> IRIS 14건 · NTIS 9건 · 기업마당 17건 · K-Startup 19건 · KETEP 2건 · TIPA 4건 · NIPA 3건 · 특구재단 3건 · KHIDI 8건 · KICOX 2건 · KEITI 3건 · 창업진흥원 1건 · NIA 1건 · KDDF 1건 · 경상북도 0건 · 포항시 0건 · 경북TP 4건</p><p><b>실패</b></p><ul class='plain'><li>e나라도움 <span class="sub">— API 키 없음, 웹 목록 SPA</span></li><li>나라장터 <span class="sub">— API 키 없음, SSO로 파싱 불가</span></li><li>KIAT <span class="sub">— 목록 JS 렌더링, 검색 결과 없음</span></li><li>KIMST <span class="sub">— 목록 갱신 멈춤(2026-08)</span></li><li>KOSMES <span class="sub">— 11월 공고 검색 결과 없음</span></li><li>HRDK <span class="sub">— EUC-KR 인코딩으로 제목 깨짐</span></li></ul><p><b>미조회</b> KIDP · KOTRA · KOITA · KIBO · KAIA · KISTA · KOCCA</p></div></section><footer>
+<p>적합도 = A 주관 적격성 25 + B 분야·키워드 25 + C 과제 유형 20 + D 예산 15 + E 마감 여유 15 + F 실행 난이도(−5). 70점 이상 즉시 검토, 40~69점 참고.</p>
+<p>긴급 = 마감 D-7 이내이면서 A ≥ 20, A+B+C ≥ 55. 자격 게이트 코드 뒤 "?"는 원문을 열지 못해 제목으로 추정한 것입니다.</p>
+<p>이 브리핑은 수집 시점의 공고문 문구를 기준으로 작성했습니다. 신청 전에 원문에서 자격과 마감을 반드시 다시 확인하세요.</p>
+</footer></div><script>
+(function(){
+ var q=document.getElementById('q'),nw=document.getElementById('onlynew');
+ function run(){var t=(q.value||'').trim().toLowerCase(),on=nw.checked;
+  document.querySelectorAll('[data-q]').forEach(function(el){
+   var hit=(!t||el.getAttribute('data-q').indexOf(t)>-1)&&(!on||el.hasAttribute('data-new'));
+   el.classList.toggle('hide',!hit);});}
+ q.addEventListener('input',run);nw.addEventListener('change',run);
+})();
+</script></body></html>
