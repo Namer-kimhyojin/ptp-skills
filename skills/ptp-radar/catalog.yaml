@@ -1,0 +1,23 @@
+title: 공고레이더
+summary: 정부·전담기관·지자체 신규 공고와 기술수요조사를 찾아 포항TP 적합도로 채점하고, 원문 링크가 걸린 HTML 브리핑으로 정리
+category: 기획·발표·보고
+version: 1.0.0
+owner: 포항테크노파크
+outputs: [html]
+tags: [공고, 공모, 사업공고, 기술수요조사, RFP, 전담기관, IRIS, NTIS, 적합도, 과제 발굴]
+examples:
+  - "공고레이더 돌려줘"
+  - "이번 주 우리가 주관할 만한 수소·이차전지 공고 찾아줘"
+  - "기술수요조사 나온 거 있어?"
+  - "포항강소특구육성센터 공고 게시판을 수집 소스로 추가해줘"
+process:
+  - { title: 소스 준비, desc: "포털·전담기관·지역 38곳 조회 순서 정리" }
+  - { title: 공고 수집, desc: "API·웹 조회·검색으로 공고와 수요조사 확인" }
+  - { title: 적합도 채점, desc: "자격 게이트 후 주관·분야·유형·예산·마감 점수" }
+  - { title: HTML 브리핑, desc: "마감 임박·즉시 검토·사전조사별 링크 목록" }
+  - { title: 소스 관리, desc: "실패 기록, 미등록 기관 자동 추가, 추가·삭제" }
+compat:
+  claude:  { level: full,    note: 웹 수집·채점·HTML 브리핑·소스 관리까지 (Python 필요) }
+  chatgpt: { level: partial, note: "웹 검색으로 공고 수집·채점까지. HTML 생성과 소스 파일 관리는 Codex 화면에서 Python이 있을 때" }
+  gemini:  { level: partial, note: 웹 검색으로 공고 수집·채점까지. HTML 파일·소스 관리는 안 됨 }
+former_names: [announcement-radar]

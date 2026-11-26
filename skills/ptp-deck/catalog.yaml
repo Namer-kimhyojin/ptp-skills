@@ -1,0 +1,22 @@
+title: 발표자료 제작
+summary: 보고서·수치·메모를 주면 포항TP 로고가 들어간 발표자료(A4 가로 기본)를 HTML 한 파일로 제작. 발표 보기·편집 모드·인쇄/PDF 지원
+category: 기획·발표·보고
+version: 1.0.0
+owner: 포항테크노파크
+outputs: [html, pdf]
+tags: [발표자료, 슬라이드, PPT, 현장방문, 성과보고, 보고자료]
+examples:
+  - "첨부한 기본자료로 발표자료 제작해줘"
+  - "이 성과 실적표로 현장방문 회의자료 10쪽 만들어줘"
+  - "이 보고서를 16:9 화면 발표용 자료로 만들어줘"
+process:
+  - { title: 확인 질문, desc: "크기·분량·목적과 발표 정보를 한 번에 확인" }
+  - { title: 자료 정리, desc: "핵심 사실과 지표를 뽑고 수치 재확인" }
+  - { title: 쪽 구성, desc: "발표 유형별 흐름, 쪽마다 결론 문장" }
+  - { title: HTML 제작, desc: "로고·발표 보기·편집 모드가 든 한 파일" }
+  - { title: 검수·전달, desc: "넘침 검사·원자료 대조 후 HTML·PDF" }
+compat:
+  claude:  { level: full,    note: HTML 파일 생성·로고 내장·넘침 검사까지 (코드 실행이 켜진 환경) }
+  chatgpt: { level: full,    note: "Codex 화면에서 HTML 생성·로고 내장·넘침 검사까지. 대화·프로젝트에서는 HTML 초안까지" }
+  gemini:  { level: partial, note: "지침과 로고 파일이 함께 들어가 HTML 초안까지. 로고 내장·자동 넘침 검사는 빠질 수 있음" }
+former_names: [tp-presentation-deck]

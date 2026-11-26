@@ -27,7 +27,7 @@ const data = skills.map(s => {
     instructions: text,
     overLimit,
     starterPrompt: buildStarterPrompt(s),
-    history: skillHistory(root, s.name),
+    history: skillHistory(root, s.name, [].concat(s.catalog?.former_names ?? [])),
     files: s.files,
     gemini: { kept: gem.keep.length, dropped: gem.dropped },
     downloads: {

@@ -37,6 +37,6 @@ Claude 데스크톱 앱(Cowork·Code 탭)에서는 왼쪽 **Customize** › **Pl
 
 ## 관리자 메모
 
-- 보도자료 스킬의 원장명 기본값은 공개 정보이며, 인사이동 시 `skills/write-pohang-tp-press-release/SKILL.md`에서 수정해야 합니다.
+- 보도자료 스킬의 원장명 기본값은 공개 정보이며, 인사이동 시 `skills/ptp-press/SKILL.md`에서 수정해야 합니다.
 - 스킬 폴더의 `catalog.yaml`은 사이트 표시용 정보이며, 배포 zip과 묶음 폴더에는 들어가지 않습니다.
 - `plugins/` 폴더는 묶음 설치용으로 `npm run build`가 `skills/`를 복사해 만듭니다. 직접 고치지 말고 `skills/`를 고치세요.
