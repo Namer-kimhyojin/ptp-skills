@@ -1,0 +1,114 @@
+---
+// 첫 화면 검색: 스킬 목록 안에서 바로 찾아 카드처럼 짧게 보여 준다.
+// 스킬 수가 적으므로 색인 서버 없이 페이지에 넣은 목록을 브라우저에서 거른다.
+import { skills, skillUrl, outputLabels, url } from '../lib/site.js';
+
+const index = skills.map(s => ({
+  t: s.catalog.title,
+  s: s.catalog.summary,
+  c: s.catalog.category,
+  o: outputLabels(s).join(' · '),
+  u: skillUrl(s),
+  k: [...(s.catalog.tags ?? []), ...(s.catalog.examples ?? [])].join(' '),
+}));
+const contributeUrl = url('contribute/');
+---
+<div class="qs" role="search" data-qs>
+  <label class="search__label" for="search-input">어떤 업무를 하시나요?</label>
+  <div class="qs__box">
+    <svg class="qs__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+    <input id="search-input" class="qs__input" type="search" autocomplete="off" spellcheck="false"
+      placeholder="업무나 문서 이름으로 찾기 (예: 보도자료, 공고, 회의록)"
+      aria-controls="qs-list" aria-describedby="qs-count" />
+    <button class="qs__clear" type="button" hidden>지우기</button>
+  </div>
+  <div class="qs__panel" hidden>
+    <p class="qs__count" id="qs-count" aria-live="polite"></p>
+    <ul class="qs__list" id="qs-list"></ul>
+    <p class="qs__empty" hidden>분류에서 찾아보거나 <a href={contributeUrl}>필요한 스킬을 요청</a>해 주세요.</p>
+  </div>
+</div>
+
+<script is:inline type="application/json" id="qs-data" set:html={JSON.stringify(index).replace(/</g, '\\u003c')}></script>
+<script is:inline>
+  (function () {
+    var root = document.querySelector('[data-qs]');
+    if (!root) return;
+    var data = JSON.parse(document.getElementById('qs-data').textContent);
+    var input = root.querySelector('.qs__input');
+    var clear = root.querySelector('.qs__clear');
+    var panel = root.querySelector('.qs__panel');
+    var list = root.querySelector('.qs__list');
+    var count = root.querySelector('.qs__count');
+    var empty = root.querySelector('.qs__empty');
+    var active = -1;
+
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+    function mark(text, terms) {
+      var out = esc(text);
+      terms.forEach(function (t) {
+        var re = new RegExp(esc(t).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        out = out.replace(re, function (m) { return '<mark>' + m + '</mark>'; });
+      });
+      return out;
+    }
+    function score(item, terms) {
+      var total = 0;
+      for (var i = 0; i < terms.length; i++) {
+        var t = terms[i];
+        var s = 0;
+        if (item.t.toLowerCase().indexOf(t) > -1) s = 8;
+        else if (item.k.toLowerCase().indexOf(t) > -1) s = 4;
+        else if (item.s.toLowerCase().indexOf(t) > -1) s = 3;
+        else if ((item.c + ' ' + item.o).toLowerCase().indexOf(t) > -1) s = 2;
+        if (!s) return 0; // 모든 단어가 어딘가에 있어야 한다
+        total += s;
+      }
+      return total;
+    }
+    function setActive(i) {
+      var items = list.querySelectorAll('.qs__item');
+      if (!items.length) { active = -1; return; }
+      active = (i + items.length) % items.length;
+      items.forEach(function (el, n) { el.classList.toggle('is-active', n === active); });
+      items[active].scrollIntoView({ block: 'nearest' });
+    }
+    function run() {
+      var q = input.value.trim().toLowerCase();
+      clear.hidden = !q;
+      active = -1;
+      if (!q) { panel.hidden = true; list.innerHTML = ''; return; }
+      var terms = q.split(/\s+/).filter(Boolean);
+      var hits = data
+        .map(function (it) { return { it: it, s: score(it, terms) }; })
+        .filter(function (h) { return h.s > 0; })
+        .sort(function (a, b) { return b.s - a.s || a.it.t.localeCompare(b.it.t, 'ko'); });
+      panel.hidden = false;
+      count.textContent = hits.length ? '스킬 ' + hits.length + '개' : '"' + input.value.trim() + '"에 맞는 스킬이 없습니다';
+      empty.hidden = hits.length > 0;
+      list.innerHTML = hits.map(function (h) {
+        var it = h.it;
+        return '<li><a class="qs__item" href="' + esc(it.u) + '">' +
+          '<span class="qs__main"><span class="qs__title">' + mark(it.t, terms) + '</span>' +
+          '<span class="qs__sum">' + mark(it.s, terms) + '</span></span>' +
+          '<span class="qs__meta"><span class="qs__tag">' + esc(it.c) + '</span>' +
+          (it.o ? '<span class="qs__out">' + esc(it.o) + '</span>' : '') + '</span>' +
+          '<svg class="qs__go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg>' +
+          '</a></li>';
+      }).join('');
+    }
+    input.addEventListener('input', run);
+    input.addEventListener('keydown', function (e) {
+      var items = list.querySelectorAll('.qs__item');
+      if (e.key === 'ArrowDown' && items.length) { e.preventDefault(); setActive(active + 1); }
+      else if (e.key === 'ArrowUp' && items.length) { e.preventDefault(); setActive(active - 1); }
+      else if (e.key === 'Enter' && items.length) { e.preventDefault(); window.location.href = items[Math.max(active, 0)].href; }
+      else if (e.key === 'Escape') { input.value = ''; run(); }
+    });
+    clear.addEventListener('click', function () { input.value = ''; run(); input.focus(); });
+  })();
+</script>

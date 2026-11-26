@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import SkillGroup from '../components/SkillGroup.astro';
 import AiFilter from '../components/AiFilter.astro';
+import QuickSearch from '../components/QuickSearch.astro';
 import { url, skills, categories, categoryId, skillUrl, skillsIn, formatDate, plainSubject, lastUpdated, HOME_LIMIT } from '../lib/site.js';
 
 const groups = categories
@@ -15,15 +16,12 @@ const recent = skills
   .sort((a, b) => b.date.localeCompare(a.date))
   .slice(0, 6);
 const newest = skills.map(lastUpdated).sort().at(-1);
-const pagefindBase = url();
 // 첫 화면 오른쪽 미리보기: 실제 스킬의 요청 예시와 결과물로 보여 준다.
 // 스킬이 없어지면 미리보기는 빠진다.
 const demo = skills.find(s => s.name === 'write-pohang-tp-press-release');
 const demoAsk = demo?.catalog.examples[0] ?? '';
 ---
 <Base description="포항테크노파크 직원이 Claude·ChatGPT·Gemini 앱에 넣어 쓰는 업무 스킬 모음입니다. 스킬을 찾고, 안내에 따라 내 AI에 넣으세요." current="home">
-  <link slot="head" rel="stylesheet" href={url('pagefind/pagefind-ui.css')} />
-
   <section class="hero-wrap">
     <div class="wrap">
       <div class="hero">
@@ -34,8 +32,7 @@ const demoAsk = demo?.catalog.examples[0] ?? '';
         <p class="lead">스킬은 AI에게 포항TP의 업무 방식과 양식을 알려 주는 지침 묶음입니다. 필요한 스킬을 골라 안내대로 내 AI에 넣으면 됩니다. 쓰기만 할 때는 GitHub 계정이 필요 없습니다.</p>
 
         <div class="search">
-          <label class="search__label">어떤 업무를 하시나요?</label>
-          <div id="search" class="search__ui"></div>
+          <QuickSearch />
           <noscript>
             <p class="hint">검색은 JavaScript가 켜져 있어야 동작합니다. 아래 분류에서 찾아 주세요.</p>
           </noscript>
@@ -132,23 +129,4 @@ const demoAsk = demo?.catalog.examples[0] ?? '';
     </div>
   </section>
 
-  <script is:inline src={url('pagefind/pagefind-ui.js')}></script>
-  <script is:inline define:vars={{ pagefindBase }}>
-    window.addEventListener('DOMContentLoaded', () => {
-      if (typeof PagefindUI === 'undefined') return;
-      new PagefindUI({
-        element: '#search',
-        baseUrl: pagefindBase,
-        showImages: false,
-        showSubResults: false,
-        translations: { placeholder: '업무 이름으로 찾기', zero_results: '"[SEARCH_TERM]"에 맞는 스킬이 없습니다' },
-      });
-      const input = document.querySelector('#search input');
-      const label = document.querySelector('.search__label');
-      if (input && label) {
-        input.id = 'search-input';
-        label.htmlFor = 'search-input';
-      }
-    });
-  </script>
 </Base>
