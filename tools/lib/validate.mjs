@@ -2,7 +2,7 @@ const NAME_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const LEVELS = ['full', 'partial', 'none'];
 const TOOLS = ['claude', 'codex', 'chatgpt', 'gemini'];
 // 결과물 형식. 사이트 표시 이름은 site/src/lib/site.js의 OUTPUTS에 있다.
-export const OUTPUTS = ['hwpx', 'docx', 'xlsx', 'pptx', 'pdf', 'text'];
+export const OUTPUTS = ['hwpx', 'docx', 'xlsx', 'pptx', 'pdf', 'html', 'text'];
 // claude.ai 스킬 업로드의 description 한도
 export const DESC_MAX = 200;
 const isStr = v => typeof v === 'string' && v.trim() !== '';

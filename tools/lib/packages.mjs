@@ -28,7 +28,7 @@ export function buildStarterPrompt(skill) {
 }
 
 // Gemini 스킬 업로드는 글·PDF·그림 파일만 받는다. HWPX 같은 압축 형식은 빠진다.
-const GPT_GEMINI_EXT = /.(md|txt|pdf|png|jpe?g|gif|webp|csv)$/i;
+const GPT_GEMINI_EXT = /\.(md|txt|pdf|png|jpe?g|gif|webp|csv)$/i;
 
 export function buildGptGeminiZip(skill) {
   const keep = distributable(skill)
