@@ -5,6 +5,11 @@ const TOOLS = ['claude', 'codex', 'chatgpt', 'gemini'];
 export const OUTPUTS = ['hwpx', 'docx', 'xlsx', 'pptx', 'pdf', 'html', 'png', 'mp4', 'text'];
 // claude.ai 스킬 업로드의 description 한도
 export const DESC_MAX = 200;
+// 스킬 상세 화면의 작업 흐름 도식(catalog.yaml process) 단계 수와 글자 수
+export const PROCESS_MIN = 3;
+export const PROCESS_MAX = 6;
+export const PROCESS_TITLE_MAX = 12;
+export const PROCESS_DESC_MAX = 40;
 const isStr = v => typeof v === 'string' && v.trim() !== '';
 
 export function validateSkill(skill, categories) {
@@ -55,6 +60,23 @@ export function validateSkill(skill, categories) {
   }
   if (c.tags !== undefined && (!Array.isArray(c.tags) || !c.tags.every(isStr))) {
     add('catalog.yaml', 'tags는 문자열 목록이어야 합니다 (예: [보도, 언론])');
+  }
+  if (c.process !== undefined) {
+    const p = c.process;
+    if (!Array.isArray(p) || p.length < PROCESS_MIN || p.length > PROCESS_MAX) {
+      add('catalog.yaml', `process는 단계 ${PROCESS_MIN}~${PROCESS_MAX}개의 목록이어야 합니다`);
+    } else {
+      p.forEach((s, i) => {
+        const n = i + 1;
+        if (!s || typeof s !== 'object' || Array.isArray(s)) { add('catalog.yaml', `process ${n}단계는 title·desc 항목이어야 합니다`); return; }
+        if (!isStr(s.title)) add('catalog.yaml', `process ${n}단계의 title이 없거나 비어 있습니다`);
+        else if ([...s.title].length > PROCESS_TITLE_MAX) add('catalog.yaml', `process ${n}단계의 title은 ${PROCESS_TITLE_MAX}자 이내여야 합니다`);
+        if (s.desc !== undefined && !isStr(s.desc)) add('catalog.yaml', `process ${n}단계의 desc는 글이어야 합니다`);
+        else if (s.desc !== undefined && [...s.desc].length > PROCESS_DESC_MAX) add('catalog.yaml', `process ${n}단계의 desc는 ${PROCESS_DESC_MAX}자 이내여야 합니다`);
+        const extra = Object.keys(s).filter(k => k !== 'title' && k !== 'desc');
+        if (extra.length) add('catalog.yaml', `process ${n}단계에 알 수 없는 항목(${extra.join(', ')})이 있습니다. desc에 쉼표가 있으면 따옴표로 감싸세요`);
+      });
+    }
   }
   if (!c.compat || typeof c.compat !== 'object') {
     add('catalog.yaml', '필수 항목 compat이(가) 없습니다');
