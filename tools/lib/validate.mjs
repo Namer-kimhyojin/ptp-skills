@@ -66,6 +66,8 @@ export function validateSkill(skill, categories) {
         add('catalog.yaml', `compat.${t}.level은 ${LEVELS.join('|')} 중 하나여야 합니다 (현재: ${e.level})`);
       }
       if (!isStr(e.note)) add('catalog.yaml', `compat.${t}.note가 없거나 비어 있습니다`);
+      const extra = Object.keys(e).filter(k => k !== 'level' && k !== 'note');
+      if (extra.length) add('catalog.yaml', `compat.${t}에 알 수 없는 항목(${extra.join(', ')})이 있습니다. note에 쉼표가 있으면 note 전체를 따옴표로 감싸세요`);
     }
   }
   return errs;
