@@ -1,20 +1,20 @@
 ---
-// "내 AI에 넣기" 탭. JS가 없으면 탭 버튼 없이 다섯 안내가 차례로 모두 보인다.
+// "내 AI에 넣기" 탭. Claude 앱·ChatGPT 앱·Gemini 앱 세 곳 기준. JS가 없으면 탭 버튼 없이 세 안내가 차례로 보인다.
 // 메뉴 이름 출처(2026-11-26 다시 확인):
-//  Claude 웹  https://support.claude.com/en/articles/12512180-use-skills-in-claude
-//             https://support.claude.com/en/articles/12512198-how-to-create-custom-skills (description 200자)
-//  Claude Code https://code.claude.com/docs/en/plugins/install
-//  Cowork     https://support.claude.com/en/articles/13837440-use-plugins-in-claude
-//  ChatGPT    https://help.openai.com/en/articles/10169521-projects-in-chatgpt
-//             https://help.openai.com/en/articles/8554397-creating-a-gpt (개인 계정 새 GPT 불가)
-//  Gemini     https://support.google.com/gemini/answer/17094296 (스킬 업로드)
-//             https://support.google.com/gemini/answer/18560919 (Gem → 스킬 전환, 글·PDF·그림만 업로드)
-//  Codex      https://learn.chatgpt.com/docs/build-skills ($HOME/.agents/skills)
+//  Claude  https://support.claude.com/en/articles/12512180-use-skills-in-claude (Customize > Skills > Upload a skill)
+//          https://claude.com/docs/skills/how-to (zip 맨 위는 스킬 폴더)
+//          https://support.claude.com/en/articles/13837440-use-plugins-in-claude (Plugins > Add marketplace, 유료)
+//  ChatGPT https://help.openai.com/en/articles/20001066-skills-in-chatgpt (Plugins > Skills > Upload, 업무용 워크스페이스)
+//          https://help.openai.com/en/articles/10169521-projects-in-chatgpt (프로젝트)
+//          https://learn.chatgpt.com/docs/build-skills (Codex: $HOME/.agents/skills)
+//  Gemini  https://support.google.com/gemini/answer/17094296 (Customize > Skills > Create > Upload)
+//          https://support.google.com/gemini/answer/18977944 (SKILL.md 맨 위, 100개·100MB)
+//          https://support.google.com/gemini/answer/18560919 (Gem → 스킬 전환, 개인 계정)
 import fs from 'node:fs';
 import path from 'node:path';
 import CopyBlock from './CopyBlock.astro';
 import LevelMark from './LevelMark.astro';
-import { url, LEVELS, REPO, MARKETPLACE_ADD, bundlesFor, installCommand } from '../lib/site.js';
+import { url, LEVELS, REPO, bundlesFor } from '../lib/site.js';
 
 interface Props { skill: any }
 const { skill } = Astro.props;
@@ -28,8 +28,8 @@ function sizeOf(rel: string) {
     return '';
   }
 }
-const claudeZip = { href: url(skill.downloads.claude), file: path.basename(skill.downloads.claude), size: sizeOf(skill.downloads.claude) };
-const gptZip = { href: url(skill.downloads.gptGemini), file: path.basename(skill.downloads.gptGemini), size: sizeOf(skill.downloads.gptGemini) };
+const fullZip = { href: url(skill.downloads.claude), file: path.basename(skill.downloads.claude), size: sizeOf(skill.downloads.claude) };
+const gemZip = { href: url(skill.downloads.gemini), file: path.basename(skill.downloads.gemini), size: sizeOf(skill.downloads.gemini) };
 
 const hasInstaller = skill.files.includes('install_windows.bat');
 const makesHwpx = skill.files.some((f: string) => /\.hwpx$/i.test(f));
@@ -38,21 +38,20 @@ const needsWhat = makesHwpx ? 'HWPX 파일까지 만들려면' : '이 스킬의 
 const uploadFiles = skill.files.filter((f: string) => (skill.overLimit && f === 'SKILL.md') || f.startsWith('references/'));
 const FREE_FILE_LIMIT = 5;
 const [mainBundle] = bundlesFor(skill);
-const allBundle = bundlesFor(skill).find((b: any) => b.categories === 'all' && b !== mainBundle);
 const id = (s: string) => `${skill.name}-${s}`;
+// Gemini zip에서 빠진 파일: 형식(확장자)만 간추려 보여 준다.
+const gemDropped: string[] = skill.gemini?.dropped ?? [];
+const gemDroppedExt = [...new Set(gemDropped.map((f: string) => (path.extname(f).slice(1) || f).toUpperCase()))].slice(0, 6);
 
 const tabs = [
-  { key: 'claude-web', label: 'Claude 웹', compat: compat.claude },
-  { key: 'claude-code', label: 'Claude 데스크톱·Code', compat: compat.claude },
-  { key: 'codex', label: 'Codex (ChatGPT 앱)', compat: compat.codex },
-  { key: 'chatgpt', label: 'ChatGPT 대화', compat: compat.chatgpt },
-  { key: 'gemini', label: 'Gemini', compat: compat.gemini },
+  { key: 'claude', label: 'Claude 앱', compat: compat.claude },
+  { key: 'chatgpt', label: 'ChatGPT 앱', compat: compat.chatgpt },
+  { key: 'gemini', label: 'Gemini 앱', compat: compat.gemini },
 ];
-const tab = Object.fromEntries(tabs.map(t => [t.key, t]));
-const level = (k: string) => tab[k].compat?.level ?? 'none';
+const level = (t: { compat?: { level?: string } }) => (t.compat?.level ?? 'none') as 'full' | 'partial' | 'none';
 ---
 <div class="tabs" data-tabs>
-  <div class="tabs__list" role="tablist" aria-label="사용하는 AI 고르기" data-tablist hidden>
+  <div class="tabs__list" role="tablist" aria-label="사용하는 AI 앱 고르기" data-tablist hidden>
     {tabs.map((t, i) => (
       <button type="button" role="tab" id={`tab-${t.key}`} aria-controls={`install-${t.key}`} aria-selected={i === 0 ? 'true' : 'false'} data-key={t.key}>{t.label}</button>
     ))}
@@ -61,79 +60,85 @@ const level = (k: string) => tab[k].compat?.level ?? 'none';
   {tabs.map(t => (
     <section class="tabpanel" id={`install-${t.key}`} data-panel={t.key}>
       <h3 class="tabpanel__title">{t.label}</h3>
-      <p class={`support level-${level(t.key)}`}>
-        <LevelMark level={level(t.key)} />
-        <strong>{LEVELS[level(t.key)].text}</strong>
+      <p class={`support level-${level(t)}`}>
+        <LevelMark level={level(t)} />
+        <strong>{LEVELS[level(t)].text}</strong>
         {t.compat?.note && <span> · {t.compat.note}</span>}
       </p>
 
-      {level(t.key) === 'none' ? (
+      {level(t) === 'none' ? (
         <p class="note note--warn">이 스킬은 {t.label}에서 동작하지 않습니다. 다른 AI를 골라 주세요.</p>
-      ) : t.key === 'claude-web' ? (
+      ) : t.key === 'claude' ? (
         <Fragment>
-          <p class="panel-lead">claude.ai 웹사이트나 Claude 데스크톱 앱의 채팅에서 쓰는 방법입니다. 스킬 파일을 한 번 올려 두면 계속 쓸 수 있습니다.</p>
+          <p class="panel-lead">Claude 앱(웹·데스크톱·모바일)은 계정에 스킬을 한 번 넣어 두면 어디서나 씁니다. 아래 두 방법 중 하나만 하면 됩니다.</p>
+
+          <h4>방법 1. 묶음으로 설치 <span class="h4-sub">데스크톱 앱 · 유료 요금제 · 새 스킬 자동으로 받기</span></h4>
           <ol class="steps">
+            <li><p>Claude 데스크톱 앱 왼쪽의 <b>사용자 지정(Customize)</b>을 누르고 <b>Plugins</b>를 엽니다.</p></li>
             <li>
-              <p>스킬 파일을 받습니다. <strong>압축을 풀지 말고</strong> 그대로 둡니다.</p>
-              <p><a class="btn btn--primary" href={claudeZip.href} download>{claudeZip.file} 받기</a> <span class="meta">{claudeZip.size}</span></p>
-            </li>
-            <li><p>Claude에서 <b>설정(Settings) &gt; 기능(Capabilities)</b>으로 가서 <b>코드 실행 및 파일 생성(Code execution and file creation)</b>을 켭니다. 새 설정 화면에서는 <b>Create and edit files</b>라는 이름으로 보입니다. 스킬은 이 기능이 켜져 있어야 동작합니다.</p></li>
-            <li><p><b>사용자 지정(Customize) &gt; 스킬(Skills)</b>로 갑니다. <b>+</b> 버튼을 누르고 <b>+ Create skill</b>, <b>Upload a skill</b>을 차례로 고른 뒤 1번에서 받은 zip 파일을 올립니다.</p></li>
-            <li><p>스킬 목록에서 <b>{skill.name}</b> 항목이 켜져 있는지 확인합니다.</p></li>
-            <li><p>새 대화를 열고 위의 요청 예시처럼 말하면 Claude가 스킬을 꺼내 씁니다.</p></li>
-          </ol>
-          <p class="hint">화면이 한국어로 되어 있으면 메뉴 이름이 조금 다르게 보일 수 있습니다. 메뉴 이름은 바뀔 수 있습니다. 회사 계정(Team·Enterprise)은 관리자가 스킬을 막아 두면 메뉴가 보이지 않습니다.</p>
-        </Fragment>
-      ) : t.key === 'claude-code' ? (
-        <Fragment>
-          <p class="panel-lead">Claude 데스크톱 앱과 Claude Code에서는 스킬을 묶음으로 설치합니다. 한 번 설치하면 같은 묶음에 새 스킬이 추가될 때 함께 받을 수 있습니다.</p>
-          <h4>Claude 데스크톱 앱 (Cowork·Code 탭)</h4>
-          <ol class="steps">
-            <li><p>Claude 데스크톱 앱 왼쪽의 <b>Customize</b>를 누릅니다. 여기서 설치하면 Cowork와 Code 탭에서 함께 쓸 수 있습니다.</p></li>
-            <li>
-              <p><b>Plugins</b> 탭에서 <b>Add</b> &gt; <b>Add marketplace</b> &gt; <b>Add from a repository</b>를 고르고 아래 주소를 넣습니다.</p>
+              <p><b>Add</b> &gt; <b>Add marketplace</b> &gt; <b>Add from a repository</b>를 고르고 아래 주소를 넣습니다. 처음 한 번만 하면 됩니다.</p>
               <CopyBlock id={id('repo')} text={REPO} />
             </li>
-            {mainBundle && <li><p><b>Discover</b> 탭에서 <b>{mainBundle.id}</b> 묶음을 고르고 <b>Add</b>를 누릅니다.</p></li>}
+            {mainBundle && <li><p>목록에서 <b>{mainBundle.id}</b>({mainBundle.title})를 고르고 <b>Add</b>를 누릅니다.</p></li>}
+            <li><p>새 대화를 열고 요청 예시처럼 요청합니다. 묶음으로 넣은 스킬은 웹·데스크톱·모바일 채팅과 Cowork·Code 탭에서 함께 쓸 수 있습니다.</p></li>
           </ol>
-          <p class="hint">플러그인은 유료 요금제(Pro·Max·Team·Enterprise 등)에서 쓸 수 있습니다. 메뉴 이름은 바뀔 수 있습니다.</p>
-          <h4>Claude Code (터미널)</h4>
-          <p>PowerShell 같은 터미널에서 <code>claude</code>를 실행해 쓰는 경우입니다. 데스크톱 앱 Code 탭에서는 이 명령 대신 위 방법을 씁니다.</p>
+          <p class="hint">플러그인은 유료 요금제(Pro·Max·Team·Enterprise 등)에서 쓸 수 있습니다. 새 스킬이 안 보이면 같은 화면에서 업데이트 확인(Check for updates)을 누릅니다.</p>
+
+          <h4>방법 2. 스킬 파일 올리기 <span class="h4-sub">웹·데스크톱 · 이 스킬만</span></h4>
           <ol class="steps">
             <li>
-              <p>Claude Code 입력창에 아래 명령을 붙여넣고 Enter를 누릅니다. 포항TP 스킬 목록을 등록하는 단계이며, 처음 한 번만 하면 됩니다.</p>
-              <CopyBlock id={id('mk-add')} text={MARKETPLACE_ADD} />
+              <p>전체 파일을 받습니다. <strong>압축을 풀지 말고</strong> 그대로 둡니다.</p>
+              <p><a class="btn btn--primary" href={fullZip.href} download>{fullZip.file} 받기</a> <span class="meta">{fullZip.size}</span></p>
             </li>
-            {mainBundle && (
-              <li>
-                <p>이 스킬이 들어 있는 <b>{mainBundle.title}</b>을 설치합니다.</p>
-                <CopyBlock id={id('install')} text={installCommand(mainBundle)} />
-                <p>설치 범위를 물으면 <b>Install for you (user scope)</b>를 고릅니다. 모든 폴더에서 쓸 수 있습니다. <code>/reload-plugins</code>를 실행하라는 문장이 나오면 그대로 입력합니다.</p>
-                {allBundle && <p class="hint">포항TP 스킬을 모두 받으려면 <code>{installCommand(allBundle)}</code>를 대신 입력합니다.</p>}
-              </li>
-            )}
-            <li><p>자동 업데이트를 켭니다. 직접 등록한 스킬 목록은 자동 업데이트가 꺼진 채로 시작합니다. <code>/plugin</code>을 입력하고 <b>Marketplaces</b> 탭에서 <b>pohang-tp</b>를 고른 뒤 자동 업데이트(auto-update)를 켭니다.</p></li>
+            <li><p><b>설정(Settings) &gt; 기능(Capabilities)</b>에서 <b>코드 실행 및 파일 생성(Code execution and file creation)</b>을 켭니다. 새 설정 화면에서는 <b>Create and edit files</b>로 보입니다. 스킬은 이 기능이 켜져 있어야 동작합니다.</p></li>
+            <li><p><b>사용자 지정(Customize) &gt; 스킬(Skills)</b>에서 <b>+</b> &gt; <b>+ Create skill</b> &gt; <b>Upload a skill</b>을 고르고 1번에서 받은 zip 파일을 올립니다.</p></li>
+            <li><p>스킬 목록에서 <b>{skill.name}</b>이 켜져 있는지 확인하고, 새 대화에서 요청 예시처럼 요청합니다.</p></li>
           </ol>
+          <p class="hint">회사 계정(Team·Enterprise)은 관리자가 스킬 올리기를 막아 두면 메뉴가 보이지 않습니다. 메뉴 이름은 바뀔 수 있습니다. 터미널의 Claude Code는 <a href={url('install/')}>설치 안내</a>를 봅니다.</p>
           {hasInstaller && (
             <div class="note">
-              <p><strong>{needsWhat} PC에 Python이 필요합니다.</strong> 처음 한 번만 하면 됩니다.</p>
+              <p><strong>{needsWhat} PC에 Python이 필요합니다(데스크톱 앱 Code 탭).</strong> 처음 한 번만 하면 됩니다.</p>
               <ol>
                 <li>python.org에서 Python 3.10 이상을 설치합니다. 설치 화면에 <b>Add python.exe to PATH</b>가 보이면 꼭 체크합니다.</li>
-                <li>Claude(데스크톱 앱 Code 탭이나 Claude Code)에 <q>install_windows.bat 실행해줘</q>라고 요청합니다. Claude가 스킬 폴더에 있는 이 파일을 찾아 실행합니다. <b>[성공]</b> 문장이 나오면 끝입니다.</li>
+                <li>Code 탭에서 <q>install_windows.bat 실행해줘</q>라고 요청합니다. <b>[성공]</b> 문장이 나오면 끝입니다.</li>
               </ol>
-              <p>플러그인이 업데이트된 뒤 설치 안내가 다시 나오면 install_windows.bat을 한 번 더 실행하세요.</p>
             </div>
           )}
         </Fragment>
       ) : t.key === 'chatgpt' ? (
         <Fragment>
-          <p class="panel-lead">개인 계정(무료·Go·Plus·Pro)에서는 새 맞춤형 GPT를 만들 수 없게 바뀌었습니다. 대신 모든 요금제에서 쓸 수 있는 <b>프로젝트</b>에 지침과 문서를 넣어 씁니다.</p>
+          <p class="panel-lead">ChatGPT 앱은 쓰는 화면과 계정 종류에 따라 방법이 다릅니다. 스크립트까지 돌려 파일을 끝까지 만들려면 <b>방법 1(Codex)</b>을 씁니다.</p>
+
+          <h4>방법 1. Codex 화면 <span class="h4-sub">ChatGPT 데스크톱 앱 · 스크립트 실행 · 끝까지</span></h4>
           <ol class="steps">
             <li>
-              <p><b>글·그림만</b> 담은 파일을 받아 <strong>압축을 풉니다</strong>.</p>
-              <p><a class="btn btn--primary" href={gptZip.href} download>{gptZip.file} 받기</a> <span class="meta">{gptZip.size}</span></p>
+              <p>전체 파일을 받아 <strong>압축을 풉니다</strong>. 안에 <code>{skill.name}</code> 폴더가 있습니다.</p>
+              <p><a class="btn btn--primary" href={fullZip.href} download>{fullZip.file} 받기</a> <span class="meta">{fullZip.size}</span></p>
             </li>
-            <li><p>ChatGPT 왼쪽 사이드바에서 <b>새 프로젝트(New project)</b>를 누르고 이름을 <q>{title}</q>처럼 정합니다.</p></li>
+            <li>
+              <p>파일 탐색기 주소창에 아래 경로를 붙여넣고 Enter를 누릅니다. 폴더가 없다고 나오면 <code>C:\Users\내 이름</code> 폴더 안에 <code>.agents</code> 폴더를, 그 안에 <code>skills</code> 폴더를 만듭니다.</p>
+              <CopyBlock id={id('codex-dir')} text="%USERPROFILE%\.agents\skills" />
+            </li>
+            <li><p><code>{skill.name}</code> 폴더를 통째로 그 안에 옮깁니다. <code>skills\{skill.name}\SKILL.md</code> 모양이 되면 맞습니다. Mac은 <code>~/.agents/skills</code>에 넣습니다.</p></li>
+            {hasInstaller && (
+              <li><p>{needsWhat} Python 3.10 이상이 필요합니다. python.org에서 설치하고(<b>Add python.exe to PATH</b> 체크), 옮긴 폴더의 <code>install_windows.bat</code>을 더블클릭합니다. <b>[성공]</b> 문장이 나오면 끝입니다.</p></li>
+            )}
+            <li><p>ChatGPT 앱의 <b>Codex</b> 화면에서 요청 예시처럼 요청합니다. 왼쪽 사이드바의 <b>Skills</b>에서 들어갔는지 확인할 수 있고, 보이지 않을 때만 앱을 다시 시작합니다.</p></li>
+          </ol>
+
+          <h4>방법 2. 스킬 올리기 <span class="h4-sub">회사 워크스페이스(Business·Enterprise·Edu)</span></h4>
+          <ol class="steps">
+            <li><p>방법 1의 전체 파일 zip을 <strong>압축을 풀지 말고</strong> 준비합니다.</p></li>
+            <li><p>왼쪽 사이드바에서 <b>Plugins</b>를 열고 <b>Skills</b> 탭에서 <b>Create</b> &gt; <b>Upload from your computer</b>를 고른 뒤 zip을 올립니다.</p></li>
+            <li><p>자동 검사가 끝나면 바로 쓸 수 있습니다. <b>Needs Review</b>가 붙으면 안내된 내용을 확인한 뒤 씁니다.</p></li>
+            <li><p>대화에서 요청 예시처럼 요청하거나, 입력창에 <b>@</b>를 눌러 스킬을 고릅니다.</p></li>
+          </ol>
+          <p class="hint">관리자가 스킬 올리기를 허용해야 메뉴가 보입니다. 개인 요금제에서 이 메뉴가 없으면 방법 3을 씁니다.</p>
+
+          <h4>방법 3. 프로젝트에 지침 넣기 <span class="h4-sub">개인 계정(무료·Go·Plus·Pro) 대화</span></h4>
+          <ol class="steps">
+            <li><p>방법 1의 전체 파일을 받아 <strong>압축을 풉니다</strong>.</p></li>
+            <li><p>왼쪽 사이드바에서 <b>새 프로젝트(New project)</b>를 누르고 이름을 <q>{title}</q>처럼 정합니다.</p></li>
             <li>
               <p>프로젝트의 <b>•••</b> 메뉴에서 <b>프로젝트 설정(Project settings)</b>을 열고 지침 칸에 아래 글을 붙여넣습니다.</p>
               {skill.overLimit ? (
@@ -151,53 +156,39 @@ const level = (k: string) => tab[k].compat?.level ?? 'none';
                 </Fragment>
               )}
             </li>
-            <li>
-              <p>프로젝트에 파일을 추가합니다. 압축을 푼 폴더에서 아래 파일을 올립니다.</p>
-              <ul class="filelist">{uploadFiles.map((f: string) => <li><code>{f}</code></li>)}</ul>
-              {uploadFiles.length > FREE_FILE_LIMIT ? (
-                <p class="note">파일이 {uploadFiles.length}개입니다. 무료 요금제는 프로젝트 하나에 {FREE_FILE_LIMIT}개까지만 올릴 수 있으니, 지금 만들 문서에 필요한 파일부터 {FREE_FILE_LIMIT}개를 고릅니다. Go·Plus 요금제는 25개까지 올릴 수 있습니다.</p>
-              ) : (
-                <p class="hint">무료 요금제는 프로젝트 하나에 파일 {FREE_FILE_LIMIT}개까지 올릴 수 있습니다.</p>
-              )}
-            </li>
+            {uploadFiles.length > 0 && (
+              <li>
+                <p>프로젝트에 파일을 추가합니다. 압축을 푼 폴더에서 {skill.overLimit && <Fragment><code>SKILL.md</code>와 </Fragment>}<code>references</code> 폴더의 파일을 올립니다({uploadFiles.length}개).</p>
+                <details class="fulltext">
+                  <summary>올릴 파일 목록 보기</summary>
+                  <ul class="filelist">{uploadFiles.map((f: string) => <li><code>{f}</code></li>)}</ul>
+                </details>
+                {uploadFiles.length > FREE_FILE_LIMIT ? (
+                  <p class="note">무료 요금제는 프로젝트 하나에 {FREE_FILE_LIMIT}개, Go·Plus는 25개까지 올릴 수 있습니다. 넘으면 지금 만들 결과물에 필요한 파일부터 고릅니다.</p>
+                ) : (
+                  <p class="hint">무료 요금제는 프로젝트 하나에 파일 {FREE_FILE_LIMIT}개까지 올릴 수 있습니다.</p>
+                )}
+              </li>
+            )}
             <li><p>그 프로젝트 안에서 새 대화를 열고 요청 예시처럼 요청합니다.</p></li>
           </ol>
-          <p class="hint">회사 워크스페이스(Business·Enterprise)는 관리자가 허용하면 맞춤형 GPT나 스킬로도 넣을 수 있습니다. 메뉴 이름은 바뀔 수 있습니다.</p>
-        </Fragment>
-      ) : t.key === 'gemini' ? (
-        <Fragment>
-          <p class="panel-lead">개인 Google 계정은 2026년 11월 17일부터 Gem을 새로 만들 수 없고, 대신 <b>스킬</b>로 넣습니다. 받은 zip 파일을 그대로 올리면 됩니다.</p>
-          <ol class="steps">
-            <li>
-              <p><b>글·그림만</b> 담은 파일을 받습니다. <strong>압축을 풀지 말고</strong> 그대로 둡니다.</p>
-              <p><a class="btn btn--primary" href={gptZip.href} download>{gptZip.file} 받기</a> <span class="meta">{gptZip.size}</span></p>
-            </li>
-            <li><p>PC 브라우저로 gemini.google.com에 들어갑니다. 휴대폰 앱에서는 파일을 올릴 수 없고, 스킬은 만 18세 이상 계정에서 쓸 수 있습니다.</p></li>
-            <li><p>왼쪽 사이드바에서 <b>맞춤설정(Customize)</b>을 누르고 위쪽의 <b>스킬(Skills)</b>을 엽니다. Customize가 보이지 않으면 <b>더보기(More)</b>를 먼저 누릅니다.</p></li>
-            <li><p><b>만들기(Create)</b> &gt; <b>업로드(Upload)</b>를 누르고 1번에서 받은 zip 파일을 고른 뒤 <b>열기(Open)</b>를 누릅니다.</p></li>
-            <li><p>내용을 확인하고 <b>만들기(Create)</b>를 누릅니다.</p></li>
-            <li><p>새 대화를 열고 요청 예시처럼 요청합니다.</p></li>
-          </ol>
-          <p class="hint">이 zip에는 Gemini가 받는 글·PDF·그림 파일만 넣었습니다{makesHwpx ? '(HWPX 양식은 빠집니다)' : ''}. 그래도 업로드가 안 되면 압축을 풀고 <code>SKILL.md</code> 파일 하나만 올려도 지침은 들어갑니다. 회사·학교 Google 계정은 2027년 3월(교육용은 6월)까지 Gem을 계속 쓸 수 있으니, Gem을 만들어 ChatGPT 탭의 3·4번처럼 지침과 파일을 넣어도 됩니다. 메뉴 이름은 바뀔 수 있습니다.</p>
+          <p class="hint">프로젝트 대화에서는 스킬의 스크립트가 돌지 않아, 파일 만들기는 위 지원 범위만큼만 됩니다. 메뉴 이름은 바뀔 수 있습니다.</p>
         </Fragment>
       ) : (
         <Fragment>
-          <p class="panel-lead">ChatGPT 앱에 들어 있는 Codex(와 Codex CLI)는 정해진 폴더에 있는 스킬을 자동으로 읽습니다. ChatGPT 대화와 달리 스크립트까지 실행하므로 <b>전체 파일</b>을 씁니다.</p>
+          <p class="panel-lead">Gemini 앱은 <b>스킬</b>로 넣습니다. Gemini용 zip을 그대로 올리면 되고, 한 번 넣으면 웹과 모바일 앱에서 함께 씁니다.</p>
           <ol class="steps">
             <li>
-              <p><b>전체 파일</b>을 받아 <strong>압축을 풉니다</strong>. 안에 <code>{skill.name}</code> 폴더가 있습니다.</p>
-              <p><a class="btn btn--primary" href={claudeZip.href} download>{claudeZip.file} 받기</a> <span class="meta">{claudeZip.size}</span></p>
+              <p>Gemini용 파일을 받습니다. <strong>압축을 풀지 말고</strong> 그대로 둡니다.</p>
+              <p><a class="btn btn--primary" href={gemZip.href} download>{gemZip.file} 받기</a> <span class="meta">{gemZip.size}</span></p>
             </li>
-            <li>
-              <p>파일 탐색기 주소창에 아래 경로를 붙여넣고 Enter를 누릅니다. 폴더가 없다고 나오면 <code>C:\Users\내 이름</code> 폴더 안에 <code>.agents</code> 폴더를, 그 안에 <code>skills</code> 폴더를 만듭니다.</p>
-              <CopyBlock id={id('codex-dir')} text="%USERPROFILE%\.agents\skills" />
-            </li>
-            <li><p><code>{skill.name}</code> 폴더를 통째로 그 안에 옮깁니다. <code>skills\{skill.name}\SKILL.md</code> 모양이 되면 맞습니다. Mac은 <code>~/.agents/skills</code> 폴더에 넣습니다.</p></li>
-            {hasInstaller && (
-              <li><p>{needsWhat} Python 3.10 이상이 필요합니다. python.org에서 Python을 설치하고(설치 화면에 <b>Add python.exe to PATH</b>가 보이면 체크), 옮긴 폴더의 <code>install_windows.bat</code>을 더블클릭합니다. <b>[성공]</b> 문장이 나오면 끝입니다.</p></li>
-            )}
-            <li><p>ChatGPT 앱의 Codex에서 요청 예시처럼 요청합니다. Codex가 새 스킬을 알아서 찾으며, 앱 왼쪽 사이드바의 <b>Skills</b>에서 들어갔는지 확인할 수 있습니다. 보이지 않을 때만 앱을 다시 시작합니다.</p></li>
+            <li><p>PC 브라우저로 gemini.google.com에 들어갑니다. 스킬은 만 18세 이상 개인 Google 계정에서 쓸 수 있습니다.</p></li>
+            <li><p>왼쪽 사이드바에서 <b>맞춤설정(Customize)</b>을 누르고 위쪽의 <b>스킬(Skills)</b>을 엽니다. Customize가 보이지 않으면 <b>더보기(More)</b>를 먼저 누릅니다.</p></li>
+            <li><p><b>만들기(Create)</b> &gt; <b>업로드(Upload)</b>를 누르고 1번에서 받은 zip을 고른 뒤, 내용을 확인하고 <b>만들기(Create)</b>를 누릅니다.</p></li>
+            <li><p>새 대화에서 요청 예시처럼 요청합니다. 관련 있으면 Gemini가 스킬을 알아서 쓰고, 입력창에 <b>/</b>(새 단축키에서는 <b>@</b>)를 눌러 직접 고를 수도 있습니다.</p></li>
           </ol>
+          <p class="hint">Gemini용 zip은 Gemini 규칙(SKILL.md가 맨 위, 파일 100개·100MB 이내, 받는 형식만)에 맞춰 만들었습니다.{gemDropped.length > 0 && <Fragment> 이 스킬은 Gemini가 받지 않는 형식이나 개수 제한 때문에 파일 {gemDropped.length}개({gemDroppedExt.join('·')} 등)가 빠집니다.</Fragment>} 인터넷에 접속하는 스크립트는 Gemini에서 막힙니다.</p>
+          <p class="hint">회사·학교 Google 계정은 아직 스킬을 쓸 수 없어 Gem을 씁니다(2027년 3월, 교육용은 6월까지). zip을 대화에 첨부해 <q>이 스킬대로 해줘</q>라고 해도 읽히는 경우가 있지만, 공식 기능이 아니라 대화마다 다시 올려야 합니다. 메뉴 이름은 바뀔 수 있습니다.</p>
         </Fragment>
       )}
     </section>
@@ -241,14 +232,18 @@ const level = (k: string) => tab[k].compat?.level ?? 'none';
         select((n + tabs.length) % tabs.length, true);
       });
     });
-    let start = panels.findIndex(p => p!.id === location.hash.slice(1));
+    // 예전 탭 이름(Claude 웹·데스크톱·Codex 등)으로 들어와도 새 탭을 연다.
+    const ALIAS: Record<string, string> = { 'claude-web': 'claude', 'claude-code': 'claude', codex: 'chatgpt' };
+    const keyOf = (k: string) => ALIAS[k] ?? k;
+    const fromHash = () => panels.findIndex(p => p!.id === `install-${keyOf(location.hash.replace('#install-', ''))}`);
+    let start = fromHash();
     if (start < 0) {
-      try { start = tabs.findIndex(t => t.dataset.key === localStorage.getItem('ptp-ai')); } catch {}
+      try { start = tabs.findIndex(t => t.dataset.key === keyOf(localStorage.getItem('ptp-ai') ?? '')); } catch {}
     }
     select(Math.max(0, start));
     // 옆 패널의 "바로 넣기" 링크(#install-<key>)를 누르면 그 탭을 열고 탭 줄로 이동한다.
     window.addEventListener('hashchange', () => {
-      const i = panels.findIndex(p => p!.id === location.hash.slice(1));
+      const i = fromHash();
       if (i < 0) return;
       select(i);
       list.scrollIntoView({ block: 'start' });

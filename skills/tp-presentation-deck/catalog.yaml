@@ -17,6 +17,5 @@ process:
   - { title: 검수·전달, desc: "넘침 검사·원자료 대조 후 HTML·PDF" }
 compat:
   claude:  { level: full,    note: HTML 파일 생성·로고 내장·넘침 검사까지 (코드 실행이 켜진 환경) }
-  codex:   { level: full,    note: "HTML 파일 생성·로고 내장·넘침 검사까지 (Python 필요, 검사는 playwright)" }
-  chatgpt: { level: partial, note: 지침이 길어 SKILL.md를 파일로 넣어 씀. HTML은 만들지만 로고 내장·자동 넘침 검사는 빠질 수 있음 }
-  gemini:  { level: partial, note: 지침이 길어 SKILL.md를 파일로 넣어 씀. HTML은 만들지만 로고 내장·자동 넘침 검사는 빠질 수 있음 }
+  chatgpt: { level: full,    note: "Codex 화면에서 HTML 생성·로고 내장·넘침 검사까지. 대화·프로젝트에서는 HTML 초안까지" }
+  gemini:  { level: partial, note: "지침과 로고 파일이 함께 들어가 HTML 초안까지. 로고 내장·자동 넘침 검사는 빠질 수 있음" }

@@ -2,7 +2,7 @@
 // "쓰는 AI" 필터. 고른 AI에서 '안 됨'인 스킬 카드를 숨긴다('일부'는 남긴다).
 // 고른 값은 브라우저에 기억한다. JavaScript가 없으면 이 줄 자체가 보이지 않는다.
 import { AIS } from '../lib/site.js';
-const order = ['claude', 'chatgpt', 'gemini', 'codex'];
+const order = ['claude', 'chatgpt', 'gemini'];
 const opts = [{ key: '', label: '전체' }, ...order.map(k => AIS.find(a => a.key === k)!)];
 ---
 <div class="ai-filter" data-ai-filter hidden>

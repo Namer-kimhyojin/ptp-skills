@@ -52,8 +52,7 @@ process:
   - { title: 검수·HWPX, desc: "원자료 대조 후 배포 양식 HWPX로 작성" }
 compat:
   claude:  { level: full,    note: 초안·검수·HWPX 파일 생성까지 (Python 설치 필요) }
-  codex:   { level: full,    note: 초안·검수·HWPX 파일 생성까지 (Python 설치 필요) }
-  chatgpt: { level: partial, note: 초안 작성까지. HWPX는 양식에 직접 붙여넣기 }
+  chatgpt: { level: full,    note: "Codex 화면에서 초안·검수·HWPX 파일까지 (Python 필요). 대화·프로젝트에서는 초안까지" }
   gemini:  { level: partial, note: 초안 작성까지. HWPX는 양식에 직접 붙여넣기 }
 ```
 
@@ -71,7 +70,8 @@ compat:
 | `updated` | 마지막으로 고친 날짜(연-월-일). 선택입니다. 없으면 GitHub 수정 기록의 날짜를 씁니다. |
 | `examples` | AI에게 실제로 하는 말 예시. 1개 이상 필수입니다. |
 | `process` | 작업 흐름 도식. 선택입니다. 3~6단계를 `{ title: 짧은 이름, desc: "한 줄 설명" }`으로 적으면 스킬 상세 화면에 순서도로 나옵니다. title은 12자, desc는 40자 이내입니다. |
-| `compat` | AI 도우미별 지원 정도. 네 곳(claude, codex, chatgpt, gemini)을 모두 적습니다. |
+| `gemini_exclude` | Gemini용 zip에서 뺄 경로 목록. 선택입니다. Gemini는 한 스킬에 파일 100개까지라, 넘으면 여기에 Gemini에서 쓰지 않는 폴더(예: `scripts/`)를 적습니다. 적지 않으면 지침 → 참고 문서 → 자산 → 설정 → 스크립트 순으로 100개까지 담습니다. |
+| `compat` | AI 앱별 지원 정도. 세 곳(claude, chatgpt, gemini)을 모두 적습니다. Codex는 ChatGPT 앱 안에 있으므로 `chatgpt`에 함께 적고, 앱 안에서 가장 잘 되는 방법을 기준으로 level을 정합니다. 쉼표가 들어간 note는 따옴표로 감쌉니다. |
 
 `outputs`에 쓸 수 있는 값입니다. 여러 개면 `[hwpx, xlsx]`처럼 적습니다.
 

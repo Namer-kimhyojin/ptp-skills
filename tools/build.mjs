@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadSkills, loadCategories, loadBundles } from './lib/skills.mjs';
 import { buildMarketplace, serializeMarketplace, buildPluginFiles, writePluginFiles } from './lib/marketplace.mjs';
-import { buildSkillZip, buildGptGeminiZip, buildInstructions, buildStarterPrompt } from './lib/packages.mjs';
+import { buildSkillZip, buildGeminiZip, geminiFiles, buildInstructions, buildStarterPrompt } from './lib/packages.mjs';
 import { skillHistory } from './lib/history.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -18,7 +18,8 @@ fs.mkdirSync(dlDir, { recursive: true });
 const data = skills.map(s => {
   const { text, overLimit } = buildInstructions(s);
   fs.writeFileSync(path.join(dlDir, `${s.name}.zip`), buildSkillZip(s));
-  fs.writeFileSync(path.join(dlDir, `${s.name}-gpt-gemini.zip`), buildGptGeminiZip(s));
+  fs.writeFileSync(path.join(dlDir, `${s.name}-gemini.zip`), buildGeminiZip(s));
+  const gem = geminiFiles(s);
   return {
     name: s.name,
     catalog: s.catalog,
@@ -28,9 +29,10 @@ const data = skills.map(s => {
     starterPrompt: buildStarterPrompt(s),
     history: skillHistory(root, s.name),
     files: s.files,
+    gemini: { kept: gem.keep.length, dropped: gem.dropped },
     downloads: {
       claude: `downloads/${s.name}.zip`,
-      gptGemini: `downloads/${s.name}-gpt-gemini.zip`,
+      gemini: `downloads/${s.name}-gemini.zip`,
     },
   };
 });

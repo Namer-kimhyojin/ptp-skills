@@ -17,6 +17,5 @@ process:
   - { title: HWPX 전달, desc: "포항TP 양식 그대로 세 파일 전달" }
 compat:
   claude:  { level: full,    note: 세 문서 HWPX 파일 생성까지 (PC에서는 Python과 lxml 필요) }
-  codex:   { level: full,    note: 세 문서 HWPX 파일 생성까지 (Python과 lxml 필요) }
-  chatgpt: { level: partial, note: 회의록 문안·참석자 정렬·지출 내역 정리까지. HWPX는 양식에 직접 붙여넣기 }
+  chatgpt: { level: full,    note: "Codex 화면에서 세 문서 HWPX 파일까지 (Python과 lxml 필요). 대화·프로젝트에서는 문안 정리까지" }
   gemini:  { level: partial, note: 회의록 문안·참석자 정렬·지출 내역 정리까지. HWPX는 양식에 직접 붙여넣기 }

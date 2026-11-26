@@ -564,3 +564,5 @@ main:focus { outline: none; }
   .process__step { flex-direction: row; align-items: flex-start; gap: 14px; padding: 14px 16px; }
   .process__step:not(:last-child)::after { top: auto; right: auto; bottom: -9px; left: 27px; transform: rotate(135deg); }
 }
+
+.tabpanel h4 .h4-sub { display: block; margin-top: 2px; font-size: 13px; font-weight: 500; color: var(--muted); }

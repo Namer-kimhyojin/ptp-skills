@@ -17,6 +17,5 @@ process:
   - { title: 검수·HWPX, desc: "원자료 대조 후 배포 양식 HWPX로 작성" }
 compat:
   claude:  { level: full,    note: 초안·검수·HWPX 파일 생성까지 (Python 설치 필요) }
-  codex:   { level: full,    note: 초안·검수·HWPX 파일 생성까지 (Python 설치 필요) }
-  chatgpt: { level: partial, note: 초안 작성까지. HWPX는 양식에 직접 붙여넣기 }
+  chatgpt: { level: full,    note: "Codex 화면에서 초안·검수·HWPX 파일까지 (Python 필요). 대화·프로젝트에서는 초안까지" }
   gemini:  { level: partial, note: 초안 작성까지. HWPX는 양식에 직접 붙여넣기 }

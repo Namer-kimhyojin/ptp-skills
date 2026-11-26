@@ -17,24 +17,21 @@ const outputs = outputLabels(skill);
 const tags: string[] = c.tags ?? [];
 const aiRows = AIS.map(ai => ({ ...ai, ...(c.compat[ai.key] ?? { level: 'none', note: '' }) }));
 const aiLabel: Record<string, { name: string; sub?: string }> = {
-  claude: { name: 'Claude', sub: '웹·데스크톱 앱·Claude Code' },
-  codex: { name: 'Codex', sub: 'ChatGPT 앱·Codex CLI' },
-  chatgpt: { name: 'ChatGPT', sub: '대화·프로젝트' },
-  gemini: { name: 'Gemini' },
+  claude: { name: 'Claude 앱', sub: '웹·데스크톱·모바일' },
+  chatgpt: { name: 'ChatGPT 앱', sub: '대화·프로젝트·Codex' },
+  gemini: { name: 'Gemini 앱', sub: '웹·모바일' },
 };
 // 옆 패널의 "바로 넣기" 링크. 각 링크는 해당 AI 탭(#install-<key>)을 연다.
 const quickLinks = [
-  { key: 'claude-web', label: 'Claude 웹', ai: 'claude' },
-  { key: 'claude-code', label: 'Claude 데스크톱·Code', ai: 'claude' },
-  { key: 'codex', label: 'Codex (ChatGPT 앱)', ai: 'codex' },
-  { key: 'chatgpt', label: 'ChatGPT 대화', ai: 'chatgpt' },
-  { key: 'gemini', label: 'Gemini', ai: 'gemini' },
+  { key: 'claude', label: 'Claude 앱', ai: 'claude' },
+  { key: 'chatgpt', label: 'ChatGPT 앱', ai: 'chatgpt' },
+  { key: 'gemini', label: 'Gemini 앱', ai: 'gemini' },
 ].map(q => ({ ...q, level: (c.compat[q.ai]?.level ?? 'none') as 'full' | 'partial' | 'none' }));
 const claudeZip = url(skill.downloads.claude);
-const gptZip = url(skill.downloads.gptGemini);
+const gemZip = url(skill.downloads.gemini);
 const githubUrl = `${REPO_URL}/tree/main/skills/${skill.name}`;
 ---
-<Base title={c.title} description={`${c.summary}. Claude·ChatGPT·Gemini·Codex에 넣는 방법을 단계별로 안내합니다.`}>
+<Base title={c.title} description={`${c.summary}. Claude·ChatGPT·Gemini 앱에 넣는 방법을 단계별로 안내합니다.`}>
   <div class="wrap detail">
     <nav class="crumbs" aria-label="현재 위치">
       <a href={url()}>스킬 목록</a>
@@ -135,10 +132,10 @@ const githubUrl = `${REPO_URL}/tree/main/skills/${skill.name}`;
             ))}
           </ul>
           <div class="quick__downloads">
-            <a class="btn btn--primary quick__download" href={claudeZip} download><span>전체 파일 받기</span><small>Claude · ChatGPT 앱 Codex</small></a>
-            <a class="btn btn--secondary quick__download" href={gptZip} download><span>글·그림만 받기</span><small>ChatGPT 대화 · Gemini</small></a>
+            <a class="btn btn--primary quick__download" href={claudeZip} download><span>전체 파일 받기</span><small>Claude 앱 · ChatGPT 앱</small></a>
+            <a class="btn btn--secondary quick__download" href={gemZip} download><span>Gemini용 받기</span><small>Gemini 앱</small></a>
           </div>
-          <p class="quick__note">zip 파일은 압축을 풀지 말고 그대로 올립니다. 올리는 순서는 위에서 AI를 누르면 나옵니다.</p>
+          <p class="quick__note">압축을 풀지, 그대로 올릴지는 앱마다 다릅니다. 위에서 쓰는 앱을 누르면 순서가 나옵니다.</p>
         </div>
         <nav class="toc" aria-label="이 페이지 목차">
           <a href="#what-h">할 수 있는 일</a>
