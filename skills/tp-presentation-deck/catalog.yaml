@@ -11,6 +11,6 @@ examples:
   - "이 보고서를 16:9 화면 발표용 자료로 만들어줘"
 compat:
   claude:  { level: full,    note: HTML 파일 생성·로고 내장·넘침 검사까지 (코드 실행이 켜진 환경) }
-  codex:   { level: full,    note: HTML 파일 생성·로고 내장·넘침 검사까지 (Python 필요, 검사는 playwright) }
+  codex:   { level: full,    note: "HTML 파일 생성·로고 내장·넘침 검사까지 (Python 필요, 검사는 playwright)" }
   chatgpt: { level: partial, note: 지침이 길어 SKILL.md를 파일로 넣어 씀. HTML은 만들지만 로고 내장·자동 넘침 검사는 빠질 수 있음 }
   gemini:  { level: partial, note: 지침이 길어 SKILL.md를 파일로 넣어 씀. HTML은 만들지만 로고 내장·자동 넘침 검사는 빠질 수 있음 }

@@ -52,6 +52,11 @@ test('compat level 값 오류', () => {
   const e = validateSkill(makeSkill({ catalog: { ...okCatalog, compat } }), C);
   assert.ok(e.some(m => m.includes('compat.claude.level')));
 });
+test('compat 항목에 쉼표로 잘린 note(알 수 없는 키)', () => {
+  const compat = { ...okCatalog.compat, codex: { level: 'full', note: 'Python 필요', '검사는 playwright)': null } };
+  const e = validateSkill(makeSkill({ catalog: { ...okCatalog, compat } }), C);
+  assert.ok(e.some(m => m.includes('compat.codex') && m.includes('따옴표')));
+});
 test('compat 도구 누락', () => {
   const { gemini, ...compat } = okCatalog.compat;
   const e = validateSkill(makeSkill({ catalog: { ...okCatalog, compat } }), C);
