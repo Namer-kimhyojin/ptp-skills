@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "default_set": "teo-pio",
+  "sets": [
+    {
+      "id": "teo-pio", "name": "테오·피오", "version": "1.0", "status": "ready",
+      "aliases": ["테오피오", "테오와 피오", "both"],
+      "identity_spec": "assets/characters/character-spec-v1.2.json",
+      "references": ["references/character-identity.md", "references/character-asset-system.md"],
+      "render_styles": ["2d", "3d"], "legacy_family": true,
+      "members": [
+        {"id": "CHR-BLUE", "name": "테오", "role": "기술·연결·탐색", "anchor_ids": ["AST-ANCHOR-TEO-V12"], "legacy_key": "teo"},
+        {"id": "CHR-ORANGE", "name": "피오", "role": "성장·실행·활력", "anchor_ids": ["AST-ANCHOR-PIO-V12"], "legacy_key": "pio"}
+      ]
+    },
+    {
+      "id": "teo", "name": "테오 단독", "version": "1.0", "status": "ready",
+      "aliases": ["테오", "테오만"],
+      "identity_spec": "assets/characters/character-spec-v1.2.json",
+      "references": ["references/character-identity.md", "references/character-asset-system.md"],
+      "render_styles": ["2d", "3d"], "legacy_family": true,
+      "members": [{"id": "CHR-BLUE", "name": "테오", "role": "기술·연결·탐색", "anchor_ids": ["AST-ANCHOR-TEO-V12"], "legacy_key": "teo"}]
+    },
+    {
+      "id": "pio", "name": "피오 단독", "version": "1.0", "status": "ready",
+      "aliases": ["피오", "피오만"],
+      "identity_spec": "assets/characters/character-spec-v1.2.json",
+      "references": ["references/character-identity.md", "references/character-asset-system.md"],
+      "render_styles": ["2d", "3d"], "legacy_family": true,
+      "members": [{"id": "CHR-ORANGE", "name": "피오", "role": "성장·실행·활력", "anchor_ids": ["AST-ANCHOR-PIO-V12"], "legacy_key": "pio"}]
+    }
+  ]
+}

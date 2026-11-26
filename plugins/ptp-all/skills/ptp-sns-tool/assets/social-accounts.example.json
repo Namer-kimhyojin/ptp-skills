@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "organization": "포항테크노파크",
+  "timezone": "Asia/Seoul",
+  "preferred_method": "meta-business-suite",
+  "authentication": {
+    "preferred_browser": null,
+    "strategy": "existing-session-then-saved-profile-or-browser-login",
+    "credential_storage": "browser-or-official-site-only",
+    "save_login_requested": false,
+    "save_login_request_evidence": null,
+    "facebook_login_profile_url": null,
+    "status_path": "state/authentication-status.json",
+    "handoff_on_security_challenge": true
+  },
+  "instagram": {
+    "account_id": null,
+    "profile_url": null,
+    "display_name": null,
+    "verified_at": null,
+    "verified_by": null
+  },
+  "facebook": {
+    "account_id": null,
+    "profile_url": null,
+    "display_name": null,
+    "verified_at": null,
+    "verified_by": null
+  }
+}

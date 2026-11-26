@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "policy": "최종 사용처의 실제 픽셀 또는 실물 규격을 먼저 잠그고, 작은 래스터 결과를 확대하지 않고 원본 레이어에서 목표 크기로 다시 렌더링한다.",
+  "profiles": [
+    {
+      "id": "channel-native-1x",
+      "name_ko": "채널 표준 1×",
+      "recommended": true,
+      "final_eligible": true,
+      "medium": "digital",
+      "scale_factor": 1.0,
+      "deliver_upload_copy": true,
+      "deliver_master_copy": false,
+      "description": "선택한 SNS·웹 채널 프리셋의 픽셀 크기로 바로 납품"
+    },
+    {
+      "id": "high-resolution-master-2x",
+      "name_ko": "고해상도 마스터 2×",
+      "recommended": false,
+      "final_eligible": true,
+      "medium": "digital",
+      "scale_factor": 2.0,
+      "deliver_upload_copy": true,
+      "deliver_master_copy": true,
+      "description": "편집·보관용 2배 마스터와 채널 표준 업로드본을 함께 납품"
+    },
+    {
+      "id": "custom-pixel",
+      "name_ko": "사용자 지정 픽셀",
+      "recommended": false,
+      "final_eligible": true,
+      "medium": "digital",
+      "scale_factor": null,
+      "deliver_upload_copy": false,
+      "deliver_master_copy": true,
+      "requires": ["custom_width_px", "custom_height_px"],
+      "description": "발주서·전광판·웹사이트 등 사용자가 지정한 정확한 픽셀 크기로 납품"
+    },
+    {
+      "id": "print-production",
+      "name_ko": "인쇄 제작",
+      "recommended": false,
+      "final_eligible": true,
+      "medium": "print",
+      "scale_factor": null,
+      "deliver_upload_copy": false,
+      "deliver_master_copy": true,
+      "requires": ["print_width_mm", "print_height_mm", "print_dpi"],
+      "description": "인쇄소의 재단 크기·도련·DPI·색상 프로필을 기준으로 픽셀을 산정"
+    },
+    {
+      "id": "draft-preview-0.5x",
+      "name_ko": "빠른 시안 0.5×",
+      "recommended": false,
+      "final_eligible": false,
+      "medium": "digital",
+      "scale_factor": 0.5,
+      "deliver_upload_copy": false,
+      "deliver_master_copy": false,
+      "description": "레이아웃과 콘셉트 확인 전용이며 최종 게시·인쇄에 사용하지 않음"
+    }
+  ]
+}
+

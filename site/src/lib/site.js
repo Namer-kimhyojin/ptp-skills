@@ -87,6 +87,8 @@ export const OUTPUTS = {
   pptx: 'PPT 파일',
   pdf: 'PDF 파일',
   html: 'HTML 파일',
+  png: '이미지 파일(PNG)',
+  mp4: '영상 파일(MP4)',
   text: '글(채팅 답변)',
 };
 

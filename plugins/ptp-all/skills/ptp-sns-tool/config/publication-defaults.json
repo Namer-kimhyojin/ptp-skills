@@ -1,0 +1,5 @@
+{
+  "mode": "auto-publish-after-review",
+  "platforms": ["instagram", "facebook"],
+  "timing": "immediate"
+}

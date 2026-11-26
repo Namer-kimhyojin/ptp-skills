@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "version": "2026-10-30.1",
+  "mode": "short-preferred",
+  "scope": ["notice-to-social", "institution-explainer", "creative"],
+  "qr_payload": "verified-short-url",
+  "require_visible_short_url": true,
+  "services": ["dagd", "isgd"],
+  "fallback": "original-url-only-with-recorded-service-failure",
+  "user_request_evidence": "2026-10-30 사용자가 단축주소 미반영을 지적하고 스킬과 제작물 확인·조치를 요청함. 사업공고에 한정했던 누락을 기관소개 웹툰에도 적용."
+}

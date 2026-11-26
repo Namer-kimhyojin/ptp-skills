@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "status": "locked",
+  "identity_spec": "assets/characters/character-spec-v1.2.json",
+  "characters": {
+    "teo": {
+      "id": "CHR-BLUE",
+      "guide": "assets/guides/teo-character-guide-v1.0.png",
+      "anchor_2d": "assets/characters/teo/teo-master-sheet-v1.2.png",
+      "style_3d": "assets/characters/3d/teo-3d-style-sheet-v1.0.png"
+    },
+    "pio": {
+      "id": "CHR-ORANGE",
+      "guide": "assets/guides/pio-character-guide-v1.0.png",
+      "anchor_2d": "assets/characters/pio/pio-master-sheet-v1.2.png",
+      "style_3d": "assets/characters/3d/pio-3d-style-sheet-v1.0.png"
+    }
+  },
+  "family_3d": "assets/characters/3d/teo-pio-3d-family-sheet-v1.0.png",
+  "style_3d_spec": "assets/characters/3d/3d-style-spec-v1.0.json",
+  "pose_library_3d": "assets/characters/3d/poses/pose-library.json",
+  "font_css": "assets/fonts/paperlogy/paperlogy.css",
+  "platform_presets": "assets/platform-presets.json",
+  "output_size_profiles": "assets/output-size-profiles.json",
+  "visual_concepts": "assets/visual-concept-presets.json",
+  "webtoon_template": "assets/webtoon-mode-template.json",
+  "job_template": "assets/job-template.json",
+  "quick_job_template": "assets/quick-job-template.json"
+}

@@ -1,0 +1,306 @@
+{
+  "schema_version": "1.3",
+  "job_id": "PTP-SINGLE-IMAGE-001",
+  "status": "draft",
+  "production_mode": "standard",
+  "generation_method": "whole-image",
+  "channel_image_policy": "shared-square-feed",
+  "authoring_mode": "integrated",
+  "purpose": "지원사업 안내",
+  "audience": "기업·산업 관계자",
+  "channel": "포항테크노파크 Instagram 및 Facebook 피드",
+  "requested_outputs": [
+    "png"
+  ],
+  "resolution_policy": {
+    "selection_mode": "user-selected",
+    "profile_id": "channel-native-1x",
+    "render_strategy": "render-from-source-at-primary-size",
+    "upscale_existing_raster": false,
+    "preserve_aspect_ratio": true,
+    "adaptation_strategy": "recompose",
+    "deliver_upload_copy": true,
+    "deliver_master_copy": false,
+    "custom_width_px": null,
+    "custom_height_px": null,
+    "print_width_mm": null,
+    "print_height_mm": null,
+    "print_dpi": null
+  },
+  "platform_targets": [
+    {
+      "preset_id": "instagram-feed-square",
+      "platform": "instagram",
+      "placement": "feed-square",
+      "content_type": "social-post",
+      "content_variant_id": "shared-main",
+      "width_px": 1080,
+      "height_px": 1080,
+      "target_count": 1,
+      "requested_outputs": [
+        "png"
+      ],
+      "format_counts": {
+        "png": 1
+      },
+      "file_naming": "{job_id}_{platform}_{placement}_{page_no:02d}",
+      "source_strength": "project-default",
+      "spec_checked_at": "2026-09-02"
+    },
+    {
+      "preset_id": "facebook-feed-square",
+      "platform": "facebook",
+      "placement": "feed-square",
+      "content_type": "social-post",
+      "content_variant_id": "shared-main",
+      "width_px": 1080,
+      "height_px": 1080,
+      "target_count": 1,
+      "requested_outputs": [
+        "png"
+      ],
+      "format_counts": {
+        "png": 1
+      },
+      "file_naming": "{job_id}_{platform}_{placement}_{page_no:02d}",
+      "source_strength": "project-default",
+      "spec_checked_at": "2026-09-02"
+    }
+  ],
+  "capabilities": {
+    "official_spec_lookup": "local",
+    "source_extraction": "local",
+    "image_generation": "local",
+    "raster_or_vector_composition": "local",
+    "html_render": "local",
+    "pdf_export": "local",
+    "visual_inspection": "local",
+    "file_packaging": "local",
+    "external_publish": "unavailable"
+  },
+  "hooks": {
+    "profile": "standard",
+    "events": [
+      "after_intake",
+      "before_generate",
+      "after_generate",
+      "before_export",
+      "after_export"
+    ]
+  },
+  "orchestration": {
+    "strategy": "capability-based",
+    "multi_agent": "auto-when-beneficial",
+    "coordinator_owns_job_and_manifest": true
+  },
+  "concept_strategy": {
+    "selection_mode": "propose-3-then-select",
+    "input_signals": [
+      "benefit",
+      "business",
+      "deadline"
+    ],
+    "proposed_concept_ids": [
+      "data-led-photo-editorial",
+      "photoreal-business-scene",
+      "3d-miniature-diorama"
+    ],
+    "selected_concept_id": "data-led-photo-editorial",
+    "selection_basis": "지원 규모와 신청 정보를 빠르게 이해시키면서 현장성을 확보",
+    "composition_mode": "multi-layer",
+    "allow_flat_geometric_only": false,
+    "commercial_quality_target": "campaign-ready"
+  },
+  "publication": {
+    "requested": false,
+    "authorized": false
+  },
+  "output": {
+    "mode": "social-post",
+    "medium": "digital",
+    "capability": "direct",
+    "spec_source": "project-custom",
+    "spec_reference": "두 채널 공통 1080x1080 제작 기본값; 실제 게시 도구에서 한 장 미리보기 확인 필요",
+    "spec_checked_at": "2026-09-02",
+    "width_px": 1080,
+    "height_px": 1080,
+    "width_mm": null,
+    "height_mm": null,
+    "bleed_mm": null,
+    "dpi": null,
+    "color_mode": "RGB",
+    "extension": ".png",
+    "target_count": 1,
+    "file_naming": "{job_id}_{platform}_{placement}_{page_no:02d}",
+    "shared_across_platforms": true
+  },
+  "characters": [
+    {
+      "id": "CHR-BLUE",
+      "name": "테오",
+      "name_status": "approved",
+      "role": "기술·정책 설명",
+      "outfit_slot": "default",
+      "anchor_ids": [
+        "AST-GUIDE-TEO-V10",
+        "AST-ANCHOR-TEO-V12"
+      ],
+      "approval": "pending"
+    },
+    {
+      "id": "CHR-ORANGE",
+      "name": "피오",
+      "name_status": "approved",
+      "role": "실행·성장 행동 제안",
+      "outfit_slot": "default",
+      "anchor_ids": [
+        "AST-GUIDE-PIO-V10",
+        "AST-ANCHOR-PIO-V12"
+      ],
+      "approval": "pending"
+    }
+  ],
+  "design": {
+    "direction": "editorial-infographic",
+    "hero_message": "【이 결과물에서 가장 먼저 이해할 한 문장】",
+    "hero_metric": "【가장 중요한 금액·날짜·대상·행동 중 하나】",
+    "reading_order": [
+      "hook",
+      "hero",
+      "support",
+      "cta"
+    ],
+    "content_budget": {
+      "max_primary_messages": 1,
+      "max_supporting_blocks": 3,
+      "max_body_characters": 180
+    },
+    "visual_system": {
+      "grid": "asymmetric-8pt",
+      "motif": "내용을 돕는 절제된 기술·연결 모티프",
+      "density": "medium",
+      "palette": [
+        "#FAF8F3",
+        "#064191",
+        "#EF7D00",
+        "#102A43"
+      ],
+      "layer_plan": [
+        {
+          "id": "L1",
+          "role": "background",
+          "source_type": "generated-or-user-photo",
+          "rights_status": "pending"
+        },
+        {
+          "id": "L2",
+          "role": "atmosphere",
+          "source_type": "lighting-depth-grade",
+          "rights_status": "not-applicable"
+        },
+        {
+          "id": "L3",
+          "role": "context",
+          "source_type": "scene-objects",
+          "rights_status": "pending"
+        },
+        {
+          "id": "L4",
+          "role": "character",
+          "source_type": "approved-anchor-generation",
+          "rights_status": "approved"
+        },
+        {
+          "id": "L5",
+          "role": "information",
+          "source_type": "deterministic-composition",
+          "rights_status": "not-applicable"
+        },
+        {
+          "id": "L6",
+          "role": "typography",
+          "source_type": "native-generated-typography",
+          "rights_status": "pending"
+        },
+        {
+          "id": "L7",
+          "role": "brand-legal",
+          "source_type": "verified-brand-and-source",
+          "rights_status": "pending"
+        }
+      ],
+      "photoreal_composite": {
+        "enabled": true,
+        "base_source": "generated-or-user-provided",
+        "perspective_match": true,
+        "lighting_match": true,
+        "contact_shadow": true,
+        "edge_integration": true,
+        "color_grade_match": true,
+        "depth_occlusion_review": true,
+        "rights_status": "pending"
+      },
+      "commercial_quality": {
+        "concept_fit_review": true,
+        "distinctiveness_review": true,
+        "platform_crop_review": true,
+        "campaign_consistency_review": true
+      }
+    },
+    "character_integration": {
+      "teo_action": "핵심 정보 또는 절차를 가리킴",
+      "pio_action": "다음 행동을 제안함",
+      "functional_target": "hero_metric 또는 call_to_action"
+    },
+    "avoid": [
+      "원문 표·PDF 페이지 축소 재현",
+      "모든 정보를 같은 크기의 박스로 나열",
+      "캐릭터를 하단 장식으로 고립"
+    ]
+  },
+  "copy": {
+    "title": "【확정 제목】",
+    "body": [
+      "【확정 본문】"
+    ],
+    "call_to_action": "【확정 행동 유도】",
+    "cards": [
+      {
+        "page": 1,
+        "purpose": "단일 이미지에서 주제·핵심 정보·다음 행동 전달",
+        "headline": "【표지 제목】",
+        "hero_metric": "【핵심 수치 또는 메시지】",
+        "supporting_points": [
+          "【핵심 대상 또는 혜택】",
+          "【마감 또는 행사 일시·장소】",
+          "【실제 신청 경로·문의 또는 QR 안내】"
+        ],
+        "cta": "【다음 행동】",
+        "source_refs": [
+          "【출처】"
+        ]
+      }
+    ],
+    "claims": []
+  },
+  "accessibility": {
+    "alt_text_required": true,
+    "contrast_review": true,
+    "reading_order_required": true
+  },
+  "approvals": {
+    "character": "pending",
+    "brand": "pending",
+    "claims": "pending",
+    "publication_spec": "pending",
+    "final_human_review": "pending"
+  },
+  "delivery_form": "single-image",
+  "format_selection": {
+    "state": "selected",
+    "delivery_form": "single-image",
+    "reason": "template-only; record actual explicit choice or actual 10-second timeout at runtime",
+    "scope": "format-preference-only"
+  }
+}
+

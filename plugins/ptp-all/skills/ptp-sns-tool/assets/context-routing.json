@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "workflows": {
+    "creative": [],
+    "notice-to-social": [
+      "references/notice-to-social-workflow.md",
+      "references/notice-tracking.md",
+      "references/social-publishing.md",
+      "references/social-storytelling.md",
+      "references/creative-variation.md",
+      "references/lettering-safety.md",
+      "references/single-image-social.md"
+    ]
+  },
+  "always": [
+    "references/character-identity.md"
+  ],
+  "production_modes": {
+    "quick-draft": [
+      "references/intake-survey.md"
+    ],
+    "standard": [
+      "references/request-schema.md",
+      "references/visual-design.md",
+      "references/quality-gates.md"
+    ],
+    "publication": [
+      "references/request-schema.md",
+      "references/visual-design.md",
+      "references/quality-gates.md",
+      "references/brand-rights.md"
+    ]
+  },
+  "content_types": {
+    "card-news": ["references/output-modes.md"],
+    "poster": ["references/output-modes.md"],
+    "signage": ["references/output-modes.md"],
+    "web-banner": ["references/output-modes.md"],
+    "social-post": ["references/output-modes.md"],
+    "social-story": ["references/output-modes.md"],
+    "channel-message": ["references/output-modes.md"],
+    "social-toon": ["references/webtoon-content-mode.md"],
+    "four-panel": ["references/webtoon-content-mode.md"],
+    "educational-comic": ["references/webtoon-content-mode.md"],
+    "vertical-webtoon": ["references/webtoon-content-mode.md"],
+    "page-comic": ["references/webtoon-content-mode.md"]
+  },
+  "render_styles": {
+    "2d": ["references/character-asset-system.md"],
+    "3d": [
+      "references/character-asset-system.md",
+      "references/3d-character-style.md",
+      "references/3d-generation-prompts.md",
+      "references/performance-workflow.md"
+    ]
+  },
+  "platforms": {
+    "instagram": [
+      "references/size-and-authoring-choice.md",
+      "references/channel-output-specs.md",
+      "references/final-size-and-resolution.md"
+    ],
+    "facebook": [
+      "references/size-and-authoring-choice.md",
+      "references/channel-output-specs.md",
+      "references/final-size-and-resolution.md"
+    ],
+    "kakaotalk": [
+      "references/size-and-authoring-choice.md",
+      "references/channel-output-specs.md",
+      "references/final-size-and-resolution.md"
+    ],
+    "custom": ["references/final-size-and-resolution.md"]
+  },
+  "formats": {
+    "png": ["references/export-formats.md"],
+    "pdf": ["references/export-formats.md"],
+    "html": ["references/export-formats.md"]
+  },
+  "flags": {
+    "photoreal": ["references/visual-concept-system.md"],
+    "print": [
+      "references/final-size-and-resolution.md",
+      "references/export-formats.md",
+      "references/brand-rights.md"
+    ]
+  }
+}
