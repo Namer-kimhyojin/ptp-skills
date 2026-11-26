@@ -11,6 +11,10 @@ bundles:
     title: 발표·보고 묶음
     description: 포항TP 발표·보고 업무 스킬 모음
     categories: [발표·보고]
+  - id: ptp-planning
+    title: 사업기획 묶음
+    description: 포항TP 사업기획·공고 탐색 스킬 모음
+    categories: [사업기획]
   - id: ptp-all
     title: 전체 묶음
     description: 포항TP 업무 스킬 전체
