@@ -203,6 +203,8 @@ main:focus { outline: none; }
 .file b { display: block; color: var(--ink); font-size: 14px; }
 .file small { color: var(--muted); font-size: 13px; }
 .hero .lead { color: var(--ink-2); margin-top: 18px; max-width: 40em; }
+.hero .lead--two { max-width: none; }
+@media (max-width: 640px) { .hero .lead--two br { display: none; } }
 .search { margin-top: 32px; max-width: 720px; }
 .search__label { display: block; font-weight: 800; font-size: 18px; margin-bottom: 10px; letter-spacing: -0.02em; }
 .qs { position: relative; }
