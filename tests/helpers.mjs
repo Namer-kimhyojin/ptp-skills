@@ -8,7 +8,6 @@ export const okCatalog = {
   outputs: ['hwpx'],
   compat: {
     claude: { level: 'full', note: '전체 지원' },
-    codex: { level: 'full', note: '전체 지원' },
     chatgpt: { level: 'partial', note: '초안까지' },
     gemini: { level: 'none', note: '미지원' },
   },

@@ -31,7 +31,7 @@ test('필요한 페이지와 검색 색인이 있다', () => {
     'categories/cat-1/index.html',
     'pagefind/pagefind.js',
     `downloads/${skill}.zip`,
-    `downloads/${skill}-gpt-gemini.zip`,
+    `downloads/${skill}-gemini.zip`,
   ]) {
     assert.ok(fs.existsSync(path.join(dist, f)), `${f} 없음`);
   }
@@ -52,10 +52,10 @@ test('사이트 루트(/)로 시작하는 링크는 모두 /ptp-skills/ 아래�
   assert.deepEqual(bad, []);
 });
 
-test('상세 페이지에 Claude용 zip과 GPT·Gemini용 zip 링크가 있다', () => {
+test('상세 페이지에 전체 파일 zip과 Gemini용 zip 링크가 있다', () => {
   const html = fs.readFileSync(path.join(dist, 'skills', skill, 'index.html'), 'utf8');
   assert.ok(html.includes(`href="${BASE}downloads/${skill}.zip"`), 'Claude zip 링크 없음');
-  assert.ok(html.includes(`href="${BASE}downloads/${skill}-gpt-gemini.zip"`), 'GPT·Gemini zip 링크 없음');
+  assert.ok(html.includes(`href="${BASE}downloads/${skill}-gemini.zip"`), 'Gemini zip 링크 없음');
   assert.ok(html.includes('data-pagefind-body'), '검색 색인 표시 없음');
 });
 

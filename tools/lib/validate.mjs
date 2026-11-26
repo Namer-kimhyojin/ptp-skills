@@ -1,6 +1,7 @@
 const NAME_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const LEVELS = ['full', 'partial', 'none'];
-const TOOLS = ['claude', 'codex', 'chatgpt', 'gemini'];
+// 지원 범위는 Claude 앱·ChatGPT 앱(Codex 포함)·Gemini 앱 세 곳으로 적는다.
+export const TOOLS = ['claude', 'chatgpt', 'gemini'];
 // 결과물 형식. 사이트 표시 이름은 site/src/lib/site.js의 OUTPUTS에 있다.
 export const OUTPUTS = ['hwpx', 'docx', 'xlsx', 'pptx', 'pdf', 'html', 'png', 'mp4', 'text'];
 // claude.ai 스킬 업로드의 description 한도
@@ -61,6 +62,9 @@ export function validateSkill(skill, categories) {
   if (c.tags !== undefined && (!Array.isArray(c.tags) || !c.tags.every(isStr))) {
     add('catalog.yaml', 'tags는 문자열 목록이어야 합니다 (예: [보도, 언론])');
   }
+  if (c.gemini_exclude !== undefined && (!Array.isArray(c.gemini_exclude) || !c.gemini_exclude.every(isStr))) {
+    add('catalog.yaml', 'gemini_exclude는 경로 목록이어야 합니다 (예: [scripts/, assets/logos/])');
+  }
   if (c.process !== undefined) {
     const p = c.process;
     if (!Array.isArray(p) || p.length < PROCESS_MIN || p.length > PROCESS_MAX) {
@@ -81,6 +85,8 @@ export function validateSkill(skill, categories) {
   if (!c.compat || typeof c.compat !== 'object') {
     add('catalog.yaml', '필수 항목 compat이(가) 없습니다');
   } else {
+    const unknownTools = Object.keys(c.compat).filter(k => !TOOLS.includes(k));
+    if (unknownTools.length) add('catalog.yaml', `compat에 알 수 없는 AI(${unknownTools.join(', ')})가 있습니다. ${TOOLS.join(', ')} 세 곳만 적습니다 (Codex는 chatgpt에 함께 적습니다)`);
     for (const t of TOOLS) {
       const e = c.compat[t];
       if (!e || typeof e !== 'object') { add('catalog.yaml', `compat.${t}이(가) 없습니다`); continue; }

@@ -53,9 +53,9 @@ test('compat level 값 오류', () => {
   assert.ok(e.some(m => m.includes('compat.claude.level')));
 });
 test('compat 항목에 쉼표로 잘린 note(알 수 없는 키)', () => {
-  const compat = { ...okCatalog.compat, codex: { level: 'full', note: 'Python 필요', '검사는 playwright)': null } };
+  const compat = { ...okCatalog.compat, chatgpt: { level: 'full', note: 'Python 필요', '검사는 playwright)': null } };
   const e = validateSkill(makeSkill({ catalog: { ...okCatalog, compat } }), C);
-  assert.ok(e.some(m => m.includes('compat.codex') && m.includes('따옴표')));
+  assert.ok(e.some(m => m.includes('compat.chatgpt') && m.includes('따옴표')));
 });
 test('process는 선택이지만 쓰면 3~6단계의 title·desc', () => {
   const ok = [{ title: '자료 받기', desc: '계획안 확인' }, { title: '작성' }, { title: '검수', desc: '원자료 대조' }];
@@ -68,6 +68,16 @@ test('process는 선택이지만 쓰면 3~6단계의 title·desc', () => {
   assert.ok(long.some(m => m.includes('process 3단계') && m.includes('12자')));
   const split = validateSkill(makeSkill({ catalog: { ...okCatalog, process: [...ok.slice(0, 2), { title: '검수', desc: '대조', '확인': null }] } }), C);
   assert.ok(split.some(m => m.includes('process 3단계') && m.includes('따옴표')));
+});
+test('compat에 세 앱 외의 AI(codex)가 있으면 오류', () => {
+  const compat = { ...okCatalog.compat, codex: { level: 'full', note: 'x' } };
+  const e = validateSkill(makeSkill({ catalog: { ...okCatalog, compat } }), C);
+  assert.ok(e.some(m => m.includes('codex') && m.includes('chatgpt')));
+});
+test('gemini_exclude는 선택이지만 쓰면 경로 목록', () => {
+  assert.deepEqual(validateSkill(makeSkill({ catalog: { ...okCatalog, gemini_exclude: ['scripts/'] } }), C), []);
+  const e = validateSkill(makeSkill({ catalog: { ...okCatalog, gemini_exclude: 'scripts/' } }), C);
+  assert.ok(e.some(m => m.includes('gemini_exclude')));
 });
 test('compat 도구 누락', () => {
   const { gemini, ...compat } = okCatalog.compat;

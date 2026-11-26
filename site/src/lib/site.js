@@ -38,10 +38,9 @@ export function lastUpdated(skill) {
 }
 
 export const AIS = [
-  { key: 'claude', label: 'Claude' },
-  { key: 'codex', label: 'Codex (ChatGPT 앱)' },
-  { key: 'chatgpt', label: 'ChatGPT 대화' },
-  { key: 'gemini', label: 'Gemini' },
+  { key: 'claude', label: 'Claude 앱' },
+  { key: 'chatgpt', label: 'ChatGPT 앱' },
+  { key: 'gemini', label: 'Gemini 앱' },
 ];
 
 export const LEVELS = {

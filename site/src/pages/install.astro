@@ -5,23 +5,20 @@ import { skills, bundles, bundleSkills, skillUrl, installCommand, MARKETPLACE, M
 // 업무별 묶음을 먼저, 전체 묶음은 맨 뒤에 둔다.
 const orderedBundles = [...bundles.filter(b => b.categories !== 'all'), ...bundles.filter(b => b.categories === 'all')];
 ---
-<Base title="설치 안내" description="포항TP 업무 스킬을 Claude 데스크톱 앱·Claude Code에 묶음으로 설치하는 방법과, 다른 AI에 스킬을 하나씩 넣는 방법입니다." current="install">
+<Base title="설치 안내" description="포항TP 업무 스킬을 Claude 앱·ChatGPT 앱·Gemini 앱에 넣는 방법과, Claude 데스크톱 앱·Claude Code에 묶음으로 설치하는 방법입니다." current="install">
   <div class="wrap page">
     <h1>설치 안내</h1>
-    <p class="lead measure">어떤 AI를 쓰는지에 따라 방법이 다릅니다. Claude 데스크톱 앱(Cowork·Code 탭)과 Claude Code는 묶음으로 한 번에 설치하고, 나머지 AI는 스킬 상세 화면에서 하나씩 받습니다.</p>
+    <p class="lead measure">쓰는 AI 앱에 따라 방법이 다릅니다. Claude 데스크톱 앱은 묶음으로 한 번에 설치할 수 있고, ChatGPT 앱과 Gemini 앱은 스킬 상세 화면에서 하나씩 받습니다.</p>
 
     <section class="block" aria-labelledby="which-h">
       <h2 id="which-h">AI별 설치 방법</h2>
       <div class="table-wrap">
         <table class="compat-table">
-          <thead><tr><th scope="col">사용하는 AI</th><th scope="col">받는 것</th><th scope="col">어디서 안내하나</th></tr></thead>
+          <thead><tr><th scope="col">AI 앱</th><th scope="col">넣는 방법</th><th scope="col">받는 파일</th><th scope="col">어디서 안내하나</th></tr></thead>
           <tbody>
-            <tr><th scope="row">Claude 데스크톱 앱 (Cowork · Code 탭)</th><td>스킬 묶음</td><td>이 화면 아래</td></tr>
-            <tr><th scope="row">Claude Code (터미널)</th><td>스킬 묶음 (자동 업데이트 가능)</td><td>이 화면 아래</td></tr>
-            <tr><th scope="row">Claude 웹 · 데스크톱 채팅</th><td>전체 파일 zip</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
-            <tr><th scope="row">Codex (ChatGPT 앱 · Codex CLI)</th><td>전체 파일 zip</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
-            <tr><th scope="row">ChatGPT 대화 (웹·앱 채팅, 프로젝트)</th><td>지침 문구와 글·그림 파일</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
-            <tr><th scope="row">Gemini</th><td>글·그림만 담은 zip</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
+            <tr><th scope="row">Claude 앱<span class="compat-table__sub">웹·데스크톱·모바일</span></th><td>데스크톱 앱: 묶음 설치(유료 요금제)<br>웹·데스크톱: 스킬 파일 올리기</td><td>묶음 또는 전체 파일 zip</td><td>이 화면 아래 · 스킬 상세 화면</td></tr>
+            <tr><th scope="row">ChatGPT 앱<span class="compat-table__sub">대화·프로젝트·Codex</span></th><td>Codex 화면: 스킬 폴더에 넣기<br>회사 워크스페이스: 스킬 올리기<br>개인 계정: 프로젝트에 지침 넣기</td><td>전체 파일 zip</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
+            <tr><th scope="row">Gemini 앱<span class="compat-table__sub">웹·모바일</span></th><td>스킬 올리기(개인 계정, 만 18세 이상)</td><td>Gemini용 zip</td><td>스킬 상세 화면 › 내 AI에 넣기</td></tr>
           </tbody>
         </table>
       </div>
@@ -79,8 +76,8 @@ const orderedBundles = [...bundles.filter(b => b.categories !== 'all'), ...bundl
     </section>
 
     <section class="block" aria-labelledby="one-h">
-      <h2 id="one-h">다른 AI에 스킬 하나씩 넣기</h2>
-      <p class="block__lead">Claude 웹, Codex(ChatGPT 앱), ChatGPT 대화, Gemini는 스킬마다 받는 파일과 순서가 다릅니다. 스킬을 고른 뒤 상세 화면의 ‘내 AI에 넣기’를 따라 하세요.</p>
+      <h2 id="one-h">ChatGPT 앱·Gemini 앱에 스킬 넣기</h2>
+      <p class="block__lead">ChatGPT 앱과 Gemini 앱, Claude 앱의 스킬 파일 올리기는 스킬마다 받는 파일과 순서가 다릅니다. 스킬을 고른 뒤 상세 화면의 ‘내 AI에 넣기’를 따라 하세요.</p>
       <ul class="link-list">
         {skills.map(s => <li><a href={`${skillUrl(s)}#install`}>{s.catalog.title}</a> <span class="meta">{s.catalog.category}</span></li>)}
       </ul>

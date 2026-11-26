@@ -6,7 +6,7 @@ import path from 'node:path';
 import { unzipSync } from 'fflate';
 import { makeSkill } from './helpers.mjs';
 import {
-  buildSkillZip, buildGptGeminiZip, buildInstructions, buildStarterPrompt,
+  buildSkillZip, buildGeminiZip, geminiFiles, GEMINI_MAX_FILES, buildInstructions, buildStarterPrompt,
 } from '../tools/lib/packages.mjs';
 
 const name = 'write-pohang-tp-press-release';
@@ -40,13 +40,32 @@ test('Claude zip: 최상위 폴더, catalog.yaml·금지 파일 제외, CRLF 유
   assert.equal(Buffer.from(z[`${name}/install_windows.bat`]).toString(), files['install_windows.bat']);
 });
 
-test('GPT·Gemini zip: scripts·HWPX 같은 비지원 형식 제외, 사용법.txt 포함', () => {
-  const z = unzipSync(buildGptGeminiZip(skill));
-  const entries = Object.keys(z).sort();
-  assert.deepEqual(entries, [
-    `${name}/SKILL.md`, `${name}/assets/b.txt`, `${name}/assets/pic.PNG`, `${name}/references/a.md`, `${name}/사용법.txt`,
+test('Gemini zip: SKILL.md가 맨 위, 지원 형식만(스크립트 포함, HWPX·bat 제외)', () => {
+  const z = unzipSync(buildGeminiZip(skill));
+  assert.deepEqual(Object.keys(z).sort(), [
+    'SKILL.md', 'assets/b.txt', 'assets/pic.PNG', 'references/a.md', 'scripts/run.py',
   ].sort());
-  assert.equal(Buffer.from(z[`${name}/사용법.txt`]).toString(), buildStarterPrompt(skill));
+  const { dropped } = geminiFiles(skill);
+  assert.ok(dropped.includes('assets/form.hwpx') && dropped.includes('install_windows.bat'));
+});
+
+test('Gemini zip: 파일이 100개를 넘으면 지침·참고 문서부터 담고 시험 코드를 먼저 뺀다', () => {
+  const many = ['SKILL.md', ...Array.from({ length: 60 }, (_, i) => `references/r${i}.md`),
+    ...Array.from({ length: 50 }, (_, i) => `scripts/s${i}.py`), ...Array.from({ length: 20 }, (_, i) => `scripts/test_${i}.py`)];
+  const s = makeSkill({ files: many });
+  const { keep, dropped } = geminiFiles(s);
+  assert.equal(keep.length, GEMINI_MAX_FILES);
+  assert.equal(keep[0], 'SKILL.md');
+  assert.ok(keep.every(f => !f.includes('test_')));
+  assert.equal(dropped.length, many.length - GEMINI_MAX_FILES);
+});
+
+test('Gemini zip: catalog.yaml의 gemini_exclude 경로는 뺀다', () => {
+  const s = makeSkill({ files: ['SKILL.md', 'references/a.md', 'scripts/a.py', 'scripts/b.py', 'assets/logo/x.png', 'assets/logo.json'] });
+  s.catalog.gemini_exclude = ['scripts/', 'assets/logo'];
+  const { keep, dropped } = geminiFiles(s);
+  assert.deepEqual(keep, ['SKILL.md', 'references/a.md', 'assets/logo.json']);
+  assert.deepEqual(dropped.sort(), ['assets/logo/x.png', 'scripts/a.py', 'scripts/b.py']);
 });
 
 test('zip은 입력이 같으면 바이트가 같다', () => {
