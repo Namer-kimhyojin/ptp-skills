@@ -17,17 +17,17 @@ const tags: string[] = c.tags ?? [];
 const aiRows = AIS.map(ai => ({ ...ai, ...(c.compat[ai.key] ?? { level: 'none', note: '' }) }));
 const aiLabel: Record<string, { name: string; sub?: string }> = {
   claude: { name: 'Claude', sub: '웹·데스크톱 앱·Claude Code' },
-  codex: { name: 'Codex' },
-  chatgpt: { name: 'ChatGPT' },
+  codex: { name: 'Codex', sub: 'ChatGPT 앱·Codex CLI' },
+  chatgpt: { name: 'ChatGPT', sub: '대화·프로젝트' },
   gemini: { name: 'Gemini' },
 };
 // 옆 패널의 "바로 넣기" 링크. 각 링크는 해당 AI 탭(#install-<key>)을 연다.
 const quickLinks = [
   { key: 'claude-web', label: 'Claude 웹', ai: 'claude' },
   { key: 'claude-code', label: 'Claude 데스크톱·Code', ai: 'claude' },
-  { key: 'chatgpt', label: 'ChatGPT', ai: 'chatgpt' },
+  { key: 'codex', label: 'Codex (ChatGPT 앱)', ai: 'codex' },
+  { key: 'chatgpt', label: 'ChatGPT 대화', ai: 'chatgpt' },
   { key: 'gemini', label: 'Gemini', ai: 'gemini' },
-  { key: 'codex', label: 'Codex', ai: 'codex' },
 ].map(q => ({ ...q, level: (c.compat[q.ai]?.level ?? 'none') as 'full' | 'partial' | 'none' }));
 const claudeZip = url(skill.downloads.claude);
 const gptZip = url(skill.downloads.gptGemini);
@@ -133,8 +133,8 @@ const githubUrl = `${REPO_URL}/tree/main/skills/${skill.name}`;
             ))}
           </ul>
           <div class="quick__downloads">
-            <a class="btn btn--primary quick__download" href={claudeZip} download>Claude·Codex용 받기</a>
-            <a class="btn btn--secondary quick__download" href={gptZip} download>ChatGPT·Gemini용 받기</a>
+            <a class="btn btn--primary quick__download" href={claudeZip} download><span>전체 파일 받기</span><small>Claude · ChatGPT 앱 Codex</small></a>
+            <a class="btn btn--secondary quick__download" href={gptZip} download><span>글·그림만 받기</span><small>ChatGPT 대화 · Gemini</small></a>
           </div>
           <p class="quick__note">zip 파일은 압축을 풀지 말고 그대로 올립니다. 올리는 순서는 위에서 AI를 누르면 나옵니다.</p>
         </div>
