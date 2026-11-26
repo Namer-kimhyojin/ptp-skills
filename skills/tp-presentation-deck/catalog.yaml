@@ -1,0 +1,16 @@
+title: 발표자료 제작
+summary: 보고서·수치·메모를 주면 포항TP 로고가 들어간 발표자료(A4 가로 기본)를 HTML 한 파일로 제작. 발표 보기·편집 모드·인쇄/PDF 지원
+category: 발표·보고
+version: 1.0.0
+owner: 포항테크노파크
+outputs: [html, pdf]
+tags: [발표자료, 슬라이드, PPT, 현장방문, 성과보고, 보고자료]
+examples:
+  - "첨부한 기본자료로 발표자료 제작해줘"
+  - "이 성과 실적표로 현장방문 회의자료 10쪽 만들어줘"
+  - "이 보고서를 16:9 화면 발표용 자료로 만들어줘"
+compat:
+  claude:  { level: full,    note: HTML 파일 생성·로고 내장·넘침 검사까지 (코드 실행이 켜진 환경) }
+  codex:   { level: full,    note: HTML 파일 생성·로고 내장·넘침 검사까지 (Python 필요, 검사는 playwright) }
+  chatgpt: { level: partial, note: 지침이 길어 SKILL.md를 파일로 넣어 씀. HTML은 만들지만 로고 내장·자동 넘침 검사는 빠질 수 있음 }
+  gemini:  { level: partial, note: 지침이 길어 SKILL.md를 파일로 넣어 씀. HTML은 만들지만 로고 내장·자동 넘침 검사는 빠질 수 있음 }

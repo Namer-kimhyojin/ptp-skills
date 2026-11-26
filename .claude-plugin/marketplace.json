@@ -16,6 +16,11 @@
       "source": "./plugins/ptp-admin"
     },
     {
+      "name": "ptp-report",
+      "description": "포항TP 발표·보고 업무 스킬 모음",
+      "source": "./plugins/ptp-report"
+    },
+    {
       "name": "ptp-all",
       "description": "포항TP 업무 스킬 전체",
       "source": "./plugins/ptp-all"

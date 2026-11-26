@@ -86,6 +86,7 @@ export const OUTPUTS = {
   xlsx: '엑셀 파일',
   pptx: 'PPT 파일',
   pdf: 'PDF 파일',
+  html: 'HTML 파일',
   text: '글(채팅 답변)',
 };
 
