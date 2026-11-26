@@ -9,6 +9,12 @@ examples:
   - "첨부한 기본자료로 발표자료 제작해줘"
   - "이 성과 실적표로 현장방문 회의자료 10쪽 만들어줘"
   - "이 보고서를 16:9 화면 발표용 자료로 만들어줘"
+process:
+  - { title: 확인 질문, desc: "크기·분량·목적과 발표 정보를 한 번에 확인" }
+  - { title: 자료 정리, desc: "핵심 사실과 지표를 뽑고 수치 재확인" }
+  - { title: 쪽 구성, desc: "발표 유형별 흐름, 쪽마다 결론 문장" }
+  - { title: HTML 제작, desc: "로고·발표 보기·편집 모드가 든 한 파일" }
+  - { title: 검수·전달, desc: "넘침 검사·원자료 대조 후 HTML·PDF" }
 compat:
   claude:  { level: full,    note: HTML 파일 생성·로고 내장·넘침 검사까지 (코드 실행이 켜진 환경) }
   codex:   { level: full,    note: "HTML 파일 생성·로고 내장·넘침 검사까지 (Python 필요, 검사는 playwright)" }

@@ -1,0 +1,19 @@
+---
+// 스킬 상세 화면의 작업 흐름 도식. catalog.yaml의 process(3~6단계)를 그린다.
+interface Step { title: string; desc?: string }
+const { steps } = Astro.props as { steps: Step[] };
+---
+<div class="process-wrap">
+  <h3 class="process-head">작업 흐름</h3>
+  <ol class="process" style={`--n:${steps.length}`}>
+    {steps.map((s, i) => (
+      <li class="process__step">
+        <span class="process__num" aria-hidden="true">{i + 1}</span>
+        <span class="process__body">
+          <strong class="process__title">{s.title}</strong>
+          {s.desc && <span class="process__desc">{s.desc}</span>}
+        </span>
+      </li>
+    ))}
+  </ol>
+</div>

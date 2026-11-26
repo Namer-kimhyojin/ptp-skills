@@ -9,6 +9,12 @@ examples:
   - "첨부한 행사 계획안으로 보도자료 써줘"
   - "이번 달 기업 모집 공고를 보도자료로 만들어줘"
   - "이 보도자료 초안에서 제목을 더 짧게 고쳐줘"
+process:
+  - { title: 자료 받기, desc: "계획안·행사자료와 담당자 정보, 원장명 확인" }
+  - { title: 사실 정리, desc: "일시·장소·주최·수치를 사실 카드로 정리" }
+  - { title: 제목 고르기, desc: "차이가 분명한 제목·부제목 3~5안 중 선택" }
+  - { title: 본문 작성, desc: "6~8개 문단과 원장 인용문" }
+  - { title: 검수·HWPX, desc: "원자료 대조 후 배포 양식 HWPX로 작성" }
 compat:
   claude:  { level: full,    note: 초안·검수·HWPX 파일 생성까지 (Python 설치 필요) }
   codex:   { level: full,    note: 초안·검수·HWPX 파일 생성까지 (Python 설치 필요) }

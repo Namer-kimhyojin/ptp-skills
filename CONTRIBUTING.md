@@ -46,6 +46,10 @@ tags: [보도, 언론, 홍보, 한글 양식]
 examples:
   - "첨부한 행사 계획안으로 보도자료 써줘"
   - "이번 달 기업 모집 공고를 보도자료로 만들어줘"
+process:
+  - { title: 자료 받기, desc: "계획안·행사자료와 담당자 정보, 원장명 확인" }
+  - { title: 제목 고르기, desc: "제목·부제목 3~5안 중 선택" }
+  - { title: 검수·HWPX, desc: "원자료 대조 후 배포 양식 HWPX로 작성" }
 compat:
   claude:  { level: full,    note: 초안·검수·HWPX 파일 생성까지 (Python 설치 필요) }
   codex:   { level: full,    note: 초안·검수·HWPX 파일 생성까지 (Python 설치 필요) }
@@ -66,6 +70,7 @@ compat:
 | `tags` | 검색에 걸릴 키워드. 선택입니다. 업무 이름, 문서 이름처럼 직원이 검색할 만한 말을 적습니다. |
 | `updated` | 마지막으로 고친 날짜(연-월-일). 선택입니다. 없으면 GitHub 수정 기록의 날짜를 씁니다. |
 | `examples` | AI에게 실제로 하는 말 예시. 1개 이상 필수입니다. |
+| `process` | 작업 흐름 도식. 선택입니다. 3~6단계를 `{ title: 짧은 이름, desc: "한 줄 설명" }`으로 적으면 스킬 상세 화면에 순서도로 나옵니다. title은 12자, desc는 40자 이내입니다. |
 | `compat` | AI 도우미별 지원 정도. 네 곳(claude, codex, chatgpt, gemini)을 모두 적습니다. |
 
 `outputs`에 쓸 수 있는 값입니다. 여러 개면 `[hwpx, xlsx]`처럼 적습니다.
@@ -75,6 +80,9 @@ compat:
 - `xlsx`: 엑셀 파일
 - `pptx`: PPT 파일
 - `pdf`: PDF 파일
+- `html`: HTML 파일
+- `png`: 이미지 파일(PNG)
+- `mp4`: 영상 파일(MP4)
 - `text`: 파일 없이 채팅 답변으로 받는 글
 
 `compat`의 `level`은 세 가지 중 하나입니다.
@@ -107,7 +115,7 @@ PR을 만들면 `check`라는 점검이 자동으로 돕니다. PR 화면 아래
 
 - 필수 칸이 빠졌습니다: `catalog.yaml`에 위 표의 칸을 모두 적었는지 봅니다.
 - 분류가 없습니다: `category`가 `categories.yaml`에 있는 이름인지 봅니다.
-- outputs 값을 쓸 수 없습니다: `outputs`에 위 목록의 값(hwpx, docx, xlsx, pptx, pdf, text)만 적었는지 봅니다.
+- outputs 값을 쓸 수 없습니다: `outputs`에 위 목록의 값(hwpx, docx, xlsx, pptx, pdf, html, png, mp4, text)만 적었는지 봅니다.
 - 개인정보가 의심됩니다: 알려 준 파일에서 해당 글자를 지웁니다.
 - 넣을 수 없는 파일이 있습니다: 아래 "SKILL.md와 파일 규칙"을 봅니다.
 
