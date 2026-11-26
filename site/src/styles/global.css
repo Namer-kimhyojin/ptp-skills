@@ -333,6 +333,9 @@ main:focus { outline: none; }
 .toc a { display: block; padding: 6px 12px; color: var(--muted); text-decoration: none; font-size: 14px; }
 .toc a:hover { color: var(--ink); }
 .compat-table__sub { display: block; color: var(--muted); font-weight: 400; font-size: 13px; }
+/* AI 앱 이름(Claude 앱 등)은 글자 중간에서 줄이 바뀌지 않게 한다. 부제는 단어 단위로 줄바꿈 */
+.compat-table th[scope="row"] { white-space: nowrap; }
+.compat-table th[scope="row"] .compat-table__sub { white-space: normal; word-break: keep-all; }
 .sticky-cta { display: none; }
 
 /* 호환 표시 */
